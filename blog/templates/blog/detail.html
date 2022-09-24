@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+    <article class="media content-section">
+        <div class="media-body">
+        <div class="article-metadata">
+            <small class="text-muted">{{ blog.topic }} . {{ post.date_posted|date:'F d, Y' }}</small> <!--you can mold yhe date however u wish-->
+            <a class="mr-2" href="#">{{ blog.author }}</a>
+        </div>
+        <h2><a class="article-title" href="#">{{ blog.title }}</a></h2>
+        <!-- <p class="article-content">{{ post.content }}</p>  -->
+        </div>
+    </article>
+{% endblock content %}

@@ -1,0 +1,118 @@
+<script>
+
+$(document).ready(function() {
+
+var options = {
+          series: [{{all_users}}, {{all_profiles}}, {{all_paid_profiles}}, 0, {{all_rejected}}],
+          chart: {
+          width: 380,
+          type: 'pie',
+        },
+        labels: ['All users', 'Profiles', 'Paid Members', 'Passed Members', 'Failed members'],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+        };
+
+        var chart = new ApexCharts(document.querySelector("#all_data"), options);
+        chart.render();
+
+if ($('#revenue_expense').length > 0) {
+	var optionsBar = {
+		chart: {
+			type: 'bar',
+			height: 350,
+			width: '100%',
+			stacked: true,
+			toolbar: {
+				show: false
+			},
+		},
+		dataLabels: {
+			enabled: false
+		},
+		plotOptions: {
+			bar: {
+				columnWidth: '45%',
+			}
+		},
+		series: [{
+			name: "Revenues",
+			color: '#fdbb38',
+			data: [{{ total_revenues }}],
+		}, {
+			name: "Expenses",
+			color: '#19affb',
+			data: [{{ total_expenses }}],
+		}],
+		labels: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020],
+		xaxis: {
+			labels: {
+				show: false
+			},
+			axisBorder: {
+				show: false
+			},
+			axisTicks: {
+				show: false
+			},
+		},
+		yaxis: {
+			axisBorder: {
+				show: false
+			},
+			axisTicks: {
+				show: false
+			},
+			labels: {
+				style: {
+					colors: '#777'
+				}
+			}
+		},
+		title: {
+			text: '',
+			align: 'left',
+			style: {
+				fontSize: '18px'
+			}
+		}
+
+	}
+  
+	var chartBar = new ApexCharts(document.querySelector('#revenue_expense'), optionsBar);
+	chartBar.render();
+
+    var options = {
+          series: [{{total_revenues}}, {{total_expenses}}, {{total_profits}}, ],
+          chart: {
+          type: 'donut',
+        },
+        labels: ['revenue', 'expenses', 'profits'],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+        };
+
+        var chart = new ApexCharts(document.querySelector("#profits_expenses"), options);
+        chart.render();
+
+}
+
+</script>

@@ -1,0 +1,43 @@
+
+
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block content %}
+<div id="content-wrapper" style="padding-top: 80px"
+<div class="main-wrapper login-body " >
+  <div class="container-fluid">
+    <div class="row">
+<div class="card-body">
+    <section id="search-result" class="search-result">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9">
+            <div class="d-md-flex post-entry-2 small-img">
+              <a href="single-post.html" class="me-4 thumbnail">
+                <img src="assets/img/post-landscape-6.jpg" alt="" class="img-fluid">
+              </a>
+              {% for blog in blogs %}
+
+              <div>
+                <div class="post-meta"><span class="date">{{ blog.category }}</span> <span class="mx-1">&bullet;</span> <span>{{ blog.date_posted }}</span></div>
+                <h3><a href="{% url 'blog:blog_detail' blog.pk %}">{{ blog.title  }}</a></h3>
+                <p>{{ blog.content|truncatechars:200 }}</p>
+                <div class="d-flex align-items-center author">
+                  <div class="photo"><img src="assets/img/person-2.jpg" alt="" class="img-fluid"></div>
+                  <div class="name">
+                    {% comment %} <h3 class="m-0 p-0">Wade Warren</h3> {% endcomment %}
+                  </div>
+                </div>
+              </div>
+              {% endfor%}
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock content %}

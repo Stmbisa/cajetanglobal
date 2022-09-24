@@ -1,0 +1,114 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+  <main id="main">
+    <section>
+      <div class="container" data-aos="fade-up">
+        <div class="row">
+          <div class="col-lg-12 text-center mb-5">
+            <h1 class="page-title">About us</h1>
+          </div>
+        </div>
+
+        <div class="row mb-5">
+
+          <div class="d-md-flex post-entry-2 half">
+            <a href="#" class="me-4 thumbnail">
+              <img src="cajetanglobal/img/post-landscape-2.jpg" alt="" class="img-fluid">
+            </a>
+            <div class="ps-md-5 mt-4 mt-md-0">
+              <div class="post-meta mt-4">Welcome</div>
+              <h2 class="mb-4 display-4">Company History</h2>
+
+              <p>We are Cajetan Global Visas we provide many visa in these countries</p>
+              <p>USA, CANADA, Australia, Israel, Shengen</p>
+            </div>
+          </div>
+
+      </div>
+    </section>
+
+    <section class="mb-5 bg-light py-5">
+      <div class="container" data-aos="fade-up">
+        <div class="row justify-content-between align-items-lg-center">
+          <div class="col-lg-5 mb-4 mb-lg-0">
+            <h2 class="display-4 mb-4">Available type of visas</h2>
+            <p>We provide many types of visas like </p>
+            <ul>
+                <li>Working visas</li>
+                <li>Studying Visas</li>
+                <li>Medical Visas</li>
+                <li>Diplomatic Visas</li>
+                <li>Touring Visas</li>
+            </ul>
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container" data-aos="fade-up">
+        <div class="row">
+          <div class="col-12 text-center mb-5">
+            <div class="row justify-content-center">
+              <div class="col-lg-6">
+                <h2 class="display-4">Our Team</h2>
+                <h3>Sign up to take advantage of our services</h3>
+                <p>here</p>
+                <small>Are you already a member? <a href="">login here</a></small>
+              </div>
+            </div>
+          </div>
+          {% if user.is_authenticated == True %} 
+            {% if user.has_paid == True %}
+          <div class="col-lg-4 text-center mb-5">
+            <img src="cajetanglobal/img/person-1.jpg" alt="" class="img-fluid rounded-circle w-50 mb-4">
+            <h4>This place will show the progress and it will render, print out the progress of the process</h4>
+            <span class="d-block mb-3 text-uppercase">Founder &amp; CEO</span>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis, perspiciatis repellat maxime, adipisci non ipsam at itaque rerum vitae, necessitatibus nulla animi expedita cumque provident inventore? Voluptatum in tempora earum deleniti, culpa odit veniam, ea reiciendis sunt ullam temporibus aut!</p>
+          </div>
+
+
+          <div class="col-lg-4 text-center mb-5">
+            <img src="cajetanglobal/img/person-2.jpg" alt="" class="img-fluid rounded-circle w-50 mb-4">
+            <h4>VISA NEWS, POSTS, INQUIRIES, THAT ARE APPROVED BY THE ADMIN</h4>
+            <span class="d-block mb-3 text-uppercase">Founder, VP</span>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis, perspiciatis repellat maxime, adipisci non ipsam at itaque rerum vitae, necessitatibus nulla animi expedita cumque provident inventore? Voluptatum in tempora earum deleniti, culpa odit veniam, ea reiciendis sunt ullam temporibus aut!</p>
+          </div>
+
+
+          <div class="col-lg-4 text-center mb-5">
+            <img src="cajetanglobal/img/person-3.jpg" alt="" class="img-fluid rounded-circle w-50 mb-4">
+            <h4>users can send messages to the admin here</h4>
+            <span class="d-block mb-3 text-uppercase">users can send messages to the admin here</span>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis, perspiciatis repellat maxime, adipisci non ipsam at itaque rerum vitae, necessitatibus nulla animi expedita cumque provident inventore? Voluptatum in tempora earum deleniti, culpa odit veniam, ea reiciendis sunt ullam temporibus aut!</p>
+          </div>
+
+          
+          <div class="col-lg-4 text-center mb-5">
+            <img src="cajetanglobal/img/person-4.jpg" alt="" class="img-fluid rounded-circle w-50 mb-4">
+            <h4>Cameron Williamson</h4>
+            <span class="d-block mb-3 text-uppercase">Editor Staff</span>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis, perspiciatis repellat maxime, adipisci non ipsam at itaque rerum vitae, necessitatibus nulla animi expedita cumque provident inventore? Voluptatum in tempora earum deleniti, culpa odit veniam, ea reiciendis sunt ullam temporibus aut!</p>
+          </div>
+          <div class="col-lg-4 text-center mb-5">
+            <img src="cajetanglobal/img/person-5.jpg" alt="" class="img-fluid rounded-circle w-50 mb-4">
+            <h4>Cameron Williamson</h4>
+            <span class="d-block mb-3 text-uppercase">Editor Staff</span>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis, perspiciatis repellat maxime, adipisci non ipsam at itaque rerum vitae, necessitatibus nulla animi expedita cumque provident inventore? Voluptatum in tempora earum deleniti, culpa odit veniam, ea reiciendis sunt ullam temporibus aut!</p>
+          </div>
+          <div class="col-lg-4 text-center mb-5">
+            <img src="cajetanglobal/img/person-6.jpg" alt="" class="img-fluid rounded-circle w-50 mb-4">
+            <h4>Cameron Williamson</h4>
+            <span class="d-block mb-3 text-uppercase">Editor Staff</span>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis, perspiciatis repellat maxime, adipisci non ipsam at itaque rerum vitae, necessitatibus nulla animi expedita cumque provident inventore? Voluptatum in tempora earum deleniti, culpa odit veniam, ea reiciendis sunt ullam temporibus aut!</p>
+          </div>
+          {% endif %}
+          {% endif %}
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+  {% endblock content %}

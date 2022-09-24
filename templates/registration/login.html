@@ -1,0 +1,112 @@
+{% extends "blog/base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% trans "Log in" %}{% endblock %}
+
+{% block content %}
+
+{% comment %} <form method="post" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="{% trans 'Log in' %}" />
+    <input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+<p>{% trans "Forgot your password?" %} <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>.</p>
+<p>{% trans "Not a member?" %} <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>.</p> {% endcomment %}
+
+
+
+
+
+
+<div class="main-wrapper login-body " >
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 mb-3 mt-5">
+        <div class="col-12 mb-3">
+            <div id="content-wrapper" style="padding-top: 45px">
+              <div class="container-fluid">
+                  <div class="card mb-3 d-flex align-items-center justify-content-center">
+                  {% if user.is_authenticated %}
+                    <p>You are already logged in, please log out <a href="{% url 'auth_logout' %}" >Here</a></p>
+                  {% else %}
+                    <div class="card-body">
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                          {{ message }}
+                        </div>
+                        {% endfor %}
+                        <h4 class="text-primary">Sign Up </h4>
+                        <form method="post" novalidate class="form-horizontal">
+                          {% csrf_token %}
+                          <div class="form-control">
+                            <input type="hidden" name="next" value="{{ next }}">
+                            {{ form|crispy }}
+                            <input type="submit" class="btn btn-success" value="{% trans 'Log in' %}" />
+                            <input type="hidden" name="next" value="{{ next }}" />
+                          </div>
+                        </form>
+                        <br>
+                        <div class="card-footer">
+                          <div class="d-flex justify-content-center">
+                              <div class="messages">
+                                {% for message in messages %}
+                                <a class="alert alert-success" style="color:red;"> {{ message }}</a>
+                                {% endfor %}
+                              </div>
+                          </div>
+                        </div>
+                        <div class="login-or">
+                        <span class="or-line"></span>
+                        <span class="span-or">or</span>
+                        </div>
+                    <div class="text-center dont-have"><p>{% trans "Forgot your password?" %} <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>.</p></div>
+                    <div class="text-center dont-have"><p>{% trans "Not a member?" %} <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>.</p></div>
+                    </div>
+                  </div>
+                  {% endif %}
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+{% comment %}
+**registration/login.html**
+
+It's your responsibility to provide the login form in a template called
+registration/login.html by default. This template gets passed four
+template context variables:
+
+``form``
+    A Form object representing the login form. See the forms
+    documentation for more on Form objects.
+
+``next``
+    The URL to redirect to after successful login. This may contain a
+    query string, too.
+
+``site``
+    The current Site, according to the SITE_ID setting. If you don't
+    have the site framework installed, this will be set to an instance
+    of RequestSite, which derives the site name and domain from the
+    current HttpRequest.
+
+``site_name``
+    An alias for site.name. If you don't have the site framework
+    installed, this will be set to the value of
+    request.META['SERVER_NAME']. For more on sites, see The
+    "sites" framework.
+{% endcomment %}

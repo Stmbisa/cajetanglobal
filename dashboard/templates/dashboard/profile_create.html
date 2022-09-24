@@ -1,0 +1,58 @@
+{% extends 'dashboard/base2.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="main-wrapper login-body " >
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 mb-3 mt-5">
+        <div class="col-12 mb-3">
+            <div id="content-wrapper" style="padding-top: 45px">
+              <div class="container-fluid">
+                  <div class="card mb-3 d-flex align-items-center justify-content-center">
+                    <div class="card-body">
+                    {% if user.is_authenticated %}
+                     {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                           {{ message }}
+                        </div>
+                     {% endfor %}
+                     </div>
+                     {% comment %} {% if users %}
+                     <center><p class="text-danger">You have already created profile</p></center>
+                     {% else %} {% endcomment %}
+                     <div class="row">
+                        <div class="col-12">
+                           <h5 class="form-title">
+                              <span>Profile Update </span>
+                           </h5>
+                        </div>
+                        <form method="post", action="{% url 'dashboard:profile_create' %}">
+                           {% csrf_token %}
+                           
+                              {{ form|crispy }}
+
+                           <div class="col-12 col-sm-12">
+                              <button type="submit" class="btn btn-primary col-12 col-sm-12">
+                              Save
+                              </button>
+                           </div>
+                        </form>
+                        {% else %}
+                        <p>It seems you are not logged in <a href="{% url 'auth_login' %}" >login now</a></p>
+                        {% endif %}
+                        {% comment %} {% else %}
+                        <p>It seems you dont have the permission to view this page </p>
+                        {% endif %} {% endcomment %}
+                     </div>
+                     {% comment %} {% endif %} {% endcomment %}
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+ </div>
+{% endblock content %}
+
+

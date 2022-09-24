@@ -1,0 +1,48 @@
+{% extends 'dashboard/base2.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-12">
+       <div class="card">
+          <div class="card-body">
+            <div class="card-body">
+            {% if user.is_authenticated %}
+                {% for message in messages %}
+                   <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                       {{ message }}
+                   </div>
+               {% endfor %}
+            </div>
+            {% if users %}
+            <center><p class="text-danger">You have already created profile</p></center>
+            {% else %}
+            <div class="row">
+                   <div class="col-12">
+                      <h5 class="form-title">
+                         <span>Profile Update </span>
+                      </h5>
+                   </div>
+             <form method="post", action="{% url 'dashboard:profile_update' profile.pk %}">
+               {% csrf_token %}
+                
+                   {{ form|crispy }}
+
+
+                
+                </div>
+                <div class="col-12 col-sm-12">
+                    <button type="submit" class="btn btn-primary col-12 col-sm-12">
+                    Save
+                    </button>
+                 </div>
+             </form>
+             {% endif %}
+          </div>
+          {% endif %}
+       </div>
+    </div>
+ </div>
+{% endblock content %}
+
+

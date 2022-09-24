@@ -1,0 +1,112 @@
+{% extends 'dashboard/base2.html' %}
+{% block content %}
+    <!-- {{ profile_list }} -->
+    <div id="content-wrapper" style="padding-top: 35px"
+      {% if user.is_authenticated %}
+      {% if user.is_staff %}
+
+            <div class="content container-fluid">
+               <div class="page-header">
+               <div class="card-body">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                  <div class="row align-items-center">
+                     <div class="col">
+                        <h3 class="page-title">Revenues</h3>
+                        <ul class="breadcrumb">
+                           <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                           <li class="breadcrumb-item active">Revenues</li>
+                        </ul>
+                     </div>
+                      <div class="col-auto text-right float-right ml-auto">
+                        {% comment %} <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Download</a> {% endcomment %}
+                        <a href="{% url 'dashboard:revenue_create'  %}" class="btn btn-primary"><i class="fas fa-plus"></i></a> 
+                     </div> 
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-sm-12">
+                     <div class="card card-table">
+                        <div class="card-body">
+                           <div class="table-responsive">
+                              <table class="table table-hover table-center mb-0 datatable">
+                                 <thead>
+                                    <tr>
+                                       <th>ID</th>
+                                       <th>Revenue Of</th>
+                                       <th>Revenue By</th>
+                                       <th>Revenue Amount</th>
+                                       <th>Date</th>
+                                       <th class="text-right">Action</th>
+                                    </tr>
+                                 </thead>
+                                {% if revenues %}
+                                {% for revenue in revenues %}
+                                 <tbody>
+                                    <tr>
+                                       <td>{{ revenue.id }}</td>
+                                       <td>
+                                          <h2 class="table-avatar">
+                                             <a href="{{ revenue.get_absolute_url }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ revenue.evidence_document.url }}" alt="User Image"></a>
+                                             <a href="{{ revenue.get_absolute_url }}">{{ revenue.revenue_of }}</a>
+                                          </h2>
+                                       </td>
+                                       <td>{{ revenue.expense_by }}</td>
+                                       <td>{{ revenue.amount }}</td>
+                                       <td>{{ revenue.day_on_which }}</td>
+    
+                                       <td class="text-right">
+                                          <div class="actions">
+                                             <a href="{% url 'dashboard:revenue_update' revenue.pk %}" class="btn btn-sm bg-success-light mr-2">
+                                             <i class="fas fa-pen"></i>
+                                             </a>
+                                             <a href="{% url 'dashboard:revenue_delete' revenue.pk %}" class="btn btn-sm bg-danger-light">
+                                             <i class="fas fa-trash"></i>
+                                             </a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                 </tbody>
+                                 {% endfor %}
+                                 {% else %}
+                                 <p>You seem to have no revenue reported yet</p>
+                                {% endif %}
+                              </table>
+                              {% if is_paginated %}
+                                    <div class="pagination">
+                                        <span class="page-links">
+                                        {% if page_obj.has_previous %}
+                                            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                                        {% endif %}
+                                        <span class="page-current">
+                                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                                        </span>
+                                        {% if page_obj.has_next %}
+                                        <a href="?page={{ page_obj.next_page_number }}">next</a>
+                                        {% endif %}
+                                {% endif %}    
+
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      {% else %}
+<p>It seems you are not logged in <a href="{% url 'auth_login' %}" >login now</a></p>
+{% endif %}
+{% else %}
+<p>It seems you dont have the permission to view this page </p>
+{% endif %}
+</div>
+                        
+{% endblock %}
+
+
+
+
+

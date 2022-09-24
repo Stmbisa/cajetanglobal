@@ -1,0 +1,26 @@
+{% extends 'base2.html' %}
+{% block content %}
+<div class="row">
+<div class="col-sm-12">
+   <div class="card">
+      <div class="card-body">
+         <form method="POST" action=".">
+            {% csrf_token %}
+            <div class="col-12 col-sm-11">
+                <div class="form-group">
+                    <label>Do you really want to delete '{{ profile.name }}'? </label>
+                    <p><input type="submit" class="form-control" value="yes" /><a href="../">Cancel</a></p> 
+                </div>
+                </div>
+        
+               <button type="submit" class="btn btn-primary" value="save">
+               Submit
+               </button>
+            
+         </form>
+        </div>
+      </div>
+   </div>
+</div>
+</di>
+{% endblock content %}

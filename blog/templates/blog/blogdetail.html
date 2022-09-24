@@ -1,0 +1,42 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="main-wrapper login-body " >
+  <div class="container-fluid">
+    <div class="row">
+<div class="card-body">
+    <section id="search-result" class="search-result">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9">
+            <main id="main">
+
+    <section class="single-post-content">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9 post-content" data-aos="fade-up">
+
+            <!-- ======= Single Post Content ======= -->
+            <div class="single-post">
+              <div class="post-meta"><span class="date">{{ blog.category }}</span> <span class="mx-1">&bullet;</span> <span>{{ blog.date_posted }}</span></div>
+              <h1 class="mb-5">{{ blog.title }}</h1>
+                <figure class="my-4">
+                <img src="{{ blog.image.url }}" alt="" class="img-fluid">
+                <figcaption> </figcaption>
+              </figure>
+              <p>{{ blog.content }}</p>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,229 @@
+{% extends '../base2.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-12">
+       <div class="card">
+          <div class="card-body">
+             <form>
+                <div class="row">
+                   <div class="col-12">
+                      <h5 class="form-title">
+                         <span>Profile Update </span>
+                      </h5>
+                   </div>
+                   <div class="col-12 col-sm-6">
+                      <div class="form-group">
+                         <label>Passport Picture</label>
+                         <input type="file" class="form-control" name="avatar"/>
+                      </div>
+                   </div>
+
+                   <select class="custom-select col-md-5" name="user_type" id="user_type" required>
+                     <option disabled selected value="">User Type </option>
+                     {% for value, user_type in user_types  %}
+                     <option value='{{value}}'>{{user_type}}</option>
+                     {% endfor %}
+                 </select>
+                   <!-- <div class="col-12 col-sm-6">
+                      <div class="form-group">
+                         <label>User type</label>
+                         <input type="text" class="form-control" name="user_type"/>
+                      </div>
+                   </div> -->
+                 <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                       <label>First Name</label>
+                       <input type="text" class="form-control" name="first_name"/>
+                    </div>
+                 </div>
+                 <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                       <label>Last name </label>
+                       <input type="text" class="form-control" name="last_name" />
+                    </div>
+                 </div>
+                 <select class="custom-select col-md-5" name="user_type" id="user_type" required>
+                  <option disabled selected value="">User Type </option>
+                  {% for user_type in user_types  %}
+                  <option value='{{user_type}}'>{{ user_type }}</option>
+                  {% endfor %}
+                 </select>
+                 
+                 <select class="custom-select col-md-5" name="user_type" id="user_type" required>
+                  <option disabled selected value="">Gender </option>
+                  {% for gender_choice in gender_choices  %}
+                  <option value='{{value}}'>{{ gender_choice }}</option>
+                  {% endfor %}
+                 </select>
+                 <!-- <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                       <label>Gender</label>
+                       <input type="text" class="form-control" name="gender"/>
+                    </div>
+                 </div> -->
+                 <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                       <label>Email</label>
+                       <input type="text" class="form-control" name="email" readonly/>
+                    </div>
+                 </div>
+                 <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                       <label>Phone Number</label>
+                       <input type="text" class="form-control" name="phonenumber" />
+                    </div>
+                 </div>
+                 <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                       <label>Birth Date</label>
+                       <input type="text" class="form-control" name="birth_date" />
+                    </div>
+                 </div>
+                 <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                       <label>Bio</label>
+                       <input type="text" class="form-control" name="bio" placeholder="Tell us a bit about you"/>
+                    </div>
+                 </div>
+                 <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                       <label>Residential address</label>
+                       <input type="text" class="form-control" name="residential_address" />
+                    </div>
+                 </div>
+               <div class="col-12 col-sm-6">
+                  <div class="form-group">
+                     <label>Next of kin</label>
+                     <input type="text" class="form-control" name="next_of_kin" />
+                  </div>
+               </div>
+               <div class="col-12 col-sm-6">
+                  <div class="form-group">
+                     <label>Next of kin address</label>
+                     <input type="text" class="form-control" name="address" />
+                  </div>
+               </div>
+               <div class="col-12 col-sm-6">
+                  <div class="form-group">
+                     <label>Village</label>
+                     <input type="text" class="form-control" name="village" />
+                  </div>
+               </div>
+               <div class="col-12 col-sm-6">
+                  <div class="form-group">
+                     <label>Your city</label>
+                     <input type="text" class="form-control" name="city" />
+                  </div>
+               </div>
+               <div class="col-12 col-sm-6">
+                  <div class="form-group">
+                     <label>State</label>
+                     <input type="text" class="form-control" name="state" />
+                  </div>
+               </div>
+               <div class="col-12 col-sm-6">
+                  <div class="form-group">
+                     <label>Country</label>
+                     <input type="text" class="form-control" name="country"/>
+                  </div>
+               </div>
+               <div class="col-12 col-sm-6">
+                <div class="form-group">
+                   <label>State</label>
+                   <input type="text" class="form-control" name="education_background" />
+                </div>
+             </div>
+             <div class="col-12 col-sm-6">
+                <div class="form-group">
+                   <label>Education background</label>
+                   <input type="text" class="form-control" name="marrital_status" />
+                </div>
+             </div>
+             <div class="col-12 col-sm-6">
+                <div class="form-group">
+                   <label>Marrital status</label>
+                   <input type="text" class="form-control" name="spouse_name" />
+                </div>
+             </div>
+             <div class="col-12 col-sm-6">
+                <div class="form-group">
+                   <label>Spouse name</label>
+                   <input type="text" class="form-control" name="spouse_address" />
+                </div>
+             </div>
+             <div class="col-12 col-sm-6">
+                <div class="form-group">
+                   <label>Spouse telephone</label>
+                   <input type="text" class="form-control" name="spouse_telephone" />
+                </div>
+             </div>
+             <div class="col-12 col-sm-6">
+                <div class="form-group">
+                   <label>Children number</label>
+                   <input type="text" class="form-control" name="children_number" />
+                </div>
+             </div>
+             <div class="col-12 col-sm-6">
+                <div class="form-group">
+                   <label>Currency choice</label>
+                   <input type="text" class="form-control" name="currency_choice" />
+                </div>
+             </div>
+             <div class="col-12 col-sm-6">
+                <div class="form-group">
+                   <label>Amount to pay</label>
+                   <input type="text" class="form-control" name="amount_to_pay" />
+                </div>
+             </div>
+             <div class="col-12 col-sm-6">
+                <div class="form-group">
+                   <label>Formal employee</label>
+                   <input type="text" class="form-control" name="formal_employee" />
+                </div>
+             </div>
+             <div class="col-12 col-sm-6">
+                <div class="form-group">
+                   <label>Formal employee telephone</label>
+                   <input type="text" class="form-control" name="formal_employee_telephone"/>
+                </div>
+             </div>
+             <div class="col-12 col-sm-6">
+                <div class="form-group">
+                   <label>health_status</label>
+                   <input type="text" class="form-control" name="health_status"/>
+                </div>
+             </div>
+             <div class="col-12 col-sm-6">
+                <div class="form-group">
+                   <label>Favorite_animal</label>
+                   <input type="text" class="form-control" name="favorite_animal" />
+                </div>
+             </div>
+             <div class="col-12 col-sm-6">
+                <div class="form-group">
+                   <label>Hobby</label>
+                   <input type="text" class="form-control" name="hobby" />
+                </div>
+             </div>
+             <div class="col-12 col-sm-6">
+                <div class="form-group">
+                   <label>Password</label>
+                   <input type="password" class="form-control" name="password" placeholder="Only if you want to change" />
+                </div>
+             </div>
+
+
+                
+                </div>
+                <div class="col-12 col-sm-12">
+                    <button type="submit" class="btn btn-primary col-12 col-sm-12">
+                    Update profile
+                    </button>
+                 </div>
+             </form>
+          </div>
+       </div>
+    </div>
+ </div>
+{% endblock content %}

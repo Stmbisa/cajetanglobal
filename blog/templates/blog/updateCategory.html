@@ -1,0 +1,49 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+  <main id="main">
+<section id="search-result" class="search-result">
+      <div class="container">
+        <div class="row">
+        {% if user.is_authenticated %}
+          {% if user.is_staff %}
+          <div class="col-md-9">
+            <h3 class="category-title">Add Category </h3>
+            <ul>
+            <div class="d-md-flex post-entry-2 small-img">
+              <div>
+                {% comment %} <div class="post-meta"><span class="date">Add category </span> <span class="mx-1">&bullet;</span> <span>{{category.created_at}}</span></div> {% endcomment %}
+                
+                <div class="d-flex align-items-center author">
+                  <form method="post", action="{% url 'blog:update_category' category.pk %}">
+               {% csrf_token %}
+                
+                   {{ form|crispy}}
+               
+                <div class="col-12 col-sm-12">
+                    <button type="submit" class="btn btn-primary col-12 col-sm-12">
+                    Save
+                    </button>
+                 </div>
+             </form>
+                  
+                </div>
+              </div>
+              </li>
+            </div>
+            </ul>
+          </div>
+        </div>
+        {% else %}
+        <p>It seems you are not logged in <a href="{% url 'auth_login' %}" >login now</a></p>
+        {% endif %}
+        {% else %}
+        <p>It seems you dont have the permission to view this page </p>
+        {% endif %}
+      </div>
+    </section> <!-- End Search Result -->
+{% endblock content %}
+
+  

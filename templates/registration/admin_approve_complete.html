@@ -1,0 +1,57 @@
+
+{% extends "blog/base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% trans "Account Approved" %}{% endblock %}
+
+{% block content %}
+<div class="main-wrapper login-body " >
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 mb-3 mt-5">
+        <div class="col-12 mb-3">
+            <div id="content-wrapper" style="padding-top: 20px">
+              <div class="container-fluid">
+                  <div class="card mb-3 d-flex align-items-center justify-content-center">
+                    <div class="card-body">
+                        <div class="card-footer">
+                          <div class="d-flex justify-content-center">
+                            <p>
+                                {% trans "The user's account is now approved." %}
+                            </p>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+{% comment %}
+**registration/admin_approve_complete.html**
+
+Used to generate the html body of the admin activation email. Should display a
+link for an admin to approve activation of the account. This template has the
+following context:
+
+``site``
+    An object representing the site on which the user registered;
+    depending on whether ``django.contrib.sites`` is installed, this
+    may be an instance of either ``django.contrib.sites.models.Site``
+    (if the sites application is installed) or
+    ``django.contrib.sites.requests.RequestSite`` (if not). Consult `the
+    documentation for the Django sites framework
+    <http://docs.djangoproject.com/en/dev/ref/contrib/sites/>`_ for
+    details regarding these objects' interfaces.
+
+``user``
+    The new user account
+
+{% endcomment %}

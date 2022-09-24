@@ -1,0 +1,83 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block content %}
+<main id="main">
+<section id="search-result" class="search-result">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9">
+            <h3 class="category-title">All Categories  </h3>
+            {% for category in object_list %}
+            <ul>
+            <div class="d-md-flex post-entry-2 small-img">
+              <a href="" class="me-4 thumbnail">
+              {% comment %} <a href="{% url 'blog:category_detail' slug=category.slug %}" class="me-4 thumbnail"> {% endcomment %}
+              {% comment %} THE LINE ABOVE HAS PROBLEMS {% endcomment %}
+              {{ category.category_name }}
+              </a>
+              <li>
+              <div>
+                <div class="post-meta"><span class="date">{{ category.description|truncatechars:55  }} <a href="{{ category.get_absolute_url }}">read more</a> 
+                </span> <span class="mx-1">&bullet;</span> <span>{{category.created_at}}</span></div>
+                <div class="actions">
+                <a href="{% url 'blog:update_category' slug=category.slug %}"></i><small>edit</small></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url 'blog:category_delete' slug=category.slug %}"></i><small>delete</small></a>
+                </a>
+                </div>
+              </div>
+              </li>
+            </div>
+            {% endfor %}
+            </ul>
+            <div class="d-md-flex post-entry-2 small-img"><a href="{% url 'blog:add_category'  %}" class="btn btn-primary"><small>add a category</small></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> 
+
+
+
+
+    {% comment %} <div class="col-12">
+              <div class="card recent-sales overflow-auto">
+
+                <div class="col-auto text-right float-right ml-auto">
+                  <a href="{% url 'blog:add_category'  %}" class="btn btn-primary"><i class="fas fa-plus"></i></a> 
+                     </div>
+
+                <div class="card-body">
+                  <h5 class="card-title">Categories <span>| all</span></h5>
+
+                  <table class="table table-borderless datatable">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Category name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Created At</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row"><a href="#">{{ category.id }}</a></th>
+                        <td>
+                          <h2 class="table-avatar">
+                              <a href="{{ category.get_absolute_url }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ category.category_img.url }}" alt="Img"></a>
+                              <a href="{{ category.get_absolute_url }}">{{ category.category_name }}</a>
+                          </h2>
+                        </td>
+                        <td>{{  category.description|truncatechars:50 }}</td>
+                        <td><a href="#" class="text-primary">{{ category.created_at }}</a></td>
+
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+
+                </div>
+
+              </div> {% endcomment %}
+{% endblock content %}
+
+  

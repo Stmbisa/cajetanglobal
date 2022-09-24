@@ -1,0 +1,58 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% comment %} {% load crispy_forms_tags %} {% endcomment %}
+{% block content %}
+
+<div class="main-wrapper login-body">
+    <div class="login-wrapper">
+    <div class="container">
+    <div class="loginbox">
+    <div class="login-right">
+    <div class="login-right-wrap">
+    <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-4"></div>
+      
+          <div class="col-sm-5" style= "padding-top: 80px" >
+          {% if messages %} {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %} {% endif %}
+
+            <form action="{% url 'memberships:login' %}" method="POST">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <div class="text-center form-group">
+                 <button class="btn btn-primary btn-block text-center" type="submit">Login</button>
+              </div>
+           </form>
+           <div class="text-center forgotpass"><a href="forgot-password.html">Forgot Password?</a></div>
+           <div class="login-or">
+              <span class="or-line"></span>
+              <span class="span-or"></span>
+           </div>
+           <div class="card-footer">
+            {% comment %} <div class="d-flex justify-content-center">
+                <div class="messages">
+                  {% if messages %}{% for message in messages %}<a class="alert alert-{{ message.tags }}" style="color:red;"> {{ message }}</a>{% endfor %}{% endif %}
+                </div>
+              </div> {% endcomment %}
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    <div class="login-or">
+    <span class="or-line"></span>
+    </div>
+    
+    
+    <div class="text-center dont-have"><center>Dont have an account? <a href="{% url 'memberships:register' %}">Register</a></center></div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+{% endblock content %}

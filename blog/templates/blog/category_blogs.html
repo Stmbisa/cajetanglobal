@@ -1,0 +1,49 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block content %}
+  <main id="main">
+<section id="search-result" class="search-result">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9">
+            <h3 class="category-title">{{ category.category_name }} details and blogs </h3>
+
+            <ul>
+            <div class="d-md-flex post-entry-2 small-img">
+              <a href="single-post.html" class="me-4 thumbnail">
+                <img src="{{ blog.category_img.url }}" alt="" class="img-fluid">
+              </a>
+              <li>
+              <div>
+                <div class="post-meta"><span class="date">{{ category.category_name }}</span> <span class="mx-1">&bullet;</span> <span>{{category.created_at}}</span></div>
+                <p>{{ category.description|truncatechars:200 }}</p>
+                <div class="d-flex align-items-center author">
+                  <div class="photo"><img src=" {{ category.category_img.url }} " class='img-responsive' style='width:100%; float:left; margin-right;10%' alt="" class="img-fluid"></div>
+                </div>
+              </div>
+              </li>
+            </div>
+            <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
+          <h3>{{ category.category_name }} &amp; Blog Post</h3>
+           {% for category in blog_categories %}
+          <div class="row">
+            <div class="col-lg-6">
+              <ul>
+                <li><a href="{% url 'blog:blog_detail' slug=blog.slug %}"><i class="bi bi-chevron-right"></i> <strong>{{ blog.title }}:</strong> <span>{{ blog.author }}</span><span>{{ blog.date_posted }}</span></a></li>
+                <a href="{% url 'blog:blog_update' slug=blog.slug category=blogs.slug %}"></i><small>edit</small></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url 'blog:blog_delete' slug=blog.slug category=blogs.slug %}"></i><small>delete</small></a>
+              </ul>
+            </div>
+           </div>
+           {% endfor%}
+          </div>
+           <div class="d-md-flex post-entry-2 small-img"><a href="{% url 'blog:blog_add' %}" class="btn btn-primary"><small>add a blog</small></a>
+        </div>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section> <!-- End Search Result -->
+{% endblock content %}
+
+  

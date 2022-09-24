@@ -1,0 +1,83 @@
+{% extends "blog/base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% trans "Register for an account" %}{% endblock %}
+
+{% block content %}
+{% comment %} <div class='col-sm-6 col-sm-offset-3'>
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form|crispy  }}
+        <input type="submit" value="{% trans 'Submit' %}" />
+    </form>
+</div> {% endcomment %}
+
+
+
+
+
+<div class="main-wrapper login-body " >
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 mb-3 mt-5">
+        <div class="col-12 mb-3">
+            <div id="content-wrapper" style="padding-top: 45px">
+              <div class="container-fluid">
+                  <div class="card mb-3 d-flex align-items-center justify-content-center">
+                    <div class="card-body">
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                          {{ message }}
+                        </div>
+                        {% endfor %}
+                        <h4 class="text-primary">Sign Up Here </h4>
+                        <form method="post" novalidate class="form-horizontal">
+                          {% csrf_token %}
+                          <div class="form-control">
+                            <input type="hidden" value="">
+                            {{ form|crispy }}
+                            <input type="submit" class="btn btn-success" value="{% trans 'Submit' %}" />
+                          </div>
+                        </form>
+                        <br>
+                        <div class="card-footer">
+                          <div class="d-flex justify-content-center">
+                              <div class="messages">
+                                {% for message in messages %}
+                                <a class="alert alert-success" style="color:red;"> {{ message }}</a>
+                                {% endfor %}
+                              </div>
+                          </div>
+                        </div>
+                        <div class="login-or">
+                        <span class="or-line"></span>
+                        <span class="span-or">or</span>
+                        </div>
+                        {% comment %} {% blocktrans %}
+                        <div class="text-center dont-have">Already have an account? <a href="{{ login_url }}">Login</a></div>
+                        {% endblocktrans %}. {% endcomment %}
+                        <div class="text-center dont-have">Already have an account? <a href="{% url 'auth_login' %}">Login</a></div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+{% comment %}
+**registration/registration_form.html**
+Used to show the form users will fill out to register. By default, has
+the following context:
+
+``form``
+    The registration form. This will be an instance of some subclass
+    of ``django.forms.Form``; consult `Django's forms documentation
+    <http://docs.djangoproject.com/en/dev/topics/forms/>`_ for
+    information on how to display this in a template.
+{% endcomment %}

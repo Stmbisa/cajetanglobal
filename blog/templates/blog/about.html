@@ -1,0 +1,121 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+  <main id="main">
+    <section>
+      <div class="container" data-aos="fade-up">
+        <div class="row">
+          <div class="col-lg-12 text-center mb-5">
+            <h1 class="page-title">About us</h1>
+          </div>
+        </div>
+
+        <div class="row mb-5">
+
+          <div class="d-md-flex post-entry-2 half">
+            <a href="#" class="me-4 thumbnail">
+              <img src="cajetanglobal/img/post-landscape-2.jpg" alt="" class="img-fluid">
+            </a>
+            <div class="ps-md-5 mt-4 mt-md-0">
+              <div class="post-meta mt-4">About us</div>
+              <h2 class="mb-4 display-4">Company History</h2>
+
+              <p>Cajetan Global Visa started with an ambition of revolutionizing the online visa processing industry with the implementation of sole idea of making our clients happy & satisfied throughout the process. The steps that we ensure are highly innovative and new in the segment. With this motive of ours, we have become a leading visa service provider globally within a very-short timeframe.</p>
+              <p>What we guarantee from our side is the quickest processing & updating time along with assurance of error-free application, which takes your chances of visa approval to the next level. You can easily apply for visa by just providing some basic information and we would gather the remaining information from you while you relax at your home. Just take a few minutes to provide us your visa requirements and we would be in touch with you shortly and would assist you along the process.</p>
+            </div>
+          </div>
+
+          <div class="d-md-flex post-entry-2 half mt-5">
+            <a href="#" class="me-4 thumbnail order-2">
+              <img src="cajetanglobal/img/post-landscape-1.jpg" alt="" class="img-fluid">
+            </a>
+            <div class="pe-md-5 mt-4 mt-md-0">
+              <div class="post-meta mt-4">Mission &amp; Vision</div>
+              <h2 class="mb-4 display-4">Mission &amp; Vision</h2>
+
+              <p>we began our journey with a dream to run a good tour and travel company that understands not only the clients’ needs but also provides all the necessary support and welfare to its safari guides and staff.</p>
+              <p>We believe that only a happy, steady and well-equipped team is able to go the extra mile to create memorable experiences for and with our clients.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="mb-5 bg-light py-5">
+      <div class="container" data-aos="fade-up">
+        <div class="row justify-content-between align-items-lg-center">
+          <div class="col-lg-5 mb-4 mb-lg-0">
+            <h2 class="display-4 mb-4">Latest News</h2>
+            <p>We can help you have visa whether you want to work, or tour, or whatever </p>
+            <p>Think of the countries like CANADA, Israel and many more!</p>
+            <p><a href="{% url 'blog:blog_home' %}" class="more">View All Blog Posts</a></p>
+          </div>
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-6">
+                <img src="cajetanglobal/img/post-portrait-3.jpg" alt="" class="img-fluid mb-4">
+              </div>
+              <div class="col-6 mt-4">
+                <img src="cajetanglobal/img/post-portrait-4.jpg" alt="" class="img-fluid mb-4">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {% comment %} <section>
+      <div class="container" data-aos="fade-up">
+        <div class="row">
+          <div class="col-12 text-center mb-5">
+            <div class="row justify-content-center">
+              <div class="col-lg-6">
+                <h2 class="display-4">Our Team</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil sint sed, fugit distinctio ad eius itaque deserunt doloribus harum excepturi laudantium sit officiis et eaque blanditiis. Dolore natus excepturi recusandae.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 text-center mb-5">
+            <img src="cajetanglobal/img/person-1.jpg" alt="" class="img-fluid rounded-circle w-50 mb-4">
+            <h4>Cameron Williamson</h4>
+            <span class="d-block mb-3 text-uppercase">Founder &amp; CEO</span>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis, perspiciatis repellat maxime, adipisci non ipsam at itaque rerum vitae, necessitatibus nulla animi expedita cumque provident inventore? Voluptatum in tempora earum deleniti, culpa odit veniam, ea reiciendis sunt ullam temporibus aut!</p>
+          </div>
+          <div class="col-lg-4 text-center mb-5">
+            <img src="cajetanglobal/img/person-2.jpg" alt="" class="img-fluid rounded-circle w-50 mb-4">
+            <h4>Wade Warren</h4>
+            <span class="d-block mb-3 text-uppercase">Founder, VP</span>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis, perspiciatis repellat maxime, adipisci non ipsam at itaque rerum vitae, necessitatibus nulla animi expedita cumque provident inventore? Voluptatum in tempora earum deleniti, culpa odit veniam, ea reiciendis sunt ullam temporibus aut!</p>
+          </div>
+          <div class="col-lg-4 text-center mb-5">
+            <img src="cajetanglobal/img/person-3.jpg" alt="" class="img-fluid rounded-circle w-50 mb-4">
+            <h4>Jane Cooper</h4>
+            <span class="d-block mb-3 text-uppercase">Editor Staff</span>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis, perspiciatis repellat maxime, adipisci non ipsam at itaque rerum vitae, necessitatibus nulla animi expedita cumque provident inventore? Voluptatum in tempora earum deleniti, culpa odit veniam, ea reiciendis sunt ullam temporibus aut!</p>
+          </div>
+          <div class="col-lg-4 text-center mb-5">
+            <img src="cajetanglobal/img/person-4.jpg" alt="" class="img-fluid rounded-circle w-50 mb-4">
+            <h4>Cameron Williamson</h4>
+            <span class="d-block mb-3 text-uppercase">Editor Staff</span>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis, perspiciatis repellat maxime, adipisci non ipsam at itaque rerum vitae, necessitatibus nulla animi expedita cumque provident inventore? Voluptatum in tempora earum deleniti, culpa odit veniam, ea reiciendis sunt ullam temporibus aut!</p>
+          </div>
+          <div class="col-lg-4 text-center mb-5">
+            <img src="cajetanglobal/img/person-5.jpg" alt="" class="img-fluid rounded-circle w-50 mb-4">
+            <h4>Cameron Williamson</h4>
+            <span class="d-block mb-3 text-uppercase">Editor Staff</span>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis, perspiciatis repellat maxime, adipisci non ipsam at itaque rerum vitae, necessitatibus nulla animi expedita cumque provident inventore? Voluptatum in tempora earum deleniti, culpa odit veniam, ea reiciendis sunt ullam temporibus aut!</p>
+          </div>
+          <div class="col-lg-4 text-center mb-5">
+            <img src="cajetanglobal/img/person-6.jpg" alt="" class="img-fluid rounded-circle w-50 mb-4">
+            <h4>Cameron Williamson</h4>
+            <span class="d-block mb-3 text-uppercase">Editor Staff</span>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis, perspiciatis repellat maxime, adipisci non ipsam at itaque rerum vitae, necessitatibus nulla animi expedita cumque provident inventore? Voluptatum in tempora earum deleniti, culpa odit veniam, ea reiciendis sunt ullam temporibus aut!</p>
+          </div>
+        </div>
+      </div>
+    </section> {% endcomment %}
+
+  </main><!-- End #main -->
+  {% endblock content %}

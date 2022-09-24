@@ -1,0 +1,91 @@
+{% load static %}
+<div class="main-wrapper">
+    <div class="header">
+       <div class="header-left">
+          <a href="index.html" class="logo">
+          <img src="{% static 'assets/img/logo.png' %}" alt="Logo">
+          </a>
+          <a href="index.html" class="logo logo-small">
+          <img src="{% static 'assets/img/logo-small.png' %}" alt="Logo" width="30" height="30">
+          </a>
+       </div>
+       <a href="javascript:void(0);" id="toggle_btn">
+       <i class="fas fa-align-left"></i>
+       </a>
+       <!-- <div class="top-nav-search">
+          <form>
+             <input type="text" class="form-control" placeholder="Search here">
+             <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+          </form>
+       </div> -->
+       <div class="top-nav-search mt-3 ">
+         <h3><strong>Welcome <span>{{ user.first_name }} {{ user.last_name }}</span>&nbsp;!</strong></h3>
+      </div>
+      <div class="top-nav-search">
+         <h6><small>You can return home <span><a href="{% url 'blog:index_home' %}">Here</a></span></small></h6>
+      </div>
+
+      <div class="top-nav-search mt-3">
+         <a href="{% url 'blog:index_home' %}"><i class="fas fa-building"></i></a>
+      </div>
+
+       <a class="mobile_btn" id="mobile_btn">
+       <i class="fas fa-bars"></i>
+       </a>
+       <ul class="nav user-menu">                     
+          <li class="nav-item dropdown has-arrow">
+             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+             <span class="user-img"><img class="rounded-circle" src="{% static 'assets/img/profiles/avatar-01.jpeg' %}" width="31" alt="Cajetan Global Visas"></span>
+             </a>
+             <div class="dropdown-menu">
+                <div class="user-header">
+                   <div class="avatar avatar-sm">
+                      <img src="{% static 'assets/img/profiles/avt.jpeg' %}" alt="User Image" class="avatar-img rounded-circle">
+                   </div>
+                   <div class="user-text">
+                      <h6>{{ user.first_name }} {{ user.last_name }}</h6>
+                      {% if user is not None and user.is_active %}
+
+                        {% if user.is_admin or user.is_superuser %}
+                        <p class="text-muted mb-0">Administrator</p>
+                        {% endif %}
+
+                        {% elif user.is_requester %}
+                        <p class="text-muted mb-0">Requester</p>
+
+                        {% else %}
+                        <p class="text-muted mb-0"> Complete profile </p>
+                     {% endif %}
+
+                   </div>
+                </div>
+                {% if user is not None and user.is_active %}
+                <a class="dropdown-item" href="">My Profile</a> 
+                <a class="dropdown-item" href="">My Profile Update</a>
+                <a class="dropdown-item" href="inbox.html">Inbox</a>
+                <a class="dropdown-item" href="{% url 'auth_logout' %}">Logout</a>
+                {% endif %}
+             </div>
+          </li>
+       </ul>
+    </div>
+    {% if messages %}
+      {% for message in messages %}
+         <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+         </div>
+      {% endfor %}
+   {% endif%}
+
+
+   <!-- {% if user.is_admin or user.is_superuser %}
+                        <p class="text-muted mb-0">Administrator</p>
+                        {% endif %}
+
+                        {% if user.is_provider %}
+                        <p class="text-muted mb-0">Provider</p>
+                        {% endif %}
+
+                        {% if user.is_requester %}
+                        <p class="text-muted mb-0">Requester</p>
+                        {% endif %} -->

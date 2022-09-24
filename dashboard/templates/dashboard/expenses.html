@@ -1,0 +1,120 @@
+{% extends 'dashboard/base2.html' %}
+{% block content %}
+    <!-- {{ profile_list }} -->
+    <div id="content-wrapper" style="padding-top: 35px"
+      {% if user.is_authenticated %}
+      {% if user.is_staff %}
+
+            <div class="content container-fluid">
+               <div class="page-header">
+               <div class="card-body">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                  <div class="row align-items-center">
+                     <div class="col">
+                        <h3 class="page-title">expenses</h3>
+                        <ul class="breadcrumb">
+                           <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                           <li class="breadcrumb-item active">expenses</li>
+                        </ul>
+                     </div>
+                      <div class="col-auto text-right float-right ml-auto">
+                        {% comment %} <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Download</a> {% endcomment %}
+                        <a href="{% url 'dashboard:expense_create'  %}" class="btn btn-primary"><i class="fas fa-plus"></i></a> 
+                     </div> 
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-sm-12">
+                     <div class="card card-table">
+                        <div class="card-body">
+                           <div class="table-responsive">
+                              <table class="table table-hover table-center mb-0 datatable">
+                                 <thead>
+                                    <tr>
+                                       <th>ID</th>
+                                       <th>Expense Of</th>
+                                       <th>Expense By</th>
+                                       <th>Expense Amount</th>
+                                       <th>Date</th>
+                                       <th class="text-right">Action</th>
+                                    </tr>
+                                 </thead>
+                                {% if expenses %}
+                                {% for expense in expenses %}
+                                {% comment %} {% sum = 0 %} {% endcomment %}
+                                 <tbody>
+                                    <tr>
+                                       <td>{{ expense.id }}</td>
+                                       <td>
+                                          <h2 class="table-avatar">
+                                             <a href="{{ expense.get_absolute_url }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ revenue.evidence_document.url }}" alt="User Image"></a>
+                                             <a href="{{ expense.get_absolute_url }}">{{ expense.expense_of }}</a>
+                                          </h2>
+                                       </td>
+                                       <td>{{ expense.expense_by }}</td>
+                                       <td>{{ expense.amount }}</td>
+                                       <td>{{ expense.day_on_which }}</td>
+                                       
+                                       <td class="text-right">
+                                          <div class="actions">
+                                             <a href="{% url 'dashboard:expense_update' expense.pk %}" class="btn btn-sm bg-success-light mr-2">
+                                             <i class="fas fa-pen"></i>
+                                             </a>
+                                             <a href="{% url 'dashboard:expense_delete' expense.pk %}" class="btn btn-sm bg-danger-light">
+                                             <i class="fas fa-trash"></i>
+                                             </a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                 </tbody>
+                                 {% comment %} {% if expense.amount %}
+                                    {{ sum = '0' }}
+                                 {% for expense in expenses %}
+                                 {% total = sum + expense.amount %}
+                                 <p>The total expenses are {% total %}</p>
+                                 {% endfor %}
+                                 {% endif %} {% endcomment %}
+                                 {% endfor %}
+                                 <p>You seem to have no expenses reported so far</p>
+                                {% endif %}
+                              </table>
+                              {% if is_paginated %}
+                                    <div class="pagination">
+                                        <span class="page-links">
+                                        {% if page_obj.has_previous %}
+                                            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                                        {% endif %}
+                                        <span class="page-current">
+                                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                                        </span>
+                                        {% if page_obj.has_next %}
+                                        <a href="?page={{ page_obj.next_page_number }}">next</a>
+                                        {% endif %}
+                                {% endif %}    
+
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         {% else %}
+   <p>It seems you are not logged in <a href="{% url 'auth_login' %}" >login now</a></p>
+   {% endif %}
+   {% else %}
+   <p>It seems you dont have the permission to view this page </p>
+   {% endif %}
+</div>
+                        
+{% endblock %}
+
+
+
+
+
+expense

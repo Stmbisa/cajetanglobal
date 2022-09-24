@@ -1,0 +1,34 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block content %}
+<main id="main">
+<div class="row">
+<div class="col-sm-12">
+   <div class="card">
+      <div class="card-body">
+      {% if user.is_authenticated %}
+          {% if user.is_staff %}
+         <form method="POST" action=".">
+            {% csrf_token %}
+            <div class="col-12 col-sm-11">
+                <div class="form-group">
+                    <label>Do you really want to delete '{{ category.category_name }}'? </label>
+                    <p><input type="submit" class="form-control" class="badge badge-danger" value="yes" /><a href="../" >Cancel</a></p> 
+                </div>
+                </div>
+         </form>
+         {% else %}
+        <p>It seems you are not logged in <a href="{% url 'auth_login' %}" >login now</a></p>
+        {% endif %}
+        {% else %}
+        <p>It seems you dont have the permission to view this page </p>
+        {% endif %}
+        </div>
+      </div>
+   </div>
+</div>
+</di>
+</main>
+{% endblock content %}
+  
