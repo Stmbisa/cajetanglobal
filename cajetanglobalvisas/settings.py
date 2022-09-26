@@ -99,7 +99,7 @@ WSGI_APPLICATION = 'cajetanglobalvisas.wsgi.application'
 DATABASES={
    'default':{
       'ENGINE':'django.db.backends.postgresql_psycopg2',
-      'NAME':'cajetanglobalvisa',
+      'NAME':'cajetan',
       'USER':'postgres',
       'PASSWORD':'76765767',
       'HOST': '127.0.0.1',
