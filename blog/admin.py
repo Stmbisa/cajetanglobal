@@ -1,5 +1,3 @@
-# from msilib.schema import Feature
-from turtle import title
 from django.contrib import admin
 
 from blog.models import Blog, Feature1, Category, Author
