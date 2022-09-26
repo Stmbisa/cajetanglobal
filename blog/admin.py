@@ -1,4 +1,4 @@
-from msilib.schema import Feature
+# from msilib.schema import Feature
 from turtle import title
 from django.contrib import admin
 
