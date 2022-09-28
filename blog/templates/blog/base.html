@@ -120,8 +120,8 @@
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
           <!-- <img class="avatar-img rounded-circle img-responsive thumbnail" src="{{ user.image.url|default_if_none:'#' }}" alt="Profile"> -->
-           <img class="avatar-img rounded-circle img-responsive thumbnail" src="{{ user.image_url|default_if_none:'#' }}" alt="Profile"> 
-            {% comment %} <img src="{{ user.image_url|default_if_none:'#' }}" alt="Profile" class="rounded-circle"> {% endcomment %}
+           <img class="avatar-img rounded-circle img-responsive thumbnail" src="{{ user.get_image|default_if_none:'#' }}" alt="Profile"> 
+            {% comment %} <img src="{{ user.get_image|default_if_none:'#' }}" alt="Profile" class="rounded-circle"> {% endcomment %}
             <span class="d-none d-md-block dropdown-toggle ps-2">Cajetan Global Visas</span>
           </a><!-- End Profile Iamge Icon -->
 

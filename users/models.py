@@ -75,10 +75,9 @@ class User(AbstractUser):
         "returns User's fullname"
         return '%s %s'%(self.first_name,self.last_name)
 
-    @property
-    def image_url(self):
-        if self.image and hasattr(self.image, 'url'):
-            return self.image.url
+    def get_image(self):
+        if self.avatar and hasattr(self.avatar, 'url'):
+            return self.avatar.url
         else:
             return "/static/assets/img/user.png"
 
@@ -162,7 +161,13 @@ class Profile(models.Model):
         if self.avatar and hasattr(self.avatar, 'url'):
             return self.avatar.url
         else:
-            return 'path/to/default/image'
+            return "/static/assets/img/user.png"
+    
+    def get_passport(self):
+        if self.passport_document and hasattr(self.avatar, 'url'):
+            return self.passport_document.url
+        else:
+            return "/static/assets/img/user.png"
     
     def __str__(self):
         return self.avatar
@@ -204,13 +209,7 @@ class Profile(models.Model):
         t3 = timedelta(days=30)
         return  datetime_object - t2<= t3
         
-    @property
-    def image_url(self):
-        if self.image and hasattr(self.image, 'url'):
-            return self.image.url
-        else:
-            return "/static/assets/img/user.png"
-
+    
 
 
 

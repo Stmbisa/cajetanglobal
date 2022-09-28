@@ -28,7 +28,7 @@
 
         <div class="row">
           <div class="col-lg-4" data-aos="fade-right">
-            <img src="{{ profile.get_image.url }}" class="img-fluid" alt="pic">
+            <img src="{{ profile.get_image }}" class="img-fluid" alt="pic">
           </div>
           <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
             <h3>{{ profile.full_name }} &amp; going to {{ profile.country_of_destination }}.</h3>
@@ -60,7 +60,8 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-4" data-aos="fade-right">
-            <img src="{{ profile.passport_document.url }}" class="img-fluid" alt="pic">
+            {% comment %} <img src="{{ profile.passport_document.url }}" class="img-fluid" alt="pic"> {% endcomment %}
+            <img src="{{ profile.get_passport }}" class="img-fluid" alt="pic">
           </div>
           <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
             <div class="row">
