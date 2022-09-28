@@ -19,7 +19,8 @@
                 <div class="post-meta"><span class="date">{{ category.category_name }}</span> <span class="mx-1">&bullet;</span> <span>{{category.created_at}}</span></div>
                 <p>{{ category.description|truncatechars:200 }}</p>
                 <div class="d-flex align-items-center author">
-                  <div class="photo"><img src=" {{ category.category_img.url }} " class='img-responsive' style='width:100%; float:left; margin-right;10%' alt="" class="img-fluid"></div>
+                  <div class="photo"><img src=" {{ category.get_category_img }} " class='img-responsive' style='width:100%; float:left; margin-right;10%' alt="" class="img-fluid"></div>
+                  {% comment %} <div class="photo"><img src=" {{ category.category_img.url }} " class='img-responsive' style='width:100%; float:left; margin-right;10%' alt="" class="img-fluid"></div> {% endcomment %}
                 </div>
               </div>
               </li>

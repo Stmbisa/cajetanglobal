@@ -164,7 +164,7 @@ class Profile(models.Model):
             return "/static/assets/img/user.png"
     
     def get_passport(self):
-        if self.passport_document and hasattr(self.avatar, 'url'):
+        if self.passport_document and hasattr(self.passport_document, 'url'):
             return self.passport_document.url
         else:
             return "/static/assets/img/user.png"

@@ -33,6 +33,30 @@ class Blog(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     slug = models.SlugField(null=False, blank=True)
 
+    def get_image(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+        else:
+            return "/static/assets/img/user.png"
+
+    def get_image1(self):
+        if self.image1 and hasattr(self.image, 'url'):
+            return self.image1.url
+        else:
+            return "/static/assets/img/user.png"
+
+    def get_image2(self):
+        if self.image2 and hasattr(self.image, 'url'):
+            return self.image2.url
+        else:
+            return "/static/assets/img/user.png"
+
+    def get_image3(self):
+        if self.image3 and hasattr(self.image, 'url'):
+            return self.image3.url
+        else:
+            return "/static/assets/img/user.png"
+
     def __str__(self):
         return self.title
 
@@ -57,6 +81,12 @@ class Category(models.Model):
     description = models.TextField(max_length=350, default='This this a short description', null=False)
     created_at = models.DateField(auto_now=True, null=True, blank=True)
     slug = models.SlugField(null=False, blank=True)
+
+    def get_category_img(self):
+        if self.category_img and hasattr(self.category_img, 'url'):
+            return self.category_img.url
+        else:
+            return "/static/assets/img/user.png"
     
 
 

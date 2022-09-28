@@ -12,21 +12,23 @@
             <ul>
             <div class="d-md-flex post-entry-2 small-img">
               <a href="{% url 'blog:category_detail' slug=blog.slug category=categories.slug %}" class="me-4 thumbnail">
-                <img src="{{ blog.image.url }}" alt="" class="img-fluid">
+                <img src="{{ blog.get_image }}" alt="" class="img-fluid">
+                {% comment %} <img src="{{ blog.image.url }}" alt="" class="img-fluid"> {% endcomment %}
               </a>
               <li>
               <div>
                 <div class="post-meta"><span class="date">{{ blog.category_name }}</span> <span class="mx-1">&bullet;</span> <span>{{ blog.date_posted }}</span></div>
                 <p>{{ blog.content|truncatechars:200 }}</p>
                 <div class="d-flex align-items-center author">
-                  <div class="photo"><img src="{{ blog.image.url }}  " class='img-responsive' style='width:100%; float:left; margin-right;10%' alt="" class="img-fluid"></div>
+                  <div class="photo"><img src="{{ blog.get_image }}  " class='img-responsive' style='width:100%; float:left; margin-right;10%' alt="" class="img-fluid"></div>
+                  {% comment %} <div class="photo"><img src="{{ blog.image.url }}  " class='img-responsive' style='width:100%; float:left; margin-right;10%' alt="" class="img-fluid"></div> {% endcomment %}
                 </div>
               </div>
               </li>
             </div>
             {% endfor %}
             </ul>
-            <div class="d-md-flex post-entry-2 small-img"><a href="{% url 'blog:blog_add' category=category.slug blog=blog.slug  %}" class="btn btn-primary"><small>add a blog</small></a>
+            <div class="d-md-flex post-entry-2 small-img"><a href="{% url 'blog:blog_add' blog=blog.slug  %}" class="btn btn-primary"><small>add a blog</small></a>
           </div>
         </div>
       </div>
