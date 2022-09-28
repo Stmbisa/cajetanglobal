@@ -7,6 +7,7 @@ from .models import Blog, Feature1, Category
 from .form import BlogForm, CategoryForm
 from django.urls import reverse_lazy
 # from django.http import HttpResponse
+from django.core.mail import send_mail
 
 
 def home_view(request, *args, **kwargs):
@@ -232,6 +233,25 @@ def blog_detail_view(request, id=None):
 #     return render (request, "about_home.html")
 
 def contact(request):
-    return render (request, "contact_home.html")
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+        data = {
+            'name':name,
+            'email':email,
+            'subject':subject,
+            'message':message
+        }
+        message ='''
+        new message :{}
+
+        from:{}
+        
+        '''.format(data['message'], data['message'] )
+        send_mail(data['subject'], message, '', ['cajetanglobalvisa@gmail.com'])
+        return HttpResponse('We will get in touch, thank you for contacting us ')
+    return render (request, "blog/contact.html",)
 
 

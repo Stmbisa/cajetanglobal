@@ -46,7 +46,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="{% url 'blog:index_home' %}" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1>Cajetan Global visas</h1>
@@ -56,7 +56,7 @@
         <ul>
           <li><a href="{% url 'blog:blog_home' %}">Blog</a></li>
           <li><a href=" {% url 'memberships:membership' %}">Membership</a></li> 
-          <!-- THERE ARE SO MANY PROBLEMS HERE WITH THIS LINKS TO CHANGE AS SOON AS POSSIBLE -->
+         
           
           <li class="dropdown"><a href="{% url 'memberships:membership' %}"><span>Visas</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
@@ -111,40 +111,17 @@
               {% comment %} <li><a href="#">Company profile</a></li> {% endcomment %}
             </ul>
           </li>
-
-          
-        </ul>
-      </nav>
-
-      <div class="position-relative">
-        <a href="https://www.facebook.com/Cajetan-Global-Visa-100856879259515/" class="mx-2"><span class="bi-facebook"></span></a>
-        <a href="#" class="mx-2"><span class="bi-instagram"></span></a>
-
-        <a href="#" class="mx-2 js-search-open"><span class="bi-search"></span></a>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-
-        <!-- ======= Search Form ======= -->
-        <div class="search-form-wrap js-search-form-wrap">
-          <form action="search-result.html" class="search-form">
-            <span class="icon bi-search"></span>
-            <input type="text" name="q" placeholder="Search" class="form-control">
-            <button class="btn js-search-close" type="submit"><span class="bi-x"></span></button>
-          </form>
-        </div><!-- End Search Form -->
-
-      </div>
-      <nav id="navbar" class="navbar">
-        <ul>
-         {% if user.is_authenticated %}
-          {% if user.is_staff %}
-          <li><a href="{% url 'dashboard:dash_home' %}">Dashboard</a></li>
-          {% endif %}
-
-            <li class="nav-item dropdown pe-3">
+          {% if not user.is_authenticated %}
+              <li><a href="{% url 'auth_login' %}">login</a></li>
+              <li><a href="{% url 'registration_register' %}">register</a></li>
+              {% else %}
+              <li><a href="{% url 'dashboard:dash_home' %}">Dashboard</a></li>
+              <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-          <img class="avatar-img rounded-circle" src="{{ user.avatar.url }}" alt="Profile">
-            {% comment %} <img src="{{ user.avatar }}" alt="Profile" class="rounded-circle"> {% endcomment %}
+          <!-- <img class="avatar-img rounded-circle img-responsive thumbnail" src="{{ user.image.url|default_if_none:'#' }}" alt="Profile"> -->
+           <img class="avatar-img rounded-circle img-responsive thumbnail" src="{{ user.image_url|default_if_none:'#' }}" alt="Profile"> 
+            {% comment %} <img src="{{ user.image_url|default_if_none:'#' }}" alt="Profile" class="rounded-circle"> {% endcomment %}
             <span class="d-none d-md-block dropdown-toggle ps-2">Cajetan Global Visas</span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -203,12 +180,29 @@
                 </a>
               </li>
               {% endif %}
-            {% else %}
-            <li><a href="{% url 'auth_login' %}">login</a></li>
-        {% endif %}
-        
+              {% endif %}
+
+          
         </ul>
       </nav>
+
+      <div class="position-relative">
+        <a href="https://www.facebook.com/Cajetan-Global-Visa-100856879259515/" class="mx-2"><span class="bi-facebook"></span></a>
+        <a href="#" class="mx-2"><span class="bi-instagram"></span></a>
+
+        <a href="#" class="mx-2 js-search-open"><span class="bi-search"></span></a>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+
+        <!-- ======= Search Form ======= -->
+        <div class="search-form-wrap js-search-form-wrap">
+          <form action="search-result.html" class="search-form">
+            <span class="icon bi-search"></span>
+            <input type="text" name="q" placeholder="Search" class="form-control">
+            <button class="btn js-search-close" type="submit"><span class="bi-x"></span></button>
+          </form>
+        </div><!-- End Search Form -->
+
+      </div>
 
     </div>
 

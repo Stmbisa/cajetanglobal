@@ -3,51 +3,45 @@
 
   <main id="main">
     <section>
-      <div class="container" data-aos="fade-up">
-        <div class="row">
-          <div class="col-lg-12 text-center mb-5">
-            <h1 class="page-title">About us</h1>
-          </div>
+        <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="container">
+
+        <div class="section-title" data-aos="zoom-out">
+          <h2>Short story About Cajetan Global</h2>
         </div>
 
-        <div class="row mb-5">
-
-          <div class="d-md-flex post-entry-2 half">
-            <a href="#" class="me-4 thumbnail">
-              <img src="cajetanglobal/img/post-landscape-2.jpg" alt="" class="img-fluid">
-            </a>
-            <div class="ps-md-5 mt-4 mt-md-0">
-              <div class="post-meta mt-4">Welcome</div>
-              <h2 class="mb-4 display-4">Company History</h2>
-
-              <p>We are Cajetan Global Visas we provide many visa in these countries</p>
-              <p>USA, CANADA, Australia, Israel, Shengen</p>
-            </div>
-          </div>
-
-      </div>
-    </section>
-
-    <section class="mb-5 bg-light py-5">
-      <div class="container" data-aos="fade-up">
-        <div class="row justify-content-between align-items-lg-center">
-          <div class="col-lg-5 mb-4 mb-lg-0">
-            <h2 class="display-4 mb-4">Available type of visas</h2>
-            <p>We provide many types of visas like </p>
+        <div class="row content" data-aos="fade-up">
+          <div class="col-lg-6">
+            <p>
+              We are Cajetan Global Visas we provide many visa in these countries USA, CANADA, Australia, Israel, Shengen, </br>
+              whether you want to go to work or you want to go study or even staying forever, we will hold you hand pal😉, seriously </br>
+              we provide:
+            </p>
             <ul>
-                <li>Working visas</li>
-                <li>Studying Visas</li>
-                <li>Medical Visas</li>
-                <li>Diplomatic Visas</li>
-                <li>Touring Visas</li>
+              <li><i class="ri-check-double-line"></i> Working visa in all those country.</li>
+              <li><i class="ri-check-double-line"></i> Studying Visa</li>
+              <li><i class="ri-check-double-line"></i> Asylum visas </li>
+              <li><i class="ri-check-double-line"></i> Medical and many others </li>
             </ul>
           </div>
+          <div class="col-lg-6 pt-4 pt-lg-0">
+            <p>
+              Have you ever wished to visit the holy land of Israel or maybe hang out on the beach of miami, I mean who doesnt want that? </br>
+              Raise your hands if you dont 🙌
+              Am i sounding like am joking? Maybe but i am not 
+              You will have fun working and dealing with us trust me sign up <a href="{% url 'registration_register' %}" class="btn-learn-more">here</a> , edit your profile {% if user.is_authenticated %}<a href="{% url 'dashboard:user_update' %}" class="btn-learn-more">here</a>{% endif %} then let us know what you are thing 
+              {% comment %} The link of the profile is needed {% endcomment %}
+            </p>
+            <a href="{% url 'blog:about' %}" class="btn-learn-more">Learn More</a>
           </div>
         </div>
-      </div>
-    </section>
 
-    <section>
+      </div>
+    </section><!-- End About Section -->
+
+    {% comment %} where news will go and posts and comments {% endcomment %}
+    {% comment %} <section>
       <div class="container" data-aos="fade-up">
         <div class="row">
           <div class="col-12 text-center mb-5">
@@ -108,7 +102,7 @@
           {% endif %}
         </div>
       </div>
-    </section>
+    </section> {% endcomment %}
 
   </main><!-- End #main -->
   {% endblock content %}

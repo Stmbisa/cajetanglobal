@@ -75,6 +75,13 @@ class User(AbstractUser):
         "returns User's fullname"
         return '%s %s'%(self.first_name,self.last_name)
 
+    @property
+    def image_url(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+        else:
+            return "/static/assets/img/user.png"
+
 class Payment(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     has_paid = models.BooleanField(default=False)
@@ -196,6 +203,13 @@ class Profile(models.Model):
         t2 = datetime.now().date()
         t3 = timedelta(days=30)
         return  datetime_object - t2<= t3
+        
+    @property
+    def image_url(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+        else:
+            return "/static/assets/img/user.png"
 
 
 

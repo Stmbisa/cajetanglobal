@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = False
-DEBUG = os.getenv("DEBUG", "False") == "True"
+DEBUG = False
 
 # ALLOWED_HOSTS = []
 # ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost,www.cajetan.global,cajetan.global").split(",")
@@ -164,6 +164,13 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR/'static'),)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'cajetanglobalvisa@gmail.com'
+EMAIL_HOST_PASSWORD = 'Future256'
+EMAIL_PORT = 587
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -176,7 +183,7 @@ ACCOUNT_ACTIVATION_DAYS = 14
 REGISTRATION_AUTO_LOGIN = True
 LOGIN_REDIRECT_URL = '/memberships/'
 LOGIN_URL = '/accounts/login/'
-REGISTRATION_EMAIL_HTML= False
+REGISTRATION_EMAIL_HTML= True
 
 SITE_ID = 1
 

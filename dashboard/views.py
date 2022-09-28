@@ -12,6 +12,7 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import  DeleteView, CreateView, UpdateView, CreateView
+from django.contrib.auth.hashers import make_password
 
 def dashboard(request):
     # startdate = datetime.today()
@@ -22,17 +23,89 @@ def dashboard(request):
     all_profiles = Profile.objects.all().count()
     all_paid_profiles = Profile.objects.filter(has_paid =True).count()
     all_rejected = Profile.objects.filter(rejected =True).count()
+    total_profile_revenues = 0
+    total_revenues = 0
+    total_expenses = 0
+    all_revenue = Accounts_revenue.objects.all()
+    for revenue in all_revenue:
+        total_revenues+= revenue.amount
+    
+    all_expenses = Accounts_expense.objects.all()
+    for expense in all_expenses:
+        total_expenses+= expense.amount
+    
+    all_profiles_paid = Profile.objects.filter(has_paid =True)
+    for profile_revenue in all_profiles_paid:
+        total_profile_revenues+= profile_revenue.amount_paid_so_far
+    
+    total_revenues = total_revenues +total_profile_revenues
+    
+    total_profits = total_revenues-total_expenses
     context ={
         # 'biometries': biometries,
         'all_users': all_users,
         'all_profiles': all_profiles,
         'all_paid_profiles': all_paid_profiles,
         'all_rejected': all_rejected,
-        'total_revenues': 1000000,
-        'total_expenses': 200000,
-        'total_profits': 800000,
+        'total_revenues': total_revenues,
+        'total_expenses': total_expenses,
+        'total_profits': total_profits,
     }
     return render(request, 'dashboard/dashboard.html', context)
+
+def userprofileupdate(request):
+    # user = User.objects.get(id = request.user.id)
+    if request.method == 'POST':
+        avatar = request.FILES.get('avatar')
+        passport_document = request.FILES.get('avatar')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        gender = request.POST.get('gender')
+        birth_date = request.POST.get('birth_date')
+        country_of_orgin = request.POST.get('country_of_orgin')
+        next_of_kin = request.POST.get('next_of_kin')
+        next_of_kin_phone = request.POST.get('birth_date')
+        country_of_destination = request.POST.get('country_of_destination')
+        currency_of_choice = request.POST.get('currency_of_choice')
+        nationality = request.POST.get('nationality')
+        password = request.POST.get('password')
+        
+        
+        
+    
+
+        # Profile.objects.filter(id = request.user.id).create
+        # a = User(user_id=request.user.id, avatar=avatar, passport_document=passport_document,next_of_kin_phone=next_of_kin_phone,
+        # first_name=first_name, last_name=last_name, gender=gender, next_of_kin=next_of_kin,country_of_orgin=country_of_orgin,currency_of_choice=currency_of_choice,
+        # birth_date=birth_date, country_of_destination=country_of_destination, nationality=nationality)
+        # messages.success(request, 'Your Profile Was Created Successfully')
+        # return redirect('dashboard:profile')
+        try:
+            user = User.objects.get(id = request.user.id)
+            user.avatar = avatar
+            user.passport_document = passport_document
+            user.first_name = first_name
+            user.last_name = last_name
+            user.gender = gender
+            user.birth_date = birth_date
+            user.country_of_orgin = country_of_orgin
+            user.next_of_kin = next_of_kin
+            user.next_of_kin_phone = next_of_kin_phone
+            user.country_of_destination = country_of_destination
+            user.currency_of_choice = currency_of_choice
+            user.nationality = nationality
+            password.replace(" ", '')
+            if password != None and password !='':
+                user.set_password(password)
+            user.save()
+            message.success(request, 'Profile successfully updated')
+            redirect('dashboard:profile')
+
+        except:
+            messages.warning(request, 'Your profile failed to get updated')
+            redirect('./')
+   
+    return render(request, 'dashboard/userupdate.html' )
 
 
 class Profiles(ListView):

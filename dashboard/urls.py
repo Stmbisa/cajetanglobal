@@ -3,7 +3,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from . views import Profiles, Profile_detail, Profile_update, Profile_delete, dashboard, Profile_create,\
     Accounts_revenues, Accounts_revenue_detail, Accounts_revenue_create, Accounts_revenue_update, Accounts_revenue_delete, \
-        Accounts_expenses, Accounts_expense_detail, Accounts_expense_create, Accounts_expense_update, Accounts_expense_delete
+        Accounts_expenses, Accounts_expense_detail, Accounts_expense_create, Accounts_expense_update, Accounts_expense_delete,userprofileupdate
              #add_profile
 app_name = "dashboard"
 urlpatterns = [
@@ -13,6 +13,7 @@ urlpatterns = [
     path ('profiles/<str:pk>/update/', Profile_update.as_view(), name='profile_update'),
     path ('profiles/<str:pk>/delete/', Profile_delete.as_view(), name='profile_delete'),
     path ('profiles/create/', Profile_create.as_view(), name='profile_create'),
+    path ('profile', userprofileupdate, name='user_update'),
     
 
     # all accounts

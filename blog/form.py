@@ -1,5 +1,5 @@
 from django import forms
-from .models import Blog, Comment, Category
+from .models import Blog, Comment, Category, Contact
 
 
 class BlogForm(forms.ModelForm):
@@ -16,3 +16,8 @@ class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = ['category_img','category_name', 'description',]
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = '__all__'
