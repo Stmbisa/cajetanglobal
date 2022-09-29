@@ -89,17 +89,14 @@
                            <li><a href="tel:+256752112332">0752112332</a></li>
                         </ul>
                      </li>
-                     <li><a href="#">Email Us</a></li>
+                     <li><a href="mailto:cajetanglobalvisa@gmail.com">Email Us</a></li>
                      <!-- <li><a href="#">WhatsApp</a></li> -->
                      <li class="dropdown">
-                        <a href="#"><span>WhatsApp</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-                        <ul>
-                           <li><a href="https://wa.me/+256200903172">0200903172</a></li>
-                        </ul>
+                        <a href="https://wa.me/+256200903172"><span>WhatsApp</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                      </li>
                      <li><a href="{% url 'blog:about' %}">About Us</a></li>
                      {% comment %} 
-                     <li><a href="#">Company profile</a></li>
+                     <li><a href="{% href'blog:about' %}">Company profile</a></li>
                      {% endcomment %}
                   </ul>
                </li>
