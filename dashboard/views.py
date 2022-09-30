@@ -13,6 +13,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import  DeleteView, CreateView, UpdateView, CreateView
 from django.contrib.auth.hashers import make_password
+from django.contrib import messages
 
 def dashboard(request):
     # startdate = datetime.today()
@@ -55,56 +56,46 @@ def dashboard(request):
 
 def userprofileupdate(request):
     # user = User.objects.get(id = request.user.id)
-    if request.method == 'POST':
-        avatar = request.FILES.get('avatar')
-        passport_document = request.FILES.get('avatar')
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        gender = request.POST.get('gender')
-        birth_date = request.POST.get('birth_date')
-        country_of_orgin = request.POST.get('country_of_orgin')
-        next_of_kin = request.POST.get('next_of_kin')
-        next_of_kin_phone = request.POST.get('birth_date')
-        country_of_destination = request.POST.get('country_of_destination')
-        currency_of_choice = request.POST.get('currency_of_choice')
-        nationality = request.POST.get('nationality')
-        password = request.POST.get('password')
+    # if request.method == 'POST':
+    avatar = request.FILES.get('avatar',False)
+    passport_document = request.FILES.get('avatar',False)
+    first_name = request.POST.get('first_name')
+    last_name = request.POST.get('last_name')
+    gender = request.POST.get('gender')
+    birth_date = request.POST.get('birth_date')
+    country_of_orgin = request.POST.get('country_of_orgin')
+    next_of_kin = request.POST.get('next_of_kin')
+    next_of_kin_phone = request.POST.get('birth_date')
+    country_of_destination = request.POST.get('country_of_destination')
+    currency_of_choice = request.POST.get('currency_of_choice')
+    nationality = request.POST.get('nationality')
+    password = request.POST.get('password')
         
-        
-        
-    
+    try:
+        user = User.objects.get(id = request.user.id)
+        profile = Profile.objects.filter(id = request.user.id)
+        profile.avatar = avatar
+        profile.passport_document = passport_document
+        profile.first_name = first_name
+        profile.last_name = last_name
+        profile.gender = gender
+        profile.birth_date = birth_date
+        profile.country_of_orgin = country_of_orgin
+        profile.next_of_kin = next_of_kin
+        profile.next_of_kin_phone = next_of_kin_phone
+        profile.country_of_destination = country_of_destination
+        profile.currency_of_choice = currency_of_choice
+        profile.nationality = nationality
+        password.replace(" ", '')
+        if password != None and password !='':
+            user.set_password(password)
+        # profile.save()
+        messages.success(request, 'Profile successfully updated')
+        redirect('memberships:membership')
 
-        # Profile.objects.filter(id = request.user.id).create
-        # a = User(user_id=request.user.id, avatar=avatar, passport_document=passport_document,next_of_kin_phone=next_of_kin_phone,
-        # first_name=first_name, last_name=last_name, gender=gender, next_of_kin=next_of_kin,country_of_orgin=country_of_orgin,currency_of_choice=currency_of_choice,
-        # birth_date=birth_date, country_of_destination=country_of_destination, nationality=nationality)
-        # messages.success(request, 'Your Profile Was Created Successfully')
-        # return redirect('dashboard:profile')
-        try:
-            user = User.objects.get(id = request.user.id)
-            profile = Profile.objects.get(id = request.user.id)
-            profile.avatar = avatar
-            profile.passport_document = passport_document
-            profile.first_name = first_name
-            profile.last_name = last_name
-            profile.gender = gender
-            profile.birth_date = birth_date
-            profile.country_of_orgin = country_of_orgin
-            profile.next_of_kin = next_of_kin
-            profile.next_of_kin_phone = next_of_kin_phone
-            profile.country_of_destination = country_of_destination
-            profile.currency_of_choice = currency_of_choice
-            profile.nationality = nationality
-            password.replace(" ", '')
-            if password != None and password !='':
-                user.set_password(password)
-            profile.save()
-            message.success(request, 'Profile successfully updated')
-            redirect('dashboard:profile')
-
-        except:
-            messages.warning(request, 'Your profile failed to get updated')
-            redirect('./')
+    except:
+        messages.warning(request, 'Your profile failed to get updated')
+        redirect('./')
    
     return render(request, 'dashboard/userupdate.html' )
 

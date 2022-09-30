@@ -96,8 +96,8 @@ class Profile(models.Model):
     avatar = models.ImageField(upload_to = 'uploads/', blank=True, default='')
     has_passport = models.BooleanField(default=True)
     passport_document = models.ImageField(upload_to = 'uploads/', blank=True, default='')
-    first_name = models.CharField(max_length=255, default='')
-    last_name = models.CharField(max_length=255, default='')
+    first_name = models.CharField(max_length=255, default='',null=True, blank=True)
+    last_name = models.CharField(max_length=255, default='',null=True, blank=True)
 
     GENDER_CHOICES = [
         ('Male', 'Male'),
@@ -107,15 +107,15 @@ class Profile(models.Model):
 
     
     gender = models.CharField(max_length=15, choices=GENDER_CHOICES, default='',null=True)
-    email = models.EmailField(default='none@email.com')
-    phonenumber = models.CharField(max_length=15,null=True, default='') #blank=True, null=True
-    birth_date = models.DateField(blank=True, default='', null=True)
-    next_of_kin = models.CharField(max_length=255, default='',)
+    email = models.EmailField(default='none@email.com',blank=True, null=True)
+    phonenumber = models.CharField(max_length=15,null=True,blank=True, default='') #blank=True, null=True
+    birth_date = models.DateField(blank=True, default='', null=True,)
+    next_of_kin = models.CharField(max_length=255, default='', null=True, blank=True)
     next_of_kin_phone = models.IntegerField(unique=True)
     country_of_orgin = models.CharField(max_length=255, default='', null=True)
-    amount_paid_so_far= models.DecimalField(max_length=255, null=True,default=0, decimal_places=3, max_digits=15)
-    amount_paid_today= models.DecimalField(max_length=255, null=True,default=0, decimal_places=3, max_digits=15)
-    amount_to_pay = models.DecimalField(max_length=255, null=True, default=0, decimal_places=3, max_digits=15)
+    amount_paid_so_far= models.DecimalField(max_length=255, null=True,blank=True, default=0, decimal_places=3, max_digits=15)
+    amount_paid_today= models.DecimalField(max_length=255, null=True,blank=True, default=0, decimal_places=3, max_digits=15)
+    amount_to_pay = models.DecimalField(max_length=255, null=True, blank=True, default=0, decimal_places=3, max_digits=15)
     balance = models.DecimalField(max_length=255, null=True, default=0, decimal_places=3, max_digits=15)
     brought_by =  models.CharField(max_length=255, default='', null=True)
 
