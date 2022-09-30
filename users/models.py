@@ -111,13 +111,13 @@ class Profile(models.Model):
     phonenumber = models.CharField(max_length=15,null=True,blank=True, default='') #blank=True, null=True
     birth_date = models.DateField(blank=True, default='', null=True,)
     next_of_kin = models.CharField(max_length=255, default='', null=True, blank=True)
-    next_of_kin_phone = models.IntegerField(unique=True)
-    country_of_orgin = models.CharField(max_length=255, default='', null=True)
+    next_of_kin_phone = models.IntegerField(unique=True, null=True, blank=True)
+    country_of_orgin = models.CharField(max_length=255, default='', null=True, blank=True)
     amount_paid_so_far= models.DecimalField(max_length=255, null=True,blank=True, default=0, decimal_places=3, max_digits=15)
     amount_paid_today= models.DecimalField(max_length=255, null=True,blank=True, default=0, decimal_places=3, max_digits=15)
     amount_to_pay = models.DecimalField(max_length=255, null=True, blank=True, default=0, decimal_places=3, max_digits=15)
     balance = models.DecimalField(max_length=255, null=True, default=0, decimal_places=3, max_digits=15)
-    brought_by =  models.CharField(max_length=255, default='', null=True)
+    brought_by =  models.CharField(max_length=255, default='', null=True, blank=True)
 
     CURRENCY_CHOICES = [
         ("USD", '$'),
@@ -137,7 +137,7 @@ class Profile(models.Model):
 
        ]
     country_of_destination = models.CharField(max_length=100,choices=COUNTRY_CHOICES,default='US', null=True, blank=True)
-    nationality = models.CharField(max_length=255, default='') 
+    nationality = models.CharField(max_length=255, default='', null=True, blank=True) 
     has_paid = models.BooleanField(default=False)
     has_done_biometry_before = models.BooleanField(default=False)
     biometry_date = models.DateField(blank=True, default='', null=True)
