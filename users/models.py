@@ -92,9 +92,9 @@ class Payment(models.Model):
         return str(self.content)
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True )
     avatar = models.ImageField(upload_to = 'uploads/', blank=True, default='')
-    has_passport = models.BooleanField(default=False)
+    has_passport = models.BooleanField(default=True)
     passport_document = models.ImageField(upload_to = 'uploads/', blank=True, default='')
     first_name = models.CharField(max_length=255, default='')
     last_name = models.CharField(max_length=255, default='')
@@ -106,18 +106,18 @@ class Profile(models.Model):
        ]
 
     
-    gender = models.CharField(max_length=15, choices=GENDER_CHOICES, default='',null=False)
+    gender = models.CharField(max_length=15, choices=GENDER_CHOICES, default='',null=True)
     email = models.EmailField(default='none@email.com')
-    phonenumber = models.CharField(max_length=15,null=False, default='') #blank=True, null=True
-    birth_date = models.DateField(blank=True, default='', null=False)
+    phonenumber = models.CharField(max_length=15,null=True, default='') #blank=True, null=True
+    birth_date = models.DateField(blank=True, default='', null=True)
     next_of_kin = models.CharField(max_length=255, default='',)
     next_of_kin_phone = models.IntegerField(unique=True)
-    country_of_orgin = models.CharField(max_length=255, default='', null=False)
-    amount_paid_so_far= models.DecimalField(max_length=255, null=False,default=0, decimal_places=3, max_digits=15)
-    amount_paid_today= models.DecimalField(max_length=255, null=False,default=0, decimal_places=3, max_digits=15)
-    amount_to_pay = models.DecimalField(max_length=255, null=False, default=0, decimal_places=3, max_digits=15)
-    balance = models.DecimalField(max_length=255, null=False, default=0, decimal_places=3, max_digits=15)
-    brought_by =  models.CharField(max_length=255, default='', null=False)
+    country_of_orgin = models.CharField(max_length=255, default='', null=True)
+    amount_paid_so_far= models.DecimalField(max_length=255, null=True,default=0, decimal_places=3, max_digits=15)
+    amount_paid_today= models.DecimalField(max_length=255, null=True,default=0, decimal_places=3, max_digits=15)
+    amount_to_pay = models.DecimalField(max_length=255, null=True, default=0, decimal_places=3, max_digits=15)
+    balance = models.DecimalField(max_length=255, null=True, default=0, decimal_places=3, max_digits=15)
+    brought_by =  models.CharField(max_length=255, default='', null=True)
 
     CURRENCY_CHOICES = [
         ("USD", '$'),
@@ -136,7 +136,7 @@ class Profile(models.Model):
         ("Israel", 'Israel'),
 
        ]
-    country_of_destination = models.CharField(max_length=100,choices=COUNTRY_CHOICES,default='US', null=False, blank=False)
+    country_of_destination = models.CharField(max_length=100,choices=COUNTRY_CHOICES,default='US', null=True, blank=True)
     nationality = models.CharField(max_length=255, default='') 
     has_paid = models.BooleanField(default=False)
     has_done_biometry_before = models.BooleanField(default=False)

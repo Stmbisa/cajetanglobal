@@ -60,8 +60,8 @@
                                        <td>{{ profile.id }}</td>
                                        <td>
                                           <h2 class="table-avatar">
-                                             <a href="{{ profile.get_absolute_url }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ profile.avatar.url }}" alt=""></a>
-                                             {% comment %} <a href="{{ profile.get_absolute_url }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ profile.image_url|default_if_none:'#' }}" alt=""></a> {% endcomment %}
+                                             {% comment %} <a href="{{ profile.get_absolute_url }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ profile.avatar.url }}" alt=""></a> {% endcomment %}
+                                             <a href="{{ profile.get_absolute_url }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ profile.image_url|default_if_none:'#' }}" alt=""></a>
                                              <a href="{{ profile.get_absolute_url }}">{{ profile.full_name }}</a>
                                           </h2>
                                        </td>

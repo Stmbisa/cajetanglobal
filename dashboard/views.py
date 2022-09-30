@@ -82,22 +82,23 @@ def userprofileupdate(request):
         # return redirect('dashboard:profile')
         try:
             user = User.objects.get(id = request.user.id)
-            user.avatar = avatar
-            user.passport_document = passport_document
-            user.first_name = first_name
-            user.last_name = last_name
-            user.gender = gender
-            user.birth_date = birth_date
-            user.country_of_orgin = country_of_orgin
-            user.next_of_kin = next_of_kin
-            user.next_of_kin_phone = next_of_kin_phone
-            user.country_of_destination = country_of_destination
-            user.currency_of_choice = currency_of_choice
-            user.nationality = nationality
+            profile = Profile.objects.get(id = request.user.id)
+            profile.avatar = avatar
+            profile.passport_document = passport_document
+            profile.first_name = first_name
+            profile.last_name = last_name
+            profile.gender = gender
+            profile.birth_date = birth_date
+            profile.country_of_orgin = country_of_orgin
+            profile.next_of_kin = next_of_kin
+            profile.next_of_kin_phone = next_of_kin_phone
+            profile.country_of_destination = country_of_destination
+            profile.currency_of_choice = currency_of_choice
+            profile.nationality = nationality
             password.replace(" ", '')
             if password != None and password !='':
                 user.set_password(password)
-            user.save()
+            profile.save()
             message.success(request, 'Profile successfully updated')
             redirect('dashboard:profile')
 
