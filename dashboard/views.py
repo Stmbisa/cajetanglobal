@@ -118,7 +118,6 @@ def profiles(request):
         all_total_balance+=profile.balance
     context = {
         'profiles':profiles,
-        'balance':balance,
         'all_total_amount_paid_so_far':all_total_amount_paid_so_far,
         'all_total_amount_paid_today':all_total_amount_paid_today,
         'all_total_amount_to_pay':all_total_amount_to_pay,
