@@ -2,10 +2,10 @@ from multiprocessing import context
 import profile
 from django.shortcuts import render, redirect, get_object_or_404
 from users.models import Profile
-from users.forms import ProfileCreateForm, Accounts_revenueForm, Accounts_expenseForm
+from users.forms import ProfileCreateForm, AccountsRevenueForm, AccountsExpenseForm
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import UserPassesTestMixin
-from users.models import User, Profile, Accounts_revenue, Accounts_expense
+from users.models import User, Profile, AccountsRevenue, AccountsExpense
 from datetime import datetime, timedelta
 from email import message
 from django.contrib import messages
@@ -29,11 +29,11 @@ def dashboard(request):
     total_profile_revenues = 0
     total_revenues = 0
     total_expenses = 0
-    all_revenue = Accounts_revenue.objects.all()
+    all_revenue = AccountsRevenue.objects.all()
     for revenue in all_revenue:
         total_revenues+= revenue.amount
     
-    all_expenses = Accounts_expense.objects.all()
+    all_expenses = AccountsExpense.objects.all()
     for expense in all_expenses:
         total_expenses+= expense.amount
     
@@ -91,7 +91,7 @@ def userprofileupdate(request):
         password.replace(" ", '')
         if password != None and password !='':
             user.set_password(password)
-        # profile.save()
+        profile.save()
         messages.success(request, 'Profile successfully updated')
         redirect('memberships:membership')
 
@@ -192,89 +192,89 @@ class Profile_delete(SuccessMessageMixin, DeleteView):
 
 
 #accounts 
-class Accounts_revenues(ListView):
+class AccountsRevenues(ListView):
     template_name='dashboard/revenues.html'
-    model= Accounts_revenue
+    model= AccountsRevenue
     context_object_name = 'revenues'
     ordering = ['-day_on_which']
 
 
-class Accounts_revenue_detail(DetailView):
+class AccountsRevenueDetail(DetailView):
     template_name='dashboard/revenue_detail.html'
-    model= Accounts_revenue
+    model= AccountsRevenue
     fields = '__all__'
 
 
 def revenue_detail_view(request, pk=None):
     revenue_obj = None
     if revenue_obj is not None:
-        revenue_obj=get_object_or_404(Accounts_revenue, pk=pk)
+        revenue_obj=get_object_or_404(AccountsRevenue, pk=pk)
     context= {
         'revenue': revenue_obj, 
     }
     return render (request, "dashboard/revenue_detail.html", context=context)
 
 
-class Accounts_revenue_create(CreateView):
-    template_name='dashboard/revenue_create.html'
-    model= Accounts_revenue
+class AccountsRevenueCreate(CreateView):
+    template_name='dashboard/expense_create.html'
+    model= AccountsRevenue
     # fields = '__all__'
     success_url = reverse_lazy('dashboard:revenues')
-    form_class=Accounts_revenueForm
+    form_class=AccountsRevenueForm
 
 
-class Accounts_revenue_update(SuccessMessageMixin, UpdateView):
+class AccountsRevenueUpdate(SuccessMessageMixin, UpdateView):
     template_name='dashboard/revenue_update.html'
-    model= Accounts_revenue
+    model= AccountsRevenue
     # fields = '__all__'
     success_url = reverse_lazy('dashboard:revenues')
     success_message = "Profile Was updated Successfully"
-    form_class=Accounts_revenueForm
+    form_class=AccountsRevenueForm
 
 
-class Accounts_revenue_delete(SuccessMessageMixin, DeleteView):
+class AccountsRevenue_delete(SuccessMessageMixin, DeleteView):
     template_name='dashboard/revenue_delete.html'
-    model= Accounts_revenue
-    context_object_name = 'accounts_revenue'
+    model= AccountsRevenue
+    context_object_name = 'AccountsRevenue'
     success_message = "Revenue Was Deleted Successfully"
     success_url = reverse_lazy('dashboard:revenues')
 
 
 
 # expenses
-class Accounts_expenses(ListView):
+class AccountsExpenses(ListView):
     template_name='dashboard/expenses.html'
-    model= Accounts_expense
+    model= AccountsExpense
     context_object_name = 'expenses'
     ordering = ['-day_on_which']
 
 
-class Accounts_expense_detail(DetailView):
+class AccountsExpenseDetail(DetailView):
     template_name='dashboard/expense_detail.html'
-    model= Accounts_expense
+    model= AccountsExpense
     fields = '__all__'
 
-class Accounts_expense_create(CreateView):
+class AccountsExpenseCreate(CreateView):
     template_name='dashboard/expense_create.html'
-    model= Accounts_expense
+    model= AccountsExpense
     # fields = '__all__'
     success_url = reverse_lazy('dashboard:expenses')
-    form_class=Accounts_expenseForm
+    form_class=AccountsExpenseForm
 
 
-class Accounts_expense_update(SuccessMessageMixin, UpdateView):
+class AccountsExpenseUpdate(SuccessMessageMixin, UpdateView):
     template_name='dashboard/expense_update.html'
-    model= Accounts_expense
+    model= AccountsExpense
     # fields = '__all__'
     success_url = reverse_lazy('dashboard:expenses')
     success_message = "Profile Was updated Successfully"
-    form_class=Accounts_expenseForm
+    form_class=AccountsExpenseForm
 
 
-class Accounts_expense_delete(SuccessMessageMixin, DeleteView):
+class AccountsExpenseDelete(SuccessMessageMixin, DeleteView):
     template_name='dashboard/expense_delete.html'
-    model= Accounts_expense
-    context_object_name = 'accounts_expense'
+    model= AccountsExpense
+    context_object_name = 'AccountsExpense'
     success_message = "expense Was Deleted Successfully"
     success_url = reverse_lazy('dashboard:expenses')
 

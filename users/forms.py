@@ -4,7 +4,7 @@ from .models import User
 from django.forms import ModelForm
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
-from .models import Profile, Announcement, Accounts_revenue, Accounts_expense
+from .models import Profile, Announcement, AccountsRevenue, AccountsExpense
 import datetime
 
 class DateInput(forms.DateInput):
@@ -16,7 +16,9 @@ class ProfileCreateForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'biometry_date': DateInput(attrs={'type':'date'}),
-            'Departure_date': DateInput(attrs={'type':'date'})
+            'Departure_date': DateInput(attrs={'type':'date'}),
+            'birth_date': DateInput(attrs={'type':'date'}),
+            
         }
 
     def __init__(self, *args, **kwargs):
@@ -109,12 +111,12 @@ class RegisterUserCreationForm(UserCreationForm):
                 self.fields[field].widget.attrs['class']='form-control'
 
 
-class Accounts_revenueForm(forms.ModelForm):
+class AccountsRevenueForm(forms.ModelForm):
     class Meta:
-        model = Accounts_revenue
+        model = AccountsRevenue
         fields = '__all__'
 
-class Accounts_expenseForm(forms.ModelForm):
+class AccountsExpenseForm(forms.ModelForm):
     class Meta:
-        model = Accounts_expense
+        model = AccountsExpense
         fields = '__all__'

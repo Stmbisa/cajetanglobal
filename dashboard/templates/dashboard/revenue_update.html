@@ -16,21 +16,23 @@
                    </div>
                {% endfor %}
             </div>
-            {% comment %} {% if users %}
-            <center><p class="text-danger">Revenue Update</p></center>
-            {% else %} {% endcomment %}
+            {% if users %}
+            <center><p class="text-danger">Expense Update</p></center>
+            {% else %}
             <div class="row">
                    <div class="col-12">
                       <h5 class="form-title">
-                         <span>Revenue Update </span>
+                         <span>Expense Update </span>
                       </h5>
                    </div>
-               </div>          
              <form method="post", action="{% url 'dashboard:revenue_update' revenue.pk %}">
                {% csrf_token %}
                 
                    {{ form|crispy}}
-               
+
+
+                
+                </div>
                 <div class="col-12 col-sm-12">
                     <button type="submit" class="btn btn-primary col-12 col-sm-12">
                     Save

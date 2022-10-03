@@ -15,10 +15,10 @@
                 {% endfor %}
                   <div class="row align-items-center">
                      <div class="col">
-                        <h3 class="page-title">Revenues</h3>
+                        <h3 class="page-title">revenues</h3>
                         <ul class="breadcrumb">
                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                           <li class="breadcrumb-item active">Revenues</li>
+                           <li class="breadcrumb-item active">revenues</li>
                         </ul>
                      </div>
                       <div class="col-auto text-right float-right ml-auto">
@@ -45,19 +45,20 @@
                                  </thead>
                                 {% if revenues %}
                                 {% for revenue in revenues %}
+                                {% comment %} {% sum = 0 %} {% endcomment %}
                                  <tbody>
                                     <tr>
                                        <td>{{ revenue.id }}</td>
                                        <td>
                                           <h2 class="table-avatar">
-                                             <a href="{{ revenue.get_absolute_url }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ revenue.get_document }}" alt="User Image"></a>
+                                             <a href="{{ revenue.get_absolute_url }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ revenue.get_document }}" alt="img"></a>
                                              <a href="{{ revenue.get_absolute_url }}">{{ revenue.revenue_of }}</a>
                                           </h2>
                                        </td>
-                                       <td>{{ revenue.expense_by }}</td>
+                                       <td>{{ revenue.revenue_by }}</td>
                                        <td>{{ revenue.amount }}</td>
                                        <td>{{ revenue.day_on_which }}</td>
-    
+                                       
                                        <td class="text-right">
                                           <div class="actions">
                                              <a href="{% url 'dashboard:revenue_update' revenue.pk %}" class="btn btn-sm bg-success-light mr-2">
@@ -70,9 +71,15 @@
                                        </td>
                                     </tr>
                                  </tbody>
+                                 {% comment %} {% if expense.amount %}
+                                    {{ sum = '0' }}
+                                 {% for expense in expenses %}
+                                 {% total = sum + expense.amount %}
+                                 <p>The total expenses are {% total %}</p>
                                  {% endfor %}
-                                 {% else %}
-                                 <p>You seem to have no revenue reported yet</p>
+                                 {% endif %} {% endcomment %}
+                                 {% endfor %}
+                                 <p>You seem to have no expenses reported so far</p>
                                 {% endif %}
                               </table>
                               {% if is_paginated %}
@@ -96,17 +103,12 @@
                </div>
             </div>
          </div>
-      {% else %}
-<p>It seems you are not logged in <a href="{% url 'account:login' %}" >login now</a></p>
-{% endif %}
-{% else %}
-<p>It seems you dont have the permission to view this page </p>
-{% endif %}
+         {% else %}
+   <p>It seems you are not logged in <a href="{% url 'account:login' %}" >login now</a></p>
+   {% endif %}
+   {% else %}
+   <p>It seems you dont have the permission to view this page </p>
+   {% endif %}
 </div>
                         
 {% endblock %}
-
-
-
-
-

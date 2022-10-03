@@ -106,7 +106,7 @@ class Profile(models.Model):
     gender = models.CharField(max_length=15, choices=GENDER_CHOICES, default='',null=True)
     email = models.EmailField(default='',blank=True, null=True)
     phonenumber = models.CharField(max_length=15,null=True,blank=True, default='') #blank=True, null=True
-    birth_date = models.DateField(blank=True, default='', null=True,help_text='!!!date format 2022-12-01')
+    birth_date = models.DateField(blank=True, default='', null=True,help_text='')
     next_of_kin = models.CharField(max_length=255, default='', null=True, blank=True)
     next_of_kin_phone = models.IntegerField(unique=True, null=True, blank=True)
     country_of_orgin = models.CharField(max_length=255, default='', null=True, blank=True)
@@ -137,7 +137,7 @@ class Profile(models.Model):
     nationality = models.CharField(max_length=255, default='', null=True, blank=True) 
     has_paid = models.BooleanField(default=False)
     has_done_biometry_before = models.BooleanField(default=False)
-    biometry_date = models.DateField(blank=True, default='', null=True, help_text='!!!date format 2022-12-01')
+    biometry_date = models.DateField(blank=True, default='', null=True, help_text='')
     has_done_biometry = models.BooleanField(default=False)
     has_obtained_visa_before=models.BooleanField(default=False)
     has_obtained_visa=models.BooleanField(default=False)
@@ -172,7 +172,7 @@ class Profile(models.Model):
 
 
     def __str__(self):
-        return self.user.first_name or ''
+        return self.first_name or ''
     
     def get_absolute_url(self):
         return reverse('dashboard:profile', kwargs= {'pk':self.pk} )
@@ -235,10 +235,10 @@ class Announcement(models.Model):
 
 
 
-class Accounts_revenue(models.Model):
-    revenue_of = models.CharField(max_length=100, default='i.e: visa payment',null=False)
+class AccountsRevenue(models.Model):
+    revenue_of = models.CharField(max_length=250, default='Someone paid',null=False)
     revenue_by = models.ForeignKey(Profile, on_delete=models.CASCADE,null=True, blank=True )
-    amount = models.IntegerField( default='') 
+    amount = models.IntegerField( default='100,000') 
     day_on_which = models.DateField(auto_now=True, null=True, blank=True)
     evidence_document = models.ImageField(upload_to = 'uploads/', blank=True, default='')
     
@@ -255,14 +255,10 @@ class Accounts_revenue(models.Model):
         else:
             return "/static/assets/img/user.png"
 
-    @property
-    def get_sum(self):
-        tot = 0
-        return (tot + self.amount  )
 
 
-class Accounts_expense(models.Model):
-    expense_of = models.CharField(max_length=250, default='i.e: Trnsport',null=False)
+class AccountsExpense(models.Model):
+    expense_of = models.CharField(max_length=250, default='i.e: Transport of a good',null=False)
     expense_by = models.ForeignKey(Profile, on_delete=models.CASCADE,null=True, blank=True )
     amount = models.IntegerField( default='') 
     day_on_which = models.DateField(auto_now=True, null=True, blank=True)

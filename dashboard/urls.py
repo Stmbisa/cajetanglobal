@@ -2,8 +2,8 @@ from django.urls import URLPattern, path
 from django.conf import settings
 from django.conf.urls.static import static
 from . views import profiles, Profile_detail, Profile_update, Profile_delete, dashboard, Profile_create,\
-    Accounts_revenues, revenue_detail_view, Accounts_revenue_create, Accounts_revenue_update, Accounts_revenue_delete, \
-        Accounts_expenses, Accounts_expense_detail, Accounts_expense_create, Accounts_expense_update, Accounts_expense_delete,userprofileupdate
+    AccountsRevenues, revenue_detail_view, AccountsRevenueCreate, AccountsRevenueUpdate, AccountsRevenue_delete, \
+        AccountsExpenses, AccountsExpenseDetail, AccountsExpenseCreate, AccountsExpenseUpdate, AccountsExpenseDelete,userprofileupdate
              #add_profile
 app_name = "dashboard"
 urlpatterns = [
@@ -20,17 +20,17 @@ urlpatterns = [
     # path ('accounts/', Profiles.as_view(), name='accounts'),
     # accounts revenues 
    
-    path ('accounts/revenues', Accounts_revenues.as_view(), name='revenues'),
+    path ('accounts/revenues', AccountsRevenues.as_view(), name='revenues'),
     path ('accounts/revenues/<str:pk>/', revenue_detail_view, name='revenue'),
-    path ('accounts/revenues/<str:pk>/update/', Accounts_revenue_update.as_view(), name='revenue_update'),
-    path ('accounts/revenues/<str:pk>/delete/', Accounts_revenue_delete.as_view(), name='revenue_delete'),
-    path ('accounts/revenues/create/', Accounts_revenue_create.as_view(), name='revenue_create'),
+    path ('accounts/revenues/<str:pk>/update/', AccountsRevenueUpdate.as_view(), name='revenue_update'),
+    path ('accounts/revenues/<str:pk>/delete/', AccountsRevenue_delete.as_view(), name='revenue_delete'),
+    path ('accounts/revenues/create/', AccountsRevenueCreate.as_view(), name='revenue_create'),
 
     # accounts expenses 
-    path ('accounts/expenses', Accounts_expenses.as_view(), name='expenses'),
-    path ('accounts/expenses/<str:pk>', Accounts_expense_detail.as_view(), name='expense'),
-    path ('accounts/expenses/<str:pk>/update/', Accounts_expense_update.as_view(), name='expense_update'),
-    path ('accounts/expenses/<str:pk>/delete/', Accounts_expense_delete.as_view(), name='expense_delete'),
-    path ('accounts/expenses/create/', Accounts_expense_create.as_view(), name='expense_create'),
+    path ('accounts/expenses', AccountsExpenses.as_view(), name='expenses'),
+    path ('accounts/expenses/<str:pk>', AccountsExpenseDetail.as_view(), name='expense'),
+    path ('accounts/expenses/<str:pk>/update/', AccountsExpenseUpdate.as_view(), name='expense_update'),
+    path ('accounts/expenses/<str:pk>/delete/', AccountsExpenseDelete.as_view(), name='expense_delete'),
+    path ('accounts/expenses/create/', AccountsExpenseCreate.as_view(), name='expense_create'),
     
 ]#+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

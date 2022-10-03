@@ -51,7 +51,7 @@
                                        <td>{{ expense.id }}</td>
                                        <td>
                                           <h2 class="table-avatar">
-                                             <a href="{{ expense.get_absolute_url }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ revenue.get_document }}" alt="User Image"></a>
+                                             <a href="{{ expense.get_absolute_url }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ expense.get_document }}" alt="img"></a>
                                              <a href="{{ expense.get_absolute_url }}">{{ expense.expense_of }}</a>
                                           </h2>
                                        </td>
@@ -112,9 +112,3 @@
 </div>
                         
 {% endblock %}
-
-
-
-
-
-expense
