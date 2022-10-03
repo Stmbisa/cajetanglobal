@@ -36,7 +36,7 @@ DEBUG = os.getenv("DEBUG", "False") == "True"
 ALLOWED_HOSTS = ['cajetan.global', 'www.cajetan.global']
 
 
-DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
+
 
 
 
@@ -105,6 +105,9 @@ WSGI_APPLICATION = 'cajetanglobalvisas.wsgi.application'
 #       'PORT': '5432',
 #    }
 # }
+
+DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
+
 if DEVELOPMENT_MODE is True:
     DATABASES = {
         "default": {
