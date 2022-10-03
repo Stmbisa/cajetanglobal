@@ -217,7 +217,7 @@ def revenue_detail_view(request, pk=None):
 
 class Accounts_revenue_create(CreateView):
     template_name='dashboard/revenue_create.html'
-    model= Profile
+    model= Accounts_revenue
     # fields = '__all__'
     success_url = reverse_lazy('dashboard:revenues')
     form_class=Accounts_revenueForm
@@ -225,7 +225,7 @@ class Accounts_revenue_create(CreateView):
 
 class Accounts_revenue_update(SuccessMessageMixin, UpdateView):
     template_name='dashboard/revenue_update.html'
-    model= Profile
+    model= Accounts_revenue
     # fields = '__all__'
     success_url = reverse_lazy('dashboard:revenues')
     success_message = "Profile Was updated Successfully"
