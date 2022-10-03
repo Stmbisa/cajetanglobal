@@ -85,7 +85,12 @@
                                        {% else %}
                                        <td>{{ profile.biometry_date }}</td>
                                        {% endif %}
+                                       {% if profile.is_success %}
+                                       <td class="text-right">
+                                        <span class="badge badge-danger"> Departed </span>
+                                        {% else %}
                                        <td>{{ profile.Departure_date }}</td>
+                                       {% endif %}
                                        <td>{{ profile.amount_to_pay }}</td>
                                        <td>{{ profile.currency_of_choice }}</td>
                                        <td>{{ profile.amount_paid_today }}</td>
@@ -96,7 +101,7 @@
                                        <td>{{ profile.balance }}</td>
                                        {% else %}
                                         <td>{{ profile.amount_paid_so_far }}</td>
-                                       <td>{{ profile.balance }}</td>
+                                       <td>{{ profile.get_balance }}</td>
                                        {% endif %}
                                        <td>{{ profile.brought_by }}</td>
                                        <td class="text-right">
@@ -110,9 +115,27 @@
                                           </div>
                                        </td>
                                     </tr>
+                                    
                                  </tbody>
                                  {% endfor %}
                                 {% endif %}
+                                <tr>
+                                       <td>Totals</td>
+                                       <td>--</td>
+                                       <td>--</td>
+                                       <td>--</td>
+                                       <td>--</td>
+                                       <td>--</td>
+                                       <td>--</td>
+                                       <td>--</td>
+                                       <td>--</td>
+                                       <td>{{all_total_amount_to_pay}}</td>
+                                       <td>--</td>
+                                       <td>{{all_total_amount_paid_so_far}}</td>
+                                       <td>{{all_total_amount_paid_today}}</td>
+                                       <td>{{all_total_balance}}</td>
+                                       <td></td>
+                                    </tr>
                               </table>
                               {% if is_paginated %}
                                     <div class="pagination">
@@ -136,7 +159,7 @@
             </div>
          </div>
       {% else %}
-<p>It seems you are not logged in <a href="{% url 'auth_login' %}" >login now</a></p>
+<p>It seems you are not logged in <a href="{% url 'account:login' %}" >login now</a></p>
 {% endif %}
 {% else %}
 <p>It seems you dont have the permission to view this page </p>

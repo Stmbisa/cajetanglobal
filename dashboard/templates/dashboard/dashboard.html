@@ -42,7 +42,7 @@
             <div class="card-body">
                <div class="db-widgets d-flex justify-content-between align-items-center">
                   <div class="db-icon">
-                     <i class="fas fa-users"></i>
+                     <i class="far fa-Handshake"></i>
                   </div>
                   <div class="db-info">
                      <h3>{{all_paid_profiles}}</h3>
@@ -52,6 +52,52 @@
             </div>
          </div>
       </div>
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+         <div class="card bg-ten w-100">
+            <div class="card-body">
+               <div class="db-widgets d-flex justify-content-between align-items-center">
+                  <div class="db-icon">
+                     <i class="fas fa-money" aria-hidden = 'true'></i>
+                  </div>
+                  <div class="db-info">
+                     <h3>{{total_revenues}}</h3>
+                     <h6>Cash memo </h6>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+         <div class="card bg-ten w-100">
+            <div class="card-body">
+               <div class="db-widgets d-flex justify-content-between align-items-center">
+                  <div class="db-icon">
+                     <i class=""></i>
+                  </div>
+                  <div class="db-info">
+                     <h3>{{total_expenses}}</h3>
+                     <h6>Cash out </h6>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-xl-3 col-sm-6 col-12 d-flex">
+         <div class="card bg-ten w-100">
+            <div class="card-body">
+               <div class="db-widgets d-flex justify-content-between align-items-center">
+                  <div class="db-icon">
+                     <i class=""></i>
+                  </div>
+                  <div class="db-info">
+                     <h3>{{total_profits}}</h3>
+                     <h6>Cash added </h6>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      
       <div class="col-xl-3 col-sm-6 col-12 d-flex">
          <div class="card bg-eleven w-100">
             <div class="card-body">
@@ -69,7 +115,7 @@
       </div>
       <div class="card-body">
                <div id="revenue_expense">
-                  <div class="col-md-12 col-lg-6">
+                  <div class="col-md-6 col-lg-6">
                      <div class="card card-chart">
                         <div class="card-header">
                            <div class="row align-items-center">
@@ -177,7 +223,7 @@
  </div>
 </div>
    {% else %}
-<p>It seems you are not logged in <a href="{% url 'auth_login' %}" >login now</a></p>
+<p>It seems you are not logged in <a href="{% url 'accounts:login' %}" >login now</a></p>
 {% endif %}
 {% else %}
 <p>It seems you dont have the permission to view this page </p>

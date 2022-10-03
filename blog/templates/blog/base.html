@@ -82,12 +82,7 @@
                   <a href="{% url 'blog:contact' %}"><span>Contact Us</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                   <ul>
                      <li class="dropdown">
-                        <a href="#"><span>Call us</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-                        <ul>
-                           <li><a href="https://wa.me/+256200903172">0200903172</a></li>
-                           <li><a href="tel:+256392301434">0392301434</a></li>
-                           <li><a href="tel:+256752112332">0752112332</a></li>
-                        </ul>
+                        <a href="tel:+256392301434"><span>+256 392 301 434</span> <i class="bi bi-telephone-fill"></i></a>
                      </li>
                      <li><a href="mailto:cajetanglobalvisa@gmail.com">Email Us</a></li>
                      <!-- <li><a href="#">WhatsApp</a></li> -->
@@ -101,11 +96,11 @@
                   </ul>
                </li>
                {% if not user.is_authenticated %}
-               <li><a href="{% url 'auth_login' %}">login</a></li>
-               <li><a href="{% url 'registration_register' %}">register</a></li>
+               <li><a href="{% url 'accounts:login' %}">login</a></li>
+               <li><a href="{% url 'accounts:register' %}">register</a></li>
                {% else %}
                <li><a href="{% url 'dashboard:dash_home' %}">Dashboard</a></li>
-               <li><a href="{% url 'auth_logout' %}">logout</a></li>
+               <li><a href="{% url 'accounts:logout' %}">logout</a></li>
                <li class="nav-item dropdown pe-3">
                   <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                      <!-- <img class="avatar-img rounded-circle img-responsive thumbnail" src="{{ user.image.url|default_if_none:'#' }}" alt="Profile"> -->
@@ -159,7 +154,7 @@
                         <hr class="dropdown-divider">
                      </li>
                      <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{% url 'auth_logout' %}">
+                        <a class="dropdown-item d-flex align-items-center" href="{% url 'accounts:logout' %}">
                         <i class="bi bi-box-arrow-right"></i>
                         <span>Sign Out</span>
                         </a>
@@ -195,6 +190,7 @@
       </div>
       {% endfor %}
       {% endif %}
+      {% include 'blog/includes/alerts.html' %}
       {% block content %}
       {% endblock content %}
       <!-- ======= Footer ======= -->

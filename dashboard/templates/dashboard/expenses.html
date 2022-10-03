@@ -51,7 +51,7 @@
                                        <td>{{ expense.id }}</td>
                                        <td>
                                           <h2 class="table-avatar">
-                                             <a href="{{ expense.get_absolute_url }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ revenue.evidence_document.url }}" alt="User Image"></a>
+                                             <a href="{{ expense.get_absolute_url }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ revenue.get_document }}" alt="User Image"></a>
                                              <a href="{{ expense.get_absolute_url }}">{{ expense.expense_of }}</a>
                                           </h2>
                                        </td>
@@ -104,7 +104,7 @@
             </div>
          </div>
          {% else %}
-   <p>It seems you are not logged in <a href="{% url 'auth_login' %}" >login now</a></p>
+   <p>It seems you are not logged in <a href="{% url 'account:login' %}" >login now</a></p>
    {% endif %}
    {% else %}
    <p>It seems you dont have the permission to view this page </p>

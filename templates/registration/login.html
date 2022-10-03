@@ -14,7 +14,7 @@
 </form>
 
 <p>{% trans "Forgot your password?" %} <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>.</p>
-<p>{% trans "Not a member?" %} <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>.</p> {% endcomment %}
+<p>{% trans "Not a member?" %} <a href="{% url 'accounts:logout' %}">{% trans "Register" %}</a>.</p> {% endcomment %}
 
 
 
@@ -30,7 +30,7 @@
               <div class="container-fluid">
                   <div class="card mb-3 d-flex align-items-center justify-content-center">
                   {% if user.is_authenticated %}
-                    <p>You are already logged in, please log out <a href="{% url 'auth_logout' %}" >Here</a></p>
+                    <p>You are already logged in, please log out <a href="{% url 'accounts:logout' %}" >Here</a></p>
                   {% else %}
                     <div class="card-body">
                         {% for message in messages %}
@@ -63,7 +63,7 @@
                         <span class="span-or">or</span>
                         </div>
                     <div class="text-center dont-have"><p>{% trans "Forgot your password?" %} <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>.</p></div>
-                    <div class="text-center dont-have"><p>{% trans "Not a member?" %} <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>.</p></div>
+                    <div class="text-center dont-have"><p>{% trans "Not a member?" %} <a href="{% url 'accounts:logout' %}">{% trans "Register" %}</a>.</p></div>
                     </div>
                   </div>
                   {% endif %}

@@ -15,7 +15,7 @@
                 {% for blog in blog_list %}
                 <div class="swiper-slide">
                   <!-- the link below will be changed to a dynamic links with a shared template of many differnt topics to be in this slider -->
-                    <a href="single-post.html" class="img-bg d-flex align-items-end" style="background-image: url('{{ blog.image.url }}')50% 50% no-repeat;">
+                    <a href="single-post.html" class="img-bg d-flex align-items-end" style="background-image: url('{{ blog.get_image }}')50% 50% no-repeat;">
                     <div class="img-bg-inner">
                       <h2>{{ blog.title }}</h2>
                       <p>{{ blog.content|truncatechars:255 }}</p>

@@ -44,7 +44,7 @@
                   </div>
                </div>
                {% else %}
-               <p>It seems you are not logged in <a href="{% url 'auth_login' %}" >login now</a></p>
+               <p>It seems you are not logged in <a href="{% url 'accounts:login' %}" >login now</a></p>
                {% endif %}
                {% else %}
                <p>It seems you dont have the permission to view this page </p>

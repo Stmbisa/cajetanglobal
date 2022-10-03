@@ -5,11 +5,19 @@ from django.forms import ModelForm
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
 from .models import Profile, Announcement, Accounts_revenue, Accounts_expense
+import datetime
+
+class DateInput(forms.DateInput):
+    input_type: 'date'
 
 class ProfileCreateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = '__all__'
+        widgets = {
+            'biometry_date': DateInput(attrs={'type':'date'}),
+            'Departure_date': DateInput(attrs={'type':'date'})
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -72,11 +80,33 @@ class AnnouncementCreateForm(forms.ModelForm):
         fields = '__all__'
 
 class RegisterUserCreationForm(UserCreationForm):
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={
+        "placeholder":"Confirm Password",
+        "class":"form_control"
+    })),
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={
+        "placeholder":"Confirm Password",
+         "class":"form_control"
+    }))
+
     class Meta:
         model =User
-        fields = '__all__'
+        # fields = '__all__'
         fields = ('first_name', 'last_name','gender', 'phone','username', 'country_of_orgin','country_of_destination', 
         'nationality', 'next_of_kin','next_of_kin_phone_number', 'has_taken_biometry_before',)
+        def __init__(self, *args, **kwargs):
+            super(RegisterUserCreationForm, self).__init__(*args, **kwargs)
+            self.fields['first_name'].widget.attrs['placeholder']='Type your First Name'
+            self.fields['Last_name'].widget.attrs['placeholder']='Type your Last Name'
+            self.fields['phone'].widget.attrs['placeholder']='Type your number'
+            self.fields['username'].widget.attrs['placeholder']='Type your email'
+            self.fields['country_of_orgin'].widget.attrs['placeholder']='Your country of origin'
+            self.fields['country_of_destination'].widget.attrs['placeholder']='Where do you want to go'
+            self.fields['nationality'].widget.attrs['placeholder']='Your nationality'
+            self.fields['next_of_kin'].widget.attrs['placeholder']='Whom can we call if you are not available'
+            self.fields['next_of_kin_phone_number'].widget.attrs['placeholder']='Whats their number '
+            for field in self.fields:
+                self.fields[field].widget.attrs['class']='form-control'
 
 
 class Accounts_revenueForm(forms.ModelForm):

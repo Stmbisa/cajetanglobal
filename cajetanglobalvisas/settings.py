@@ -44,8 +44,6 @@ DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.sites',
-    'registration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -179,12 +177,6 @@ AUTH_USER_MODEL = 'users.User'
 
 CRISPY_TEMPLATE_PACK= 'bootstrap4'
 
-ACCOUNT_ACTIVATION_DAYS = 14
-REGISTRATION_AUTO_LOGIN = True
-LOGIN_REDIRECT_URL = '/memberships/'
-LOGIN_URL = '/accounts/login/'
-REGISTRATION_EMAIL_HTML= True
-
 SITE_ID = 1
 
 #change this in production
@@ -201,3 +193,10 @@ SECURE_SSL_REDIRECT = True
 SECURE_HSTS_SECONDS = 31536000 # 1 year
 SECURE_HSTS_PRELOAD = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+
+
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS={
+    messages.ERROR: 'danger',
+}

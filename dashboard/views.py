@@ -1,6 +1,6 @@
 from multiprocessing import context
 import profile
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from users.models import Profile
 from users.forms import ProfileCreateForm, Accounts_revenueForm, Accounts_expenseForm
 from django.contrib.messages.views import SuccessMessageMixin
@@ -15,6 +15,7 @@ from django.views.generic.edit import  DeleteView, CreateView, UpdateView, Creat
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
 
+
 def dashboard(request):
     # startdate = datetime.today()
     # end_date = startdate + timedelta(days=30)
@@ -24,6 +25,7 @@ def dashboard(request):
     all_profiles = Profile.objects.all().count()
     all_paid_profiles = Profile.objects.filter(has_paid =True).count()
     all_rejected = Profile.objects.filter(rejected =True).count()
+    # all_success = Profile.objects.filter(is_success =True).count()
     total_profile_revenues = 0
     total_revenues = 0
     total_expenses = 0
@@ -39,9 +41,9 @@ def dashboard(request):
     for profile_revenue in all_profiles_paid:
         total_profile_revenues+= profile_revenue.amount_paid_so_far
     
-    total_revenues = total_revenues +total_profile_revenues
+    total_revenues = int(total_revenues +total_profile_revenues)
     
-    total_profits = total_revenues-total_expenses
+    total_profits = int(total_revenues)-int(total_expenses)
     context ={
         # 'biometries': biometries,
         'all_users': all_users,
@@ -100,11 +102,39 @@ def userprofileupdate(request):
     return render(request, 'dashboard/userupdate.html' )
 
 
-class Profiles(ListView):
-    template_name='dashboard/profiles.html'
-    model= Profile
-    context_object_name = 'profiles'
-    ordering = ['-email']
+
+def profiles(request):
+    # user = User.objects.get(id = request.user.id)
+    profiles = Profile.objects.all()
+    all_total_amount_paid_so_far=0 
+    all_total_amount_paid_today=0
+    all_total_amount_to_pay=0
+    all_total_balance=0
+    for profile in profiles:
+        balance = int(profile.amount_to_pay)-int(profile.amount_paid_so_far)
+        all_total_amount_paid_so_far+=profile.amount_paid_so_far
+        all_total_amount_paid_today+=profile.amount_paid_today
+        all_total_amount_to_pay+=profile.amount_to_pay
+        all_total_balance+=profile.balance
+    context = {
+        'profiles':profiles,
+        'balance':balance,
+        'all_total_amount_paid_so_far':all_total_amount_paid_so_far,
+        'all_total_amount_paid_today':all_total_amount_paid_today,
+        'all_total_amount_to_pay':all_total_amount_to_pay,
+        'all_total_balance':all_total_balance
+    }
+    
+    return render(request, 'dashboard/profiles.html',context)
+#to change this in function based view
+
+
+
+# class Profiles(ListView):
+#     template_name='dashboard/profiles.html'
+#     model= Profile
+#     context_object_name = 'profiles'
+#     ordering = ['-email']
 
 
 class Profile_detail(DetailView):
@@ -174,6 +204,17 @@ class Accounts_revenue_detail(DetailView):
     model= Accounts_revenue
     fields = '__all__'
 
+
+def revenue_detail_view(request, pk=None):
+    revenue_obj = None
+    if revenue_obj is not None:
+        revenue_obj=get_object_or_404(Accounts_revenue, pk=pk)
+    context= {
+        'revenue': revenue_obj, 
+    }
+    return render (request, "dashboard/revenue_detail.html", context=context)
+
+
 class Accounts_revenue_create(CreateView):
     template_name='dashboard/revenue_create.html'
     model= Profile
@@ -239,14 +280,7 @@ class Accounts_expense_delete(SuccessMessageMixin, DeleteView):
 
 
 
-# def profiles(request):
-#     # user = User.objects.get(id = request.user.id)
-#     queryset = Profile.objects.all()
-#     context = {
-#         'profile_list':queryset
-#     }
-    
-#     return render(request, 'dashboard/profiles.html',context)
+
 
 # def add_profile(request):
 #     form=ProfileCreateForm(request.POST)

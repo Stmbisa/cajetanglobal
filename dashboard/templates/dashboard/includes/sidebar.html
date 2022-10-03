@@ -9,7 +9,7 @@
              <li class="submenu">
                <a href="{% url 'dashboard:dash_home' %}"><i class="fas fa-table"></i> <span> Dashboard</span> <span class="menu-arrow"></span></a>
                <ul>
-                  <li><a href="">Main </a></li>
+                  <li><a href="{% url 'dashboard:profiles' %}">Main </a></li>
                   <li><a href="{% url 'dashboard:profiles' %}">Manage all User profiles </a></li>
                   <li><a href="{% url 'dashboard:profile_create' %}">add profiles</a></li>
                   {% comment %} <li><a href="">see paid profiles</a></li>
@@ -51,7 +51,7 @@
             <li><a href="{% url 'blog:warning' %}"><i class="fas fa-holly-berry"></i> <span>Profits</span></a></li>
             <li><a href="{% url 'blog:warning' %}"><i class="fas fa-holly-berry"></i> <span>Complete success</span></a></li>
             <li><a href="{% url 'blog:warning' %}"><i class="fas fa-holly-berry"></i> <span>complete failure </span></a></li>
-            <li><a href="{% url 'auth_logout' %}"><i class="fa fa-sign-out-alt"></i> <span>Log out </span></a></li>
+            <li><a href="{% url 'accounts:logout' %}"><i class="fa fa-sign-out-alt"></i> <span>Log out </span></a></li>
 
 
                

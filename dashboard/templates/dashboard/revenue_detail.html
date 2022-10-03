@@ -9,10 +9,10 @@
 <div class="page-header">
    <div class="row">
       <div class="col-sm-12">
-         <h3 class="page-title">Profile Details</h3>
+         <h3 class="page-title">Cash Memo Details</h3>
          <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="students.html">Profile</a></li>
-            <li class="breadcrumb-item active">Profile Details</li>
+            <li class="breadcrumb-item"><a href="students.html">Cash memo</a></li>
+            <li class="breadcrumb-item active">Cash memo Details</li>
          </ul>
       </div>
    </div>
@@ -26,7 +26,7 @@
                <ul>
                   <li>
                      <span class="title-span">Revenue Of: </span>
-                     <span class="info-span">{{ self.revenue_of }}</span>
+                     <span class="info-span">{{ revenue_obj.revenue_of }}</span>
                   </li>
                   <li>
                      <span class="title-span">Revenue By:</span>
@@ -46,7 +46,7 @@
    </div>
 </div>
 {% else %}
-<p>It seems you are not logged in <a href="{% url 'auth_login' %}" >login now</a></p>
+<p>It seems you are not logged in <a href="{% url 'account:login' %}" >login now</a></p>
 {% endif %}
 {% else %}
 <p>It seems you dont have the permission to view this page </p>

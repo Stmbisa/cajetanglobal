@@ -17,7 +17,6 @@ from .manager import UserManager
 def path_and_rename(instance, filename):
     upload_to = 'Images/'
     ext = filename.split('.')[-1]
-    # get filename
     if instance.pk:
         filename = 'User_Profile_Pictures/{}.{}'.format(instance.pk, ext)
     return os.path.join(upload_to, filename)
@@ -26,13 +25,11 @@ def path_and_rename(instance, filename):
 
 class User(AbstractUser):
     is_verified= models.BooleanField(default=False) 
-    has_taken_biometry_before= models.BooleanField(default=False)
+    is_active= models.BooleanField(default=True)
+    has_taken_biometry_before= models.BooleanField(default=False, help_text='Tick if you have ever taken the biometry')
     avatar = models.ImageField(upload_to = 'uploads/', default='')
     first_name = models.CharField(max_length=255, default='')
     last_name = models.CharField(max_length=255, default='')
-    # GENDER_MALE = 'Male'
-    # GENDER_FEMALE = 'Female'
-    # OTHER = 'Other'
 
     GENDER_CHOICES = [
         ('Male', 'Male'),
@@ -40,7 +37,7 @@ class User(AbstractUser):
         ('Other', 'Other'),
        ]
     gender = models.CharField(max_length=15, choices=GENDER_CHOICES,null=False,default='', blank=False)
-    username=models.EmailField(unique=True, null=True)
+    username=models.EmailField(unique=True, null=True, help_text='Type in your email, Required. Letters, numbers and @/./+/-/_ characters')
     phone = models.CharField(max_length=14, default='', unique=True, null=True)
     email_token = models.CharField(max_length=100, null=True, blank=True)
     forget_password=models.CharField(max_length=100, null=True, blank=True)
@@ -59,13 +56,13 @@ class User(AbstractUser):
        ]
     country_of_destination = models.CharField(max_length=100,choices=COUNTRY_CHOICES,default='US', null=False, blank=False)
     nationality = models.CharField(max_length=100, null=False, blank=False, default='')
-    next_of_kin = models.CharField(max_length=255, default='')
+    next_of_kin = models.CharField(max_length=255, default='', help_text='whom would we call if you are not available')
     next_of_kin_phone_number = models.CharField(max_length=14, default='')
     
     
     objects: UserManager()
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['first_name', 'last_name','phone']
 
     def __str__(self):
         return self.username or ''
@@ -107,9 +104,9 @@ class Profile(models.Model):
 
     
     gender = models.CharField(max_length=15, choices=GENDER_CHOICES, default='',null=True)
-    email = models.EmailField(default='none@email.com',blank=True, null=True)
+    email = models.EmailField(default='',blank=True, null=True)
     phonenumber = models.CharField(max_length=15,null=True,blank=True, default='') #blank=True, null=True
-    birth_date = models.DateField(blank=True, default='', null=True,)
+    birth_date = models.DateField(blank=True, default='', null=True,help_text='!!!date format 2022-12-01')
     next_of_kin = models.CharField(max_length=255, default='', null=True, blank=True)
     next_of_kin_phone = models.IntegerField(unique=True, null=True, blank=True)
     country_of_orgin = models.CharField(max_length=255, default='', null=True, blank=True)
@@ -140,7 +137,7 @@ class Profile(models.Model):
     nationality = models.CharField(max_length=255, default='', null=True, blank=True) 
     has_paid = models.BooleanField(default=False)
     has_done_biometry_before = models.BooleanField(default=False)
-    biometry_date = models.DateField(blank=True, default='', null=True)
+    biometry_date = models.DateField(blank=True, default='', null=True, help_text='!!!date format 2022-12-01')
     has_done_biometry = models.BooleanField(default=False)
     has_obtained_visa_before=models.BooleanField(default=False)
     has_obtained_visa=models.BooleanField(default=False)
@@ -196,10 +193,10 @@ class Profile(models.Model):
     @property
     def get_balance(self):
         if self.amount_paid_so_far:
-            balance=self.amount_to_pay-self.amount_paid_so_far
+            balance = int(self.amount_to_pay)-int(self.amount_paid_so_far)
             if balance <= 0:
                 self.has_paid=True
-        return balance
+            return balance
 
     @property
     def is_due(self):
@@ -208,6 +205,13 @@ class Profile(models.Model):
         t2 = datetime.now().date()
         t3 = timedelta(days=30)
         return  datetime_object - t2<= t3
+    
+    @property
+    def is_success(self):
+       if self.Departure_date:
+        datetime_object = self.Departure_date
+        t2 = datetime.now().date()
+        return  datetime_object <= t2
         
     
 
@@ -222,6 +226,12 @@ class Announcement(models.Model):
 
     def __str__(self):
         return str(self.content)
+
+    def get_document(self):
+        if self.evidence_document and hasattr(self.evidence_document, 'url'):
+            return self.evidence_document.url
+        else:
+            return "/static/assets/img/user.png"
 
 
 
@@ -238,6 +248,12 @@ class Accounts_revenue(models.Model):
 
     def get_absolute_url(self):
         return reverse('dashboard:revenue', kwargs= {'pk':self.pk} )
+
+    def get_document(self):
+        if self.evidence_document and hasattr(self.evidence_document, 'url'):
+            return self.evidence_document.url
+        else:
+            return "/static/assets/img/user.png"
 
     @property
     def get_sum(self):
@@ -256,7 +272,13 @@ class Accounts_expense(models.Model):
         return str(self.expense_of)
     
     def get_absolute_url(self):
-        return reverse('dashboard:revenue', kwargs= {'pk':self.pk} )
+        return reverse('dashboard:expense', kwargs= {'pk':self.pk} )
+
+    def get_document(self):
+        if self.evidence_document and hasattr(self.evidence_document, 'url'):
+            return self.evidence_document.url
+        else:
+            return "/static/assets/img/user.png"
 
 
 

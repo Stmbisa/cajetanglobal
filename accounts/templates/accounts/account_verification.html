@@ -1,0 +1,31 @@
+{% autoescape off %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>{{ domain }} </title>
+</head>
+
+<body>
+<p>
+    
+    Hi {{ user.first_name }}
+    You (or someone pretending to be you) have asked to register an account at
+    {{ domain }} click the link below to activate
+    https://{{domain}}{% url 'activate' uidb64=uid token=token %}
+
+     If this wasn't you, please ignore this email
+    and your address will be removed from our records.
+</p>
+<p>
+    To activate this account, please click the following link above or it will expire soon
+    
+</p>
+
+</p>
+</body>
+
+</html>
+
+{% autoescape  %}
+

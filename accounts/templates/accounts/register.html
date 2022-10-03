@@ -1,0 +1,118 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+
+    <!-- ============================ COMPONENT REGISTER   ================================= -->
+        <div class="card mx-auto" style="max-width:520px; margin-top:50px;">
+          <article class="card-body">
+          {% if form.errors %}
+            {% for error in form.errors %}
+            <p style="color: rgb(26, 1, 1);"> {{error}}</p>
+            {% endfor %}
+            {% endif %}
+            <header class="mb-4"><h4 class="card-title">Sign up</h4></header>
+            <form action="{% url 'accounts:register' %}" method="POST">
+                {% csrf_token %}
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                              {{ form.as_p }}
+                        </div> <!-- form-group end.// -->
+                    </div>
+
+                    {% comment %} <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Last name</label>
+                              {{ form.last_name }}
+                        </div> <!-- form-group end.// -->
+                    </div> <!-- form-row end.// -->
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label>Email</label>
+                          {{ form.username }}
+                        </div> <!-- form-group end.// -->
+                    </div> <!-- form-row.// -->
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                        <label>Gender</label>
+                        {{ form.gender }}
+                        </div>
+                    </div> <!-- form-group end.// -->
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label>Country of Origin</label>
+                          {{ form.country_of_orgin }}
+                        </div> <!-- form-group end.// -->
+                    </div> <!-- form-row.// -->
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label>Country of destination</label>
+                          {{ form.country_of_destination }}
+                        </div> <!-- form-group end.// -->
+                    </div> <!-- form-row.// -->
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label>Your nationality </label>
+                          {{ form.nationality }}
+                        </div> <!-- form-group end.// -->
+                    </div> <!-- form-row.// -->
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label>Your Next of kin </label>
+                          {{ form.next_of_kin }}
+                        </div> <!-- form-group end.// -->
+                    </div> <!-- form-row.// -->
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label>Next of Kin phone Number</label>
+                          {{ form.next_of_kin_phone_number }}
+                        </div> <!-- form-group end.// -->
+                    </div> <!-- form-row.// -->
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label>Tick if you have taken biometry before</label>
+                          {{ form.has_taken_biometry_before }}
+                        </div> <!-- form-group end.// -->
+                    </div> <!-- form-row.// -->
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Create password</label>
+                            {{ form.password1 }}
+                        </div> 
+                    </div><!-- form-group end.// --> 
+                    <div>
+                        <div class="form-group col-md-6">
+                            <label>Repeat password</label>
+                            {{ form.password2 }}
+                        </div> <!-- form-group end.// -->  
+                    </div> {% endcomment %}
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block"> Register  </button>
+                    </div> <!-- form-group// -->       
+                        
+                </form>
+            </article><!-- card-body.// -->
+        </div> <!-- card .// -->
+        <p class="text-center mt-4">Have an account? <a href="{% url 'accounts:login' %}">Log In</a></p>
+        <br><br>
+    <!-- ============================ COMPONENT REGISTER  END.// ================================= -->
+    
+    
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+
+
+
+{% endblock content %}

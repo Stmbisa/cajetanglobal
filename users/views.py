@@ -21,14 +21,23 @@ from django.http import HttpResponse, Http404
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib import auth
 from . models import Profile,User, Payment
+from django.contrib.sites.shortcuts import get_current_site
+from .forms import RegisterUserCreationForm
+
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.forms import (AuthenticationForm, UserCreationForm,
                                        PasswordChangeForm)
 
 
 
+
 def login(request):
     return render(request, "users/login.html")
+
+
+
+
+
 
 # requester views
 # class RequesterSignUpView(CreateView):
