@@ -172,7 +172,7 @@ class Profile(models.Model):
 
 
     def __str__(self):
-        return self.user.username or ''
+        return self.user.first_name or ''
     
     def get_absolute_url(self):
         return reverse('dashboard:profile', kwargs= {'pk':self.pk} )
