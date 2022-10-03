@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'dashboard',
     'crispy_forms',
     'bootstrap5',
+    'django-heroku'
 
 ]
 
