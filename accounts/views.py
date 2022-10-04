@@ -132,7 +132,7 @@ def logout(request):
 def forgotPassword(request):
     email = request.POST.get('email')
     if User.objects.filter(email=email).exists():
-        user = User.objects.get(email__iexact==email)
+        user = User.objects.get(email=email)
         #reset password
         current_site = get_current_site(request)
         mail_subject = 'Reset your Password'
@@ -146,11 +146,11 @@ def forgotPassword(request):
         send_email = EmailMessage(mail_subject, message, to=[to_email])
         send_email.send()
         messages.success(request, 'Password ret has been sent to your email')
-        return redirect('accounts:login')
+        return render(request, 'accounts/forgotPassword.html')
 
     else:
         messages.error(request, 'Account with this email does not exist')
-        return redirect('accounts:forgotpassword')
+        return render(request, 'accounts/forgotPassword.html')
 
     return render(request, 'accounts/forgotPassword.html')
 

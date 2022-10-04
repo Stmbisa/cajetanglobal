@@ -110,9 +110,10 @@ def profiles(request):
     all_total_amount_paid_today=0
     all_total_amount_to_pay=0
     all_total_balance=0
+    balance = 0
+    
     for profile in profiles:
-        if profile.amount_paid_today and profile.amount_paid_so_far:
-            balance = int(profile.amount_to_pay)-int(profile.amount_paid_so_far)
+        balance = int(profile.amount_to_pay - profile.amount_paid_so_far) if profile.amount_paid_today and profile.amount_paid_so_far else balance==0
         all_total_amount_paid_so_far+=profile.amount_paid_so_far
         all_total_amount_paid_today+=profile.amount_paid_today
         all_total_amount_to_pay+=profile.amount_to_pay
@@ -125,8 +126,11 @@ def profiles(request):
             'all_total_amount_to_pay':all_total_amount_to_pay,
             'all_total_balance':all_total_balance
         }
-    
-    return render(request, 'dashboard/profiles.html',context)
+
+        return render(request, 'dashboard/profiles.html',context)
+    else:
+        messages.success(request, 'Something isnt right')
+        return render(request, 'dashboard/profiles.html')
 #to change this in function based view
 
 
