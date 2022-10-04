@@ -111,18 +111,20 @@ def profiles(request):
     all_total_amount_to_pay=0
     all_total_balance=0
     for profile in profiles:
-        balance = int(profile.amount_to_pay)-int(profile.amount_paid_so_far)
+        if profile.amount_paid_today and profile.amount_paid_so_far:
+            balance = int(profile.amount_to_pay)-int(profile.amount_paid_so_far)
         all_total_amount_paid_so_far+=profile.amount_paid_so_far
         all_total_amount_paid_today+=profile.amount_paid_today
         all_total_amount_to_pay+=profile.amount_to_pay
         all_total_balance+=profile.balance
-    context = {
-        'profiles':profiles,
-        'all_total_amount_paid_so_far':all_total_amount_paid_so_far,
-        'all_total_amount_paid_today':all_total_amount_paid_today,
-        'all_total_amount_to_pay':all_total_amount_to_pay,
-        'all_total_balance':all_total_balance
-    }
+        context = {
+            'profiles':profiles,
+            'balance':balance,
+            'all_total_amount_paid_so_far':all_total_amount_paid_so_far,
+            'all_total_amount_paid_today':all_total_amount_paid_today,
+            'all_total_amount_to_pay':all_total_amount_to_pay,
+            'all_total_balance':all_total_balance
+        }
     
     return render(request, 'dashboard/profiles.html',context)
 #to change this in function based view
