@@ -1,0 +1,470 @@
+{% extends 'dashboard/base2.html' %}
+{% block content %}
+<!-- {{ profile_list }} -->
+<div id="content-wrapper" style="padding-top: 35px"
+{% if user.is_authenticated %}
+{% if user.is_staff %}
+<div class="content container-fluid">
+<div class="page-header">
+    <div class="card-body">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Profiles</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Profiles</li>
+                </ul>
+            </div>
+            <div class="col-auto text-right float-right ml-auto">
+                {% comment %} <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Download</a> {% endcomment %}
+                <a href="{% url 'dashboard:profile_create'  %}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card card-table">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-center mb-0 datatable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Full Name</th>
+                                    <th>Email</th>
+                                    <th>Phone Number</th>
+                                    <th>status</th>
+                                    <th>Orgin Country</th>
+                                    <th>Destination country</th>
+                                    <th>Biometry date</th>
+                                    <th>Departure date</th>
+                                    <th>Amount to pay</th>
+                                    <th>Currency Choice</th>
+                                    <th>Amount paid</th>
+                                    <th>Amount today</th>
+                                    <th>Balance</th>
+                                    <th class="text-right">Action</th>
+                                </tr>
+                            </thead>
+                            {% if profiles %}
+                            {% for profile in profiles %}
+                            <tbody>
+                                <tr>
+                                    <td>{{ profile.id }}</td>
+                                    <td>
+                                        <h2 class="table-avatar">
+                                            {% comment %} <a href="{{ profile.get_absolute_url }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ profile.avatar.url }}" alt=""></a> {% endcomment %}
+                                            <a href="{{ profile.get_absolute_url }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ profile.image_url|default_if_none:'#' }}" alt=""></a>
+                                            <a href="{{ profile.get_absolute_url }}">{{ profile.full_name }}</a>
+                                        </h2>
+                                    </td>
+                                    <td>{{ profile.email }}</td>
+                                    <td>{{ profile.phone }}</td>
+                                    {% if profile.has_paid %}
+                                    <td class="text-right">
+                                        <span class="badge badge-success">Paid</span>
+                                    </td>
+                                    {% else %}
+                                    <td class="text-right">
+                                        <span class="badge badge-danger">Unpaid</span>
+                                    </td>
+                                    {% endif %}
+                                    <td>{{ profile.country_of_orgin }}</td>
+                                    <td>{{ profile.country_of_destination }}</td>
+                                    {% if profile.is_due %}
+                                    <td class="text-right">
+                                        <span class="badge badge-danger">{{ profile.biometry_date }}</span>
+                                    </td>
+                                    {% else %}
+                                    <td>{{ profile.biometry_date }}</td>
+                                    {% endif %}
+                                    {% if profile.is_success %}
+                                    <td class="text-right">
+                                        <span class="badge badge-success"> Departed </span>
+                                        {% else %}
+                                    <td>{{ profile.Departure_date }}</td>
+                                    {% endif %}
+                                    <td>{{ profile.amount_to_pay }}</td>
+                                    <td>{{ profile.currency_of_choice }}</td>
+                                    <td>{{ profile.amount_paid_today }}</td>
+                                    <td>{{ profile.amount_paid_so_far }}</td>
+                                    {% if self.amount_paid_so_far or self.amount_to_pay %}
+                                    <td>{{ profile.get_balance }}</td>
+                                    {% else %}
+                                    <td>{{ balance }}</td>
+                                    {% endif %}
+                                    <td class="text-right">
+                                        <div class="actions">
+                                            <a href="{% url 'dashboard:profile_update' profile.pk %}" class="btn btn-sm bg-success-light mr-2">
+                                            <i class="fas fa-pen"></i>
+                                            </a>
+                                            <a href="{% url 'dashboard:profile_delete' profile.pk %}" class="btn btn-sm bg-danger-light">
+                                            <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            {% endfor %}
+                            {% endif %}
+                            <tr>
+                                <td>Totals</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>{{ all_total_amount_to_pay }}</td>
+                                <td>--</td>
+                                <td>{{all_total_amount_paid_so_far}}</td>
+                                <td>{{all_total_amount_paid_today}}</td>
+                                <td>{{all_total_balance}}</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <div>
+                           <div class="pagination">
+                              <span class="step-links">
+                                  {% if page_obj.has_previous %}
+                                      <a href="?page=1">&laquo; first</a>
+                                      <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                                  {% endif %}
+
+                                  <span class="current">
+                                      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                                  </span>
+
+                                  {% if page_obj.has_next %}
+                                      <a href="?page={{ page_obj.next_page_number }}">next</a>
+                                      <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                                  {% endif %}
+                              </span>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <p>It seems you are not logged in <a href="{% url 'account:login' %}" >login now</a></p>
+    {% endif %}
+    {% else %}
+    <p>It seems you dont have the permission to view this page </p>
+    {% endif %}
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="content container-fluid">
+<div class="page-header">
+    <div class="card-body">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Profiles</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Profiles</li>
+                </ul>
+            </div>
+            <div class="col-auto text-right float-right ml-auto">
+                {% comment %} <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Download</a> {% endcomment %}
+                <a href="{% url 'dashboard:profile_create'  %}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card card-table">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-center mb-0 datatable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Full Name</th>
+                                    <th>Email</th>
+                                    <th>Phone Number</th>
+                                    <th>status</th>
+                                    <th>Orgin Country</th>
+                                    <th>Destination country</th>
+                                    <th>Biometry date</th>
+                                    <th>Departure date</th>
+                                    <th>Amount to pay</th>
+                                    <th>Currency Choice</th>
+                                    <th>Amount paid</th>
+                                    <th>Amount today</th>
+                                    <th>Balance</th>
+                                    <th class="text-right">Action</th>
+                                </tr>
+                            </thead>
+                            {% if profiles %}
+                            {% for profile in profiles %}
+                            <tbody>
+                                <tr>
+                                    <td>{{ profile.id }}</td>
+                                    <td>
+                                        <h2 class="table-avatar">
+                                            {% comment %} <a href="{{ profile.get_absolute_url }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ profile.avatar.url }}" alt=""></a> {% endcomment %}
+                                            <a href="{{ profile.get_absolute_url }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ profile.image_url|default_if_none:'#' }}" alt=""></a>
+                                            <a href="{{ profile.get_absolute_url }}">{{ profile.full_name }}</a>
+                                        </h2>
+                                    </td>
+                                    <td>{{ profile.email }}</td>
+                                    <td>{{ profile.phone }}</td>
+                                    {% if profile.has_paid %}
+                                    <td class="text-right">
+                                        <span class="badge badge-success">Paid</span>
+                                    </td>
+                                    {% else %}
+                                    <td class="text-right">
+                                        <span class="badge badge-danger">Unpaid</span>
+                                    </td>
+                                    {% endif %}
+                                    <td>{{ profile.country_of_orgin }}</td>
+                                    <td>{{ profile.country_of_destination }}</td>
+                                    {% if profile.is_due %}
+                                    <td class="text-right">
+                                        <span class="badge badge-danger">{{ profile.biometry_date }}</span>
+                                    </td>
+                                    {% else %}
+                                    <td>{{ profile.biometry_date }}</td>
+                                    {% endif %}
+                                    {% if profile.is_success %}
+                                    <td class="text-right">
+                                        <span class="badge badge-success"> Departed </span>
+                                        {% else %}
+                                    <td>{{ profile.Departure_date }}</td>
+                                    {% endif %}
+                                    <td>{{ profile.amount_to_pay }}</td>
+                                    <td>{{ profile.currency_of_choice }}</td>
+                                    <td>{{ profile.amount_paid_today }}</td>
+                                    <td>{{ profile.amount_paid_so_far }}</td>
+                                    {% if self.amount_paid_so_far or self.amount_to_pay %}
+                                    <td>{{ profile.get_balance }}</td>
+                                    {% else %}
+                                    <td>{{ balance }}</td>
+                                    {% endif %}
+                                    <td class="text-right">
+                                        <div class="actions">
+                                            <a href="{% url 'dashboard:profile_update' profile.pk %}" class="btn btn-sm bg-success-light mr-2">
+                                            <i class="fas fa-pen"></i>
+                                            </a>
+                                            <a href="{% url 'dashboard:profile_delete' profile.pk %}" class="btn btn-sm bg-danger-light">
+                                            <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            {% endfor %}
+                            {% endif %}
+                            <tr>
+                                <td>Totals</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>{{ all_total_amount_to_pay }}</td>
+                                <td>--</td>
+                                <td>{{all_total_amount_paid_so_far}}</td>
+                                <td>{{all_total_amount_paid_today}}</td>
+                                <td>{{all_total_balance}}</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <div>
+                           <div class="pagination">
+                              <span class="step-links">
+                                  {% if page_obj.has_previous %}
+                                      <a href="?page=1">&laquo; first</a>
+                                      <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                                  {% endif %}
+
+                                  <span class="current">
+                                      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                                  </span>
+
+                                  {% if page_obj.has_next %}
+                                      <a href="?page={{ page_obj.next_page_number }}">next</a>
+                                      <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                                  {% endif %}
+                              </span>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <p>It seems you are not logged in <a href="{% url 'account:login' %}" >login now</a></p>
+    {% endif %}
+    {% else %}
+    <p>It seems you dont have the permission to view this page </p>
+    {% endif %}
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% extends 'dashboard/base2.html' %}
+{% block content %}
+<!-- {{ profile_list }} -->
+<div id="content-wrapper" style="padding-top: 35px"
+{% if user.is_authenticated %}
+{% if user.is_staff %}
+<div class="display_table">
+<table class='table1'>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>FULL NAME</th>
+            <th>EMAIL</th>
+            <th>PHONE NUMBER</th>
+            <th>STATUS</th>
+            <th>ORIGIN COUNTRY</th>
+            <th>DESTINATION COUNTRY</th>
+            <th>Amount to pay</th>
+            <th>Currency Choice</th>
+            <th>Amount paid</th>
+            <th>Balance</th>
+            <th class="text-right">Action</th>
+          </tr>
+        </thead>
+      {% for profile in profiles %}
+          <tr>
+            <td>{{ profile.id }}</td>
+            <td>
+                <h2 class="table-avatar">
+                    {% comment %} <a href="{{ profile.get_absolute_url }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ profile.avatar.url }}" alt=""></a> {% endcomment %}
+                    <a href="{{ profile.get_absolute_url }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ profile.image_url|default_if_none:'#' }}" alt=""></a>
+                    <a href="{{ profile.get_absolute_url }}">{{ profile.full_name }}</a>
+                </h2>
+            </td>
+            <td>{{ profile.email }}</td>
+            <td>{{ profile.phone }}</td>
+            {% if profile.has_paid %}
+            <td class="text-right">
+                <span class="badge badge-success">Paid</span>
+            </td>
+            {% else %}
+            <td class="text-right">
+                <span class="badge badge-danger">Unpaid</span>
+            </td>
+            {% endif %}
+            <td>{{ profile.country_of_orgin }}</td>
+            <td>{{ profile.country_of_destination }}</td>
+            {% if profile.is_due %}
+            <td>{{ profile.amount_to_pay }}</td>
+            <td>{{ profile.currency_of_choice }}</td>
+            <td>{{ profile.amount_paid_so_far }}</td>
+            <td>{{ profile.balance }}</td>
+            {% endif %}
+            <td class="text-right">
+                <div class="actions">
+                    <a href="{% url 'dashboard:profile_update' profile.pk %}" class="btn btn-sm bg-success-light mr-2">
+                    <i class="fas fa-pen"></i>
+                    </a>
+                    <a href="{% url 'dashboard:profile_delete' profile.pk %}" class="btn btn-sm bg-danger-light">
+                    <i class="fas fa-trash"></i>
+                    </a>
+                </div>
+            </td>
+          </tr>
+      {% endfor %}
+    </table>
+    {% else %}
+    <p>It seems you are not logged in <a href="{% url 'account:login' %}" >login now</a></p>
+    {% endif %}
+    {% else %}
+    <p>It seems you dont have the permission to view this page </p>
+    {% endif %}
+    </div>
+
+
+
+
+{% endblock %}

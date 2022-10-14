@@ -76,6 +76,14 @@ class ProfileCreateForm(forms.ModelForm):
             Submit('submit', 'Sign in')
         )
 
+class ProfileSearchform(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['first_name', 'last_name', 'phonenumber']
+
+
+
+
 class AnnouncementCreateForm(forms.ModelForm):
     class Meta:
         model = Announcement
@@ -114,9 +122,19 @@ class RegisterUserCreationForm(UserCreationForm):
 class AccountsRevenueForm(forms.ModelForm):
     class Meta:
         model = AccountsRevenue
-        fields = '__all__'
+        fields = ['revenue_of', 'cashmemo_by', 'amount']
+
+class AccountsRevenueSearch(forms.ModelForm):
+    class Meta:
+        model = AccountsRevenue
+        fields = ['revenue_of', 'cashmemo_by',]
 
 class AccountsExpenseForm(forms.ModelForm):
     class Meta:
         model = AccountsExpense
         fields = '__all__'
+
+class AccountsExpenseSearch(forms.ModelForm):
+    class Meta:
+        model = AccountsExpense
+        fields = ['expense_of', 'expense_by',]

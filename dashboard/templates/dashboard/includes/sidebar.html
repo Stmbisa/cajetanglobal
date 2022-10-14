@@ -16,45 +16,46 @@
                   <li><a href="">see non-paid profiles</a></li> {% url 'blog:warning' %}{% endcomment %}
                </ul>
             </li>
+            <li class="submenu">
+               <a href="{% url 'dashboard:profiles' %}"><i class="fa-regular fa-face-smile"></i> <span> Profile identities</span> <span class="menu-arrow"></span></a>
+               <ul>
+                  <li><a href="{% url 'dashboard:identities' %}">Manage all profile identities </a></li>
+                  {% comment %} <li><a href="{% url 'dashboard:profile_update' profile.pk %}">add information </a></li> {% endcomment %}
+                  {% comment %} <li><a href="">see paid profiles</a></li>
+                  <li><a href="">see non-paid profiles</a></li> {% url 'blog:warning' %}{% endcomment %}
+               </ul>
+            </li>
+            <li class="submenu">
+               <a href="{% url 'dashboard:transactions' %}"><i class="fas fa-barcode"></i><span> Profile transactions</span> <span class="menu-arrow"></span></a>
+               <ul>
+                  <li><a href="{% url 'dashboard:transactions' %}">Manage all profile transactions </a></li>
+                  <li><a href="{% url 'dashboard:transaction_create' %}">add transations </a></li>
+                  {% comment %} <li><a href="">see paid profiles</a></li>
+                  <li><a href="">see non-paid profiles</a></li> {% url 'blog:warning' %}{% endcomment %}
+               </ul>
+            </li>
              <li class="submenu">
-                <a href="{% url 'dashboard:revenues' %}"><i class="fas fa-building"></i> <span> Revenues</span> <span class="menu-arrow"></span></a>
+                <a href="{% url 'dashboard:revenues' %}"><i class="far fa-bookmark"></i> <span> Cash memo</span> <span class="menu-arrow"></span></a>
                 <ul>
-                   <li><a href="{% url 'dashboard:revenues' %}">Revenues List</a></li>
-                   <li><a href="{% url 'dashboard:revenue_create' %}">Revenue Add</a></li>
+                   <li><a href="{% url 'dashboard:revenues' %}">cash memo List</a></li>
+                   <li><a href="{% url 'dashboard:revenue_add' %}">cash memo Add</a></li>
                 </ul>
              </li>
              <li class="submenu">
-                <a href="{% url 'dashboard:expenses' %}"><i class="fas fa-book-reader"></i> <span> Expenses</span> <span class="menu-arrow"></span></a>
+                <a href="{% url 'dashboard:expenses' %}"><i class="bi bi-bar-chart"></i> <span> Expenses</span> <span class="menu-arrow"></span></a>
                 <ul>
                    <li><a href="{% url 'dashboard:expenses' %}"> Expenses List</a></li>
                    <li><a href="{% url 'dashboard:expense_create' %}"> Expenses Add</a></li>
                 </ul>
              </li>
-             <li class="submenu ">
-               <a href="{% url 'blog:warning' %}"><i class="fas fa-user-graduate"></i> <span> Operational costs </span> <span class="menu-arrow"></span></a>
-               <ul>
-                 <a href="{% url 'blog:warning' %}"><i class="fas fa-holly-berry"></i> <span>Inhouse  costs</span></a>
-                 <a href="{% url 'blog:warning' %}"><i class="fas fa-holly-berry"></i> <span>Transportation</span></a>
-                 <a href="{% url 'blog:warning' %}"><i class="fas fa-holly-berry"></i> <span>Internet</span></a>
-                 <a href="{% url 'blog:warning' %}"><i class="fas fa-holly-berry"></i> <span>Third parties costs </span></a>
-               </ul>
-            </li>
             <li class="submenu ">
-               <a href="#"><i class="fas fa-calendar"></i> <span> Appointement </span> <span class="menu-arrow"></span></a>
+               <a href="#"><i class="fas fa-calendar"></i> <span> profile dates and Appointements </span> <span class="menu-arrow"></span></a>
                <ul>
-                 <a href="{% url 'blog:warning' %}"><i class="fas fa-holly-berry"></i> <span>View appointment </span></a>
-                 <a href="{% url 'blog:warning' %}"><i class="fas fa-holly-berry"></i> <span>Add appointment </span></a>
-                 <a href="{% url 'blog:warning' %}"><i class="fas fa-holly-berry"></i> <span>remove appointment </span></a>
+                 <a href="{% url 'blog:warning' %}"><i class="fas fa-holly-berry"></i> <span>Manage dates </span></a>
+                 <a href="{% url 'blog:warning' %}"><i class="fas fa-holly-berry"></i> <span>add dates </span></a>
                </ul>
             </li>
-            <li><a href="{% url 'blog:warning' %}"><i class="fas fa-comments"></i> <span>feedback</span></a></li>  
-            <li><a href="{% url 'blog:warning' %}"><i class="fas fa-holly-berry"></i> <span>Profits</span></a></li>
-            <li><a href="{% url 'blog:warning' %}"><i class="fas fa-holly-berry"></i> <span>Complete success</span></a></li>
-            <li><a href="{% url 'blog:warning' %}"><i class="fas fa-holly-berry"></i> <span>complete failure </span></a></li>
-            <li><a href="{% url 'accounts:logout' %}"><i class="fa fa-sign-out-alt"></i> <span>Log out </span></a></li>
-
-
-               
+            <li><a href="{% url 'accounts:logout' %}"><i class="fa fa-sign-out-alt"></i> <span>Log out </span></a></li>   
        </div>
     </div>
  </div>

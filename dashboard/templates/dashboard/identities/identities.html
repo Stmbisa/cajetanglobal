@@ -1,0 +1,137 @@
+{% extends 'dashboard/base2.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+<!-- {{ profile_list }} -->
+<div id="content-wrapper" style="padding-top: 35px"
+{% if user.is_authenticated %}
+{% if user.is_staff %}
+<div class="content container-fluid">
+<div class="page-header">
+<div class="card-body">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    <div class="row align-items-center" style="font-family: helvetica; color: #337ab7; font-size: 50px; text-align: center; width: 100%;text-shadow: 6px 6px 6px #c9c6c6; display: block;font-weight: bolder;">
+        <div class="col-auto text-right float-right ml-auto">
+            {% comment %} <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Download</a> {% endcomment %}
+            <a href="{% url 'dashboard:profile_create'  %}" class="btn btn-primary"><i class="fas fa-plus"></i></a> 
+        </div>
+        <div class="col">
+            <h3 class="page-title">Profiles</h3>
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="">Dashboard</a></li>
+                <li class="breadcrumb-item active">Profiles</li>
+            </ul>
+        </div>
+        <br>
+    </div>
+    <form method='POST' action=''>{% csrf_token %}
+        {{form}}
+        <input type="submit" value='Search'/>
+    </form>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-table">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div class="display_table" style="border-bottom-right-radius: 20px; padding-left: 5px; padding-right: 5px; padding-bottom: 20px;box-shadow: 12px 12px 20px 6px #2e6da4;">
+                        <table class="table table-hover table-center mb-0 datatable" style="font-size: 13px; text-align: center; width: 95%; margin: auto; text-align: center; tr:nth-child(odd){background: #B8CAE4}; tr:nth-child(even){background: #dae5f4}">
+                            <thead style="background-color: #334250; color: rgb(238, 15, 15);">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Full Name</th>
+                                    <th>Email</th>
+                                    <th>Phone Number</th>
+                                    <th>status</th>
+                                    <th>Orgin Country</th>
+                                    <th>Destination country</th>
+                                    <th class="text-right">Action</th>
+                                </tr>
+                            </thead>
+                            {% if profiles %}
+                            {% for profile in profiles %}
+                            <tbody>
+                                <tr>
+                                    <td>{{ profile.id }}</td>
+                                    <td>
+                                        <h2 class="table-avatar">
+                                            {% comment %} <a href="{{ profile.get_absolute_url }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ profile.avatar.url }}" alt=""></a> {% endcomment %}
+                                            <a href="{{ profile.get_absolute_url }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ profile.image_url|default_if_none:'#' }}" alt=""></a>
+                                            <a href="{{ profile.get_absolute_url }}">{{ profile.full_name }}</a>
+                                        </h2>
+                                    </td>
+                                    <td>{{ profile.email }}</td>
+                                    <td>{{ profile.phone }}</td>
+                                    {% if profile.has_paid %}
+                                    <td class="text-right">
+                                        <span class="badge badge-success">Paid</span>
+                                    </td>
+                                    {% else %}
+                                    <td class="text-right">
+                                        <span class="badge badge-danger">Unpaid</span>
+                                    </td>
+                                    {% endif %}
+                                    <td>{{ profile.country_of_orgin }}</td>
+                                    <td>{{ profile.country_of_destination }}</td>
+                                    <td class="text-right">
+                                        <div class="actions">
+                                            <a href="{% url 'dashboard:profile_update' profile.pk %}" class="btn btn-sm bg-success-light mr-2">
+                                            <i class="fas fa-pen"></i>
+                                            </a>
+                                            <a href="{% url 'dashboard:profile_delete' profile.pk %}" class="btn btn-sm bg-danger-light">
+                                            <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            {% endfor %}
+                            {% endif %}
+                            <tr>
+                                <td>Totals</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>{{ all_total_amount_to_pay }}</td>
+                                <td>--</td>
+                                <td>{{all_total_amount_paid_so_far}}</td>
+                                <td>{{all_total_balance}}</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <div class="pagination">
+                            <span class="step-links">
+                            {% if page_obj.has_previous %}
+                            <a href="?page=1">&laquo; first</a>
+                            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                            {% endif %}
+                            <span class="current">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                            </span>
+                            {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}">next</a>
+                            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                            {% endif %}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<p>It seems you are not logged in <a href="{% url 'account:login' %}" >login now</a></p>
+{% endif %}
+{% else %}
+<p>It seems you dont have the permission to view this page </p>
+{% endif %}
+{% endblock %}

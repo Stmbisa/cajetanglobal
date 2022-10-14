@@ -1,15 +1,10 @@
-from locale import currency
 from time import timezone
 from django.urls import reverse
-from email.policy import default
-from typing_extensions import Required
 from django.db import models
 from datetime import datetime, timedelta
 from datetime import *
 from django.utils import timezone
-# import dataclasses
 from django.contrib.auth.models import AbstractUser
-from django.db import models
 
 import os
 from .manager import UserManager
@@ -103,7 +98,7 @@ class Profile(models.Model):
        ]
 
     
-    gender = models.CharField(max_length=15, choices=GENDER_CHOICES, default='',null=True)
+    gender = models.CharField(max_length=15,blank=True, choices=GENDER_CHOICES, default='',null=True)
     email = models.EmailField(default='',blank=True, null=True)
     phonenumber = models.CharField(max_length=15,null=True,blank=True, default='') #blank=True, null=True
     birth_date = models.DateField(blank=True, default='', null=True,help_text='')
@@ -111,9 +106,8 @@ class Profile(models.Model):
     next_of_kin_phone = models.IntegerField(unique=True, null=True, blank=True)
     country_of_orgin = models.CharField(max_length=255, default='', null=True, blank=True)
     amount_paid_so_far= models.DecimalField(max_length=255, null=True,blank=True, default=0, decimal_places=3, max_digits=15)
-    amount_paid_today= models.DecimalField(max_length=255, null=True,blank=True, default=0, decimal_places=3, max_digits=15)
     amount_to_pay = models.DecimalField(max_length=255, null=True, blank=True, default=0, decimal_places=3, max_digits=15)
-    balance = models.DecimalField(max_length=255, null=True, default=0, decimal_places=3, max_digits=15)
+    balance = models.DecimalField(max_length=255, null=True,blank=True, default=0, decimal_places=3, max_digits=15)
     brought_by =  models.CharField(max_length=255, default='', null=True, blank=True)
 
     CURRENCY_CHOICES = [
@@ -123,7 +117,7 @@ class Profile(models.Model):
         ("Euro", '€'),
 
        ]
-    currency_of_choice = models.CharField(max_length=100,choices=CURRENCY_CHOICES,default='US', null=False, blank=False)
+    currency_of_choice = models.CharField(max_length=100,choices=CURRENCY_CHOICES,default='US',blank=True, null=True)
 
     COUNTRY_CHOICES = [
         ("Australia", 'Australia'),
@@ -192,8 +186,8 @@ class Profile(models.Model):
     
     @property
     def get_balance(self):
-        if self.amount_paid_so_far:
-            balance = int(self.amount_to_pay)-int(self.amount_paid_so_far)
+        if self.amount_paid_so_far and self.amount_to_pay:
+            balance = self.amount_to_pay - self.amount_paid_so_far
             if balance <= 0:
                 self.has_paid=True
             return balance
@@ -235,12 +229,14 @@ class Announcement(models.Model):
 
 
 
+
 class AccountsRevenue(models.Model):
     revenue_of = models.CharField(max_length=250, default='Someone paid',null=False)
-    revenue_by = models.ForeignKey(Profile, on_delete=models.CASCADE,null=True, blank=True )
-    amount = models.IntegerField( default='100,000') 
-    day_on_which = models.DateField(auto_now=True, null=True, blank=True)
+    cashmemo_by = models.CharField(max_length=250, default='i.e: Transport of a good',null=False)
+    amount = models.IntegerField( default='0') 
+    day_on_which = models.DateField(null=True, blank=True)
     evidence_document = models.ImageField(upload_to = 'uploads/', blank=True, default='')
+    signature = models.ImageField(upload_to = 'uploads/', blank=True, default='')
     
 
     def __str__(self):
@@ -259,10 +255,12 @@ class AccountsRevenue(models.Model):
 
 class AccountsExpense(models.Model):
     expense_of = models.CharField(max_length=250, default='i.e: Transport of a good',null=False)
-    expense_by = models.ForeignKey(Profile, on_delete=models.CASCADE,null=True, blank=True )
-    amount = models.IntegerField( default='') 
-    day_on_which = models.DateField(auto_now=True, null=True, blank=True)
+    # expense_by = models.ForeignKey(Profile, on_delete=models.CASCADE,null=True, blank=True, help_text='select this if its attached on a profile' )
+    expense_by = models.CharField(max_length=250, default='i.e: Transport of a good',null=False)
+    amount = models.IntegerField( default='0') 
+    day_on_which = models.DateField(null=True, blank=True)
     evidence_document = models.ImageField(upload_to = 'uploads/', blank=True, default='')
+    signature = models.ImageField(upload_to = 'uploads/', blank=True, default='')
 
     def __str__(self):
         return str(self.expense_of)
