@@ -4,7 +4,7 @@ from .models import User
 from django.forms import ModelForm
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column
-from .models import Profile, Announcement, AccountsRevenue, AccountsExpense
+from .models import Profile, Announcement, AccountsExpense
 import datetime
 
 class DateInput(forms.DateInput):
@@ -118,16 +118,6 @@ class RegisterUserCreationForm(UserCreationForm):
             for field in self.fields:
                 self.fields[field].widget.attrs['class']='form-control'
 
-
-class AccountsRevenueForm(forms.ModelForm):
-    class Meta:
-        model = AccountsRevenue
-        fields = ['revenue_of', 'cashmemo_by', 'amount']
-
-class AccountsRevenueSearch(forms.ModelForm):
-    class Meta:
-        model = AccountsRevenue
-        fields = ['revenue_of', 'cashmemo_by',]
 
 class AccountsExpenseForm(forms.ModelForm):
     class Meta:

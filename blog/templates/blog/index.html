@@ -6,7 +6,7 @@
 
     <!-- ======= Hero Slider Section ======= -->
     
-    <section id="hero-slider" class="hero-slider">
+   <section id="hero-slider" class="hero-slider">
       <div class="container-md" data-aos="fade-in">
         <div class="row">
           <div class="col-12">
@@ -15,7 +15,7 @@
                 {% for blog in blog_list %}
                 <div class="swiper-slide">
                   <!-- the link below will be changed to a dynamic links with a shared template of many differnt topics to be in this slider -->
-                    <a href="single-post.html" class="img-bg d-flex align-items-end" style="background-image: url('{{ blog.get_image }}')50% 50% no-repeat;">
+                <a href="{{ blog.get_absolute_url }}" class="img-bg d-flex align-items-end" style="background-image: url('{{ blog.get_image }}')50% 50% no-repeat;">
                     <div class="img-bg-inner">
                       <h2>{{ blog.title }}</h2>
                       <p>{{ blog.content|truncatechars:255 }}</p>
@@ -112,21 +112,21 @@
                       </a>
                     </li>
                     <li>
-                      <a href="single-post.html">
+                      <a href="">
                         <span class="number">2</span>
                         <h3>Travel visas can be separated into two categories: immigrant and nonimmigrant. Immigrant visas allow the bearer to reside permanently in the host country, whereas nonimmigrant visas allow the bearer entry into the host country on a temporary basis.</h3>
                         <span class="author">Cajetan Global Visa</span>
                       </a>
                     </li>
                     <li>
-                      <a href="single-post.html">
+                      <a href="">
                         <span class="number">3</span>
                         <h3>Your career goals don’t have limits, so why should your job search? Take your career beyond borders by finding work abroad this year!</h3>
                         <span class="author">Cajetan Global Visa</span>
                       </a>
                     </li>
                     <li>
-                      <a href="single-post.html">
+                      <a href="">
                         <span class="number">4</span>
                         <h3>What Are the Fees for Obtaining a Visa?</h3>
                         <span class="author">Cajetan Global Visa</span>

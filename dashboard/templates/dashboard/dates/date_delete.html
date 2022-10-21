@@ -11,7 +11,7 @@
                     <div class="container-fluid">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <p>You are about to delete an element,<a href="{% url 'dashboard:profiles' %}" >return instead?</a></a></p>
+                                <p>You are about to delete an element,<a href="{% url 'dashboard:events' %}" >return instead?</a></a></p>
                             </li>
                         </ol>
                         <div class="card mb-3">
@@ -33,7 +33,7 @@
                                                 Are you sure to delete detail of {{ profile.full_name }} ?
                                             </div>
                                             <input type="submit" class="btn btn-danger" value="Yes, delete it" />
-                                            <a class="btn btn-success" href="{% url 'dashboard:profiles' %}">Return back</a>
+                                            <a class="btn btn-success" href="{% url 'dashboard:events' %}">Return back</a>
                                         </form>
                                     </div>
                                 </div>

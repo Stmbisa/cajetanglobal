@@ -1,0 +1,815 @@
+{% extends 'blog/base1.html' %}
+{% load static %}
+{% block content %}
+  <!-- ======= Hero Section ======= -->
+<!-- style= "position: sticky; top: 0;" -->
+<section id="hero" class="d-flex flex-column justify-content-end align-items-center" style= "top: -100;">
+    <div id="heroCarousel" data-bs-interval="5000" class="container carousel carousel-fade" data-bs-ride="carousel" >
+        <!-- Slide  -->
+        {% for blog in blog_list %}
+        <div class="carousel-item active">
+            <div class="carousel-container">
+                <h2 class="animate__animated animate__fadeInDown">{{ blog.title }}</span></h2>
+                <p class="animate__animated fanimate__adeInUp">{{ blog.content|truncatechars:255 }}</p>
+                <a href="{{ blog.get_absolute_url }}" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+            </div>
+        </div>
+        {% endfor %}
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+            <div class="carousel-container">
+                <h2 class="animate__animated animate__fadeInDown">Welcome to cajetan Global Visas </h2>
+                <p class="animate__animated animate__fadeInUp">We guarantee that all your travelling needs wil be met, feel home and feel free to tell us your thoughts and Your dream journey</p>
+                <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+            </div>
+        </div>
+        <!-- Slide 3 -->
+        <!-- <div class="carousel-item">
+            <div class="carousel-container">
+              <h2 class="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
+              <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+              <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+            </div>
+            </div> -->
+        <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bx bx-chevron-left" aria-hidden="true"></span>
+        </a>
+        <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon bx bx-chevron-right" aria-hidden="true"></span>
+        </a>
+    </div>
+    <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none">
+        <defs>
+            <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z">
+        </defs>
+        <g class="wave1">
+            <use xlink:href="#wave-path" x="50" y="3" fill="rgba(255,255,255, .1)">
+        </g>
+        <g class="wave2">
+            <use xlink:href="#wave-path" x="50" y="0" fill="rgba(255,255,255, .2)">
+        </g>
+        <g class="wave3">
+            <use xlink:href="#wave-path" x="50" y="9" fill="#fff">
+        </g>
+    </svg>
+</section>
+<!-- End Hero -->
+<main id="main">
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-title" data-aos="zoom-out">
+                <h2>About</h2>
+                <p>Who we are and why you should choose us</p>
+            </div>
+            <div class="row content" data-aos="fade-up">
+                <div class="col-lg-6">
+                    <p>
+                        Cajetan Global Visa started with an ambition of revolutionizing the online visa processing industry with the implementation of sole idea of making our clients happy & satisfied throughout the process. The steps that we ensure are highly innovative and new in the segment. With this motive of ours, we have become a leading visa service provider globally within a very-short timeframe.
+                    </p>
+                    <p>What we guarantee from our side is the quickest processing & updating time along with assurance of error-free application, which takes your chances of visa approval to the next level. You can easily apply for visa by just providing some basic information and we would gather the remaining information from you while you relax at your home. Just take a few minutes to provide us your visa requirements and we would be in touch with you shortly and would assist you along the process.</p>
+                    <ul>
+                        <li><i class="ri-check-double-line"></i> Reliability: he services delivered to all our clients, either tourists, travelers or business partner are reliable and consistent.</li>
+                        <li><i class="ri-check-double-line"></i> Customer Satisfaction: Our activities are based on the value that the services rendered are geared towards Customer’s satisfaction.</li>
+                        <li><i class="ri-check-double-line"></i> Respect: Time, human rights, culture and environment.</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 pt-4 pt-lg-0">
+                    <p>
+                        Quality and service are inextricably linked. At every step of your journey, we go above and beyond to guarantee that these two standards are met. To fulfill these key objectives, we keep a constant eye on client satisfaction and are always looking for innovative methods to exceed their expectations. Thousands of people from all over the world have had memorable travel experiences thanks to us. That is due to the high caliber of our workforce. Our employees have vast industry experience and are enthusiastic about what they do.
+                    </p>
+                    <a href="{% url 'blog:about' %}" class="btn-learn-more">Learn More</a>
+                    <a href="{% url 'accounts:register' %}" class="btn-learn-more">securely register</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End About Section -->
+    <!-- ======= counter ======= -->
+    <!-- -->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <div class="container">
+        <div class="row">
+            <br/>
+            <div class="col text-center">
+                <h2>Our custommer base and experience</h2>
+                <p>Pending, processing, and successful projects </p>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col">
+                <div class="counter">
+                    <i class="fa fa-code fa-2x"></i>
+                    <h2 class="timer count-title count-number" data-to="78000" data-speed="1500"></h2>
+                    <p class="count-text ">Our Customers</p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="counter">
+                    <i class="bi bi-cpu-fill"></i>
+                    <h2 class="timer count-title count-number" data-to="69700" data-speed="1500"></h2>
+                    <p class="count-text ">Happy Clients</p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="counter">
+                    <i class="fa fa-lightbulb-o fa-2x"></i>
+                    <h2 class="timer count-title count-number" data-to="71066" data-speed="1500"></h2>
+                    <p class="count-text ">Projects Complete</p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="counter">
+                  <i class="bi bi-cpu-fill"></i>
+                    <h2 class="timer count-title count-number" data-to="11020" data-speed="1500"></h2>
+                    <p class="count-text ">Processing now</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ======= Features Section ======= -->
+    <section id="features" class="features">
+        <div class="container">
+            <ul class="nav nav-tabs row d-flex">
+                <li class="nav-item col-3" data-aos="zoom-in">
+                    <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1">
+                        <i class="ri-gps-line"></i>
+                        <h4 class="d-none d-lg-block">Our addresses and Locations</h4>
+                    </a>
+                </li>
+                <li class="nav-item col-3" data-aos="zoom-in" data-aos-delay="100">
+                    <a class="nav-link" data-bs-toggle="tab" href="#tab-2">
+                        <i class="ri-body-scan-line"></i>
+                        <h4 class="d-none d-lg-block">services we offers</h4>
+                    </a>
+                </li>
+                <li class="nav-item col-3" data-aos="zoom-in" data-aos-delay="200">
+                    <a class="nav-link" data-bs-toggle="tab" href="#tab-3">
+                        <i class="ri-sun-line"></i>
+                        <h4 class="d-none d-lg-block">Change your life with us </h4>
+                    </a>
+                </li>
+                <li class="nav-item col-3" data-aos="zoom-in" data-aos-delay="300">
+                    <a class="nav-link" data-bs-toggle="tab" href="#tab-4">
+                        <i class="ri-store-line"></i>
+                        <h4 class="d-none d-lg-block">Shop personalise experience</h4>
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content" data-aos="fade-up">
+                <div class="tab-pane active show" id="tab-1">
+                    <div class="row">
+                        <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
+                            <h3>To make sure we offer the best services, We have partnered with different agency all over the world</h3>
+                            <p class="fst-italic">
+                                Around the Globe or even fully online, we have set up multiple channels to reach Customer
+                            </p>
+                            <ul>
+                                <li><i class="ri-check-double-line"></i> Canada Our head offices</li>
+                                <li><i class="ri-check-double-line"></i> Uganda Kampala Central </li>
+                                <li><i class="ri-check-double-line"></i> Fully online on this very website, simply register or contact us </li>
+                            </ul>
+                            <p>
+                                You can use your favorite method to reach out to us, if you choose to directly call, numbers are provided
+                                Do you like to whatsapp? Its also provided
+                                What about email? Simpy head to contact us page
+                            </p>
+                        </div>
+                        <div class="col-lg-6 order-1 order-lg-2 text-center">
+                            <img src="asset/img/addresses2.jpg" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="tab-2">
+                    <div class="row">
+                        <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
+                            <h3>Are you planning to travel? resettle in a foreign country or you want to have a customized experience?</h3>
+                            <p>
+                                We offer Visa assistance application services unbeatable offers to various destination, 
+                                we guide peope the proper way they to apply for DV programs or similar programs for different locations 
+                            </p>
+                            <p class="fst-italic">
+                                We can assure you that you will love what you will be able to acheive as far as travelling is concened 
+                            </p>
+                            <ul>
+                                <li><i class="ri-check-double-line"></i> Visa Applications</li>
+                                <li><i class="ri-check-double-line"></i> DV Programs</li>
+                                <li><i class="ri-check-double-line"></i> Tailored travel experience </li>
+                                <li><i class="ri-check-double-line"></i> Travel insurances </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6 order-1 order-lg-2 text-center">
+                            <img src="asset/img/services2.jpg" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="tab-3">
+                    <div class="row">
+                        <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
+                            <h3>Do you want to make money while making impact?</h3>
+                            <p>
+                                Lets say you have or you know someome who has been trying to travel and all have failed, 
+                                You know someone who wish to go work In europe USA CANADA,... or you want to travel yoursef and work 
+                                This is your time, you bring someone and we give you your commission 
+                            </p>
+                            <ul>
+                                <li><i class="ri-check-double-line"></i> Work with us</li>
+                                <li><i class="ri-check-double-line"></i> Connect people who want to work abroad </li>
+                                <li><i class="ri-check-double-line"></i> Work in a prefered country and enjoy premium salaries </li>
+                            </ul>
+                            <p class="fst-italic">
+                                Whichever you choose to work with us or help others do through us, you will still make money 
+                            </p>
+                        </div>
+                        <div class="col-lg-6 order-1 order-lg-2 text-center">
+                            <img src="asset/img/features-3.png" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="tab-4">
+                    <div class="row">
+                        <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
+                            <h3>Customized personal experience prepaired just for you based on your preferences and culture</h3>
+                            <p>
+                                Many people overspend when they are abroad, because of not knowing the right places to eat from or sleep,
+                                You may want to enjoy that pirogue ... but what about your safety? Do you mind about such issues? Well you shouldwe do 
+                                we do to but thats why we are here to make sure ever customer uses our vast network and enjoy the journey to the fullest 
+                            </p>
+                            <p class="fst-italic">
+                                If you are ready please contact us and let us plan for you that experince in the way you ever dreamed of 
+                            </p>
+                            <ul>
+                                <li><i class="ri-check-double-line"></i> Customized foods.</li>
+                                <li><i class="ri-check-double-line"></i> Tailored experinces.</li>
+                                <li><i class="ri-check-double-line"></i> guaranteed safety.</li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6 order-1 order-lg-2 text-center">
+                            <img src="asset/img/experience.jpg" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Features Section -->
+    <!-- ======= Cta Section ======= -->
+    <section id="cta" class="cta">
+        <div class="container">
+            <div class="row" data-aos="zoom-out">
+                <div class="col-lg-9 text-center text-lg-start">
+                    <h3>Talk to us</h3>
+                    <p> Do you have a thought, a complaint or any idea you would like to share with us?, Please do share those with us .</p>
+                </div>
+                <div class="col-lg-3 cta-btn-container text-center">
+                    <a class="cta-btn align-middle" href="{% url 'blog:contact' %}">Call To Action</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Cta Section -->
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-title" data-aos="zoom-out">
+                <h2>Services</h2>
+                <p>What we do offer</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="icon-box" data-aos="zoom-in-left">
+                        <div class="icon"><i class="bi-rulers" style="color: #ff689b;"></i></div>
+                        <h4 class="title"><a href="">Travel Guide</a></h4>
+                        <p class="description">Whichever country you are planning to visit save those we provide, we can guide on how and what to exactly do</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mt-5 mt-md-0">
+                    <div class="icon-box" data-aos="zoom-in-left" data-aos-delay="100">
+                        <div class="icon"><i class="bi bi-person-workspace" style="color: #e9bf06;"></i></div>
+                        <h4 class="title"><a href="">Working Abroad</a></h4>
+                        <p class="description">If you are planning to work in the USA, CANADA, SCHENZEN, ISRAEL, We will help you </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mt-5 mt-lg-0 ">
+                    <div class="icon-box" data-aos="zoom-in-left" data-aos-delay="200">
+                        <div class="icon"><i class="bi bi-airplane-engines-fill" style="color: #3fcdc7;"></i></div>
+                        <h4 class="title"><a href="">Resetlement</a></h4>
+                        <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mt-5">
+                    <div class="icon-box" data-aos="zoom-in-left" data-aos-delay="300">
+                        <div class="icon"><i class="bi bi-building" style="color:#41cf2e;"></i></div>
+                        <h4 class="title"><a href="">Doing business Abroad</a></h4>
+                        <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mt-5">
+                    <div class="icon-box" data-aos="zoom-in-left" data-aos-delay="400">
+                        <div class="icon"><i class="bi bi-escape" style="color: #d6ff22;"></i></div>
+                        <h4 class="title"><a href="">Asylum Visa</a></h4>
+                        <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mt-5">
+                    <div class="icon-box" data-aos="zoom-in-left" data-aos-delay="500">
+                        <div class="icon"><i class="bi bi-fullscreen" style="color: #4680ff;"></i></div>
+                        <h4 class="title"><a href="">Tailored Traveling experiences</a></h4>
+                        <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Services Section -->
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <div class="section-title" data-aos="zoom-out">
+                <h2>Portfolio</h2>
+                <p>What we've done</p>
+            </div>
+            <ul id="portfolio-flters" class="d-flex justify-content-end" data-aos="fade-up">
+                <li data-filter="*" class="filter-active">All</li>
+                <li data-filter=".filter-wv">Working Visas</li>
+                <li data-filter=".filter-fv">Family Visa</li>
+                <li data-filter=".filter-st">Settlement</li>
+                <li data-filter=".filter-sv">Studying Visa</li>
+                <li data-filter=".filter-bv">Business Visas</li>
+                <li data-filter=".filter-gc">Green Card</li>
+                <li data-filter=".filter-sp">Sponsorship</li>
+                <li data-filter=".filter-mv">Medical Visa</li>
+                <li data-filter=".filter-ot">Others</li>
+            </ul>
+            <div class="row portfolio-container" data-aos="fade-up">
+                <div class="col-lg-4 col-md-6 portfolio-item filter-wv">
+                    <div class="portfolio-img"><img src="{% static 'asset/img/portfolio/usa.jpg' %}" class="img-fluid" alt=""></div>
+                    <div class="portfolio-info">
+                        <h4>Working Visas USA</h4>
+                        <p>Working Visas</p>
+                        <a href="{% static 'asset/img/portfolio/usa.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="WV 1"><i class="bx bx-plus"></i></a>
+                        <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 portfolio-item filter-wv">
+                    <div class="portfolio-img"><img src="{% static 'asset/img/portfolio/canada.jpg" class="img-fluid" alt=""></div>
+                    <div class="portfolio-info">
+                        <h4>Working Visas CANADA</h4>
+                        <p>Working Visas</p>
+                        <a href="{% static 'asset/img/portfolio/canada.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="WV 1"><i class="bx bx-plus"></i></a>
+                        <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 portfolio-item filter-wv">
+                    <div class="portfolio-img"><img src="{% static 'asset/img/portfolio/schengen.jpg' %}" class="img-fluid" alt=""></div>
+                    <div class="portfolio-info">
+                        <h4>Working Visas Shenzen</h4>
+                        <p>Working Visas</p>
+                        <a href="{% static 'asset/img/portfolio/schengen.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="WV 1"><i class="bx bx-plus"></i></a>
+                        <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 portfolio-item filter-wv">
+                    <div class="portfolio-img"><img src="{% static 'asset/img/portfolio/jerusalem.jpg' %}" class="img-fluid" alt=""></div>
+                    <div class="portfolio-info">
+                        <h4>Working Visas ISRAEL</h4>
+                        <p>Working Visas</p>
+                        <a href="{% static 'asset/img/portfolio/jerusalem.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="WV 1"><i class="bx bx-plus"></i></a>
+                        <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 portfolio-item filter-st">
+                    <div class="portfolio-img"><img src="{% static 'asset/img/portfolio/usa.jpg' %}" class="img-fluid" alt=""></div>
+                    <div class="portfolio-info">
+                        <h4>STUDYING VISA USA</h4>
+                        <p>Studying Visa</p>
+                        <a href="{% static 'asset/img/portfolio/usa.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="ST 3"><i class="bx bx-plus"></i></a>
+                        <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 portfolio-item filter-st">
+                    <div class="portfolio-img"><img src="{% static 'asset/img/portfolio/canada.jpg' %}" class="img-fluid" alt=""></div>
+                    <div class="portfolio-info">
+                        <h4>STUDYING VISA CANADA</h4>
+                        <p>Studying Visa</p>
+                        <a href="{% static 'asset/img/portfolio/canada.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="ST 3"><i class="bx bx-plus"></i></a>
+                        <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 portfolio-item filter-st">
+                    <div class="portfolio-img"><img src="{% static 'asset/img/portfolio/schengen.jpg' %}" class="img-fluid" alt=""></div>
+                    <div class="portfolio-info">
+                        <h4>STUDYING VISA SHENZEN</h4>
+                        <p>Studying Visa</p>
+                        <a href="{% static 'asset/img/portfolio/schengen.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="ST 3"><i class="bx bx-plus"></i></a>
+                        <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 portfolio-item filter-sv">
+                    <div class="portfolio-img"><img src="{% static 'asset/img/portfolio/sydney.jpg' %}" class="img-fluid" alt=""></div>
+                    <div class="portfolio-info">
+                        <h4>STUDYING VISA AUSTRALIA</h4>
+                        <p>SV</p>
+                        <a href="{% static 'asset/img/portfolio/sydney.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
+                        <a href="#" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 portfolio-item filter-bv">
+                    <div class="portfolio-img"><img src="{% static 'asset/img/portfolio/china.jpg' %}" class="img-fluid" alt=""></div>
+                    <div class="portfolio-info">
+                        <h4>Business VISA CHINA</h4>
+                        <p>BUSINESS VISA</p>
+                        <a href="{% static 'asset/img/portfolio/china.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
+                        <a href="" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 portfolio-item filter-gc">
+                    <div class="portfolio-img"><img src="{% static 'asset/img/portfolio/usa2.jpeg' %}" class="img-fluid" alt=""></div>
+                    <div class="portfolio-info">
+                        <h4>Green Card</h4>
+                        <p>USA</p>
+                        <a href="{% static 'asset/img/portfolio/usa2.jpeg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
+                        <a href="#" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 portfolio-item filter-sp">
+                    <div class="portfolio-img"><img src="{% static 'asset/img/portfolio/sp.jpg' %}" class="img-fluid" alt=""></div>
+                    <div class="portfolio-info">
+                        <h4>Sponsored </h4>
+                        <p>Sponsorship visa</p>
+                        <a href="{% static 'asset/img/portfolio/sp.jpeg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
+                        <a href="#" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 portfolio-item filter-mv">
+                    <div class="portfolio-img"><img src="{% static 'asset/img/portfolio/medical.jpg' %}" class="img-fluid" alt=""></div>
+                    <div class="portfolio-info">
+                        <h4>Medical visas in India or elsewhere</h4>
+                        <p>Medical care </p>
+                        <a href="{% static 'asset/img/portfolio/medical.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
+                        <a href="#" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 portfolio-item filter-ot">
+                    <div class="portfolio-img"><img src="{% static 'asset/img/portfolio/sponsorship.jpg' %}" class="img-fluid" alt=""></div>
+                    <div class="portfolio-info">
+                        <h4>Others 1</h4>
+                        <p>Other kind of Visas</p>
+                        <a href="{% static 'asset/img/portfolio/sponsorship.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
+                        <a href="#" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 portfolio-item filter-wv">
+                    <div class="portfolio-img"><img src="{% static 'asset/img/portfolio/working1.jpg' %}" class="img-fluid" alt=""></div>
+                    <div class="portfolio-info">
+                        <h4>Working Visas</h4>
+                        <p>USA, CANADA, SCHENZEN</p>
+                        <a href="{% static 'asset/img/portfolio/working1.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="WV 2"><i class="bx bx-plus"></i></a>
+                        <a href="#" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 portfolio-item filter-fv">
+                    <div class="portfolio-img"><img src="{% static 'asset/img/portfolio/family.jpg' %}" class="img-fluid" alt=""></div>
+                    <div class="portfolio-info">
+                        <h4>Family Visa</h4>
+                        <p>USA</p>
+                        <a href="{% static 'asset/img/portfolio/family.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="FV 2"><i class="bx bx-plus"></i></a>
+                        <a href="#" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                </div>
+                <!-- <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+                    <div class="portfolio-img"><img src="{% static 'asset/img/portfolio/portfolio-5.jpg' %}" class="img-fluid" alt=""></div>
+                    <div class="portfolio-info">
+                        <h4>Web 2</h4>
+                        <p>Web</p>
+                        <a href="{% static 'asset/img/portfolio/portfolio-5.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 2"><i class="bx bx-plus"></i></a>
+                        <a href="#" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                </div> -->
+                <div class="col-lg-4 col-md-6 portfolio-item filter-wv">
+                    <div class="portfolio-img"><img src="{% static 'asset/img/portfolio/working.jpg' %}" class="img-fluid" alt=""></div>
+                    <div class="portfolio-info">
+                        <h4>Working Visa</h4>
+                        <p>USA </p>
+                        <a href="{% static 'asset/img/portfolio/working.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="WV 3"><i class="bx bx-plus"></i></a>
+                        <a href="#" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 portfolio-item filter-fv">
+                    <div class="portfolio-img"><img src="{% static 'asset/img/portfolio/family2.jpg' %}" class="img-fluid" alt=""></div>
+                    <div class="portfolio-info">
+                        <h4>Family visas </h4>
+                        <p>Canada</p>
+                        <a href="{% static 'asset/img/portfolio/family2.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="FV 1"><i class="bx bx-plus"></i></a>
+                        <a href="#" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                </div>
+                <!-- <div class="col-lg-4 col-md-6 portfolio-item filter-fv">
+                    <div class="portfolio-img"><img src="{% static 'asset/img/portfolio/portfolio-8.jpg' %}" class="img-fluid" alt=""></div>
+                    <div class="portfolio-info">
+                      <h4>FV 3</h4>
+                      <p>FV</p>
+                      <a href="{% static 'asset/img/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="FV 3"><i class="bx bx-plus"></i></a>
+                      <a href="#" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                    </div> -->
+                <div class="col-lg-4 col-md-6 portfolio-item filter-ot">
+                    <div class="portfolio-img"><img src="{% static 'asset/img/portfolio/Traveled.jpeg' %}" class="img-fluid" alt=""></div>
+                    <div class="portfolio-info">
+                        <h4>Many other reasons you can travel for </h4>
+                        <p>Settlement </p>
+                        <a href="{% static 'asset/img/portfolio/Traveled.jpeg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
+                        <a href="#" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Portfolio Section -->
+    <!-- ======= Testimonials Section ======= -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-title" data-aos="zoom-out">
+                <h2>Testimonials</h2>
+                <p>What they are saying about us</p>
+            </div>
+            <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="testimonial-item">
+                            <p>
+                                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                I had been stolen money broker after broker, I had lost hope, but now its possible, I can now live the dream i had since childhool thanks to cajetan global visa
+                                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                            </p>
+                            <img src="{% static 'asset/img/testimonials/testimonials-1.jpeg' %}" class="testimonial-img" alt="">
+                            <h3>Mokotoz Franc</h3>
+                            <h4>From &amp; Congo</h4>
+                        </div>
+                    </div>
+                    <!-- End testimonial item -->
+                    <div class="swiper-slide">
+                        <div class="testimonial-item">
+                            <p>
+                                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                I  cant imagine I am now working and making money as  I never thought of, from Uganda to now Canada and Cajetan hekped me settle here permanently
+                                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                            </p>
+                            <img src="{% static 'asset/img/testimonials/testimonials-2.jpeg' %}" class="testimonial-img" alt="">
+                            <h3>Amani Rukundo</h3>
+                            <h4>From Uganda</h4>
+                        </div>
+                    </div>
+                    <!-- End testimonial item -->
+                    <div class="swiper-slide">
+                        <div class="testimonial-item">
+                            <p>
+                                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                USA, working hahaha, am i dreaming or its real? All my thanks to Cajetan Global Visa 
+                                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                            </p>
+                            <img src="{% static 'asset/img/testimonials/testimonials-3.jpeg' %}" class="testimonial-img" alt="">
+                            <h3>Maggy Salusha</h3>
+                            <h4>From Kenya</h4>
+                        </div>
+                    </div>
+                    <!-- End testimonial item -->
+                    <div class="swiper-slide">
+                        <div class="testimonial-item">
+                            <p>
+                                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                being here in schengen is like i am dreaming, I approached Cajetan Global and they made so simple 
+                                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                            </p>
+                            <img src="{% static 'asset/img/testimonials/testimonials-4.jpg' %}" class="testimonial-img" alt="">
+                            <h3>Kwizera Francine</h3>
+                            <h4>From Burundi</h4>
+                        </div>
+                    </div>
+                    <!-- End testimonial item -->
+                    <div class="swiper-slide">
+                        <div class="testimonial-item">
+                            <p>
+                                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                I know pray guitar and sing in places I never thought of, my talent can now grow and make me prosper 
+                                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                            </p>
+                            <img src="{% static 'asset/img/testimonials/testimonials-5.jpeg" class="testimonial-img" alt="">
+                            <h3>Apach Larson</h3>
+                            <h4>Nigeria</h4>
+                        </div>
+                    </div>
+                    <!-- End testimonial item -->
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+    <!-- End Testimonials Section -->
+    <!-- ======= Pricing Section ======= -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="section-title" data-aos="zoom-out">
+                <h2>Pricing</h2>
+                <p>Our Competing Prices</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="box" data-aos="zoom-in">
+                        <h3>Free</h3>
+                        <h4><sup>$</sup>0<span> / lifetime</span></h4>
+                        <ul>
+                            <li>Read our traveling guides</li>
+                            <li>ask questions to the expert</li>
+                            <li class="na">Customized guide</li>
+                            <li class="na">Travel with us</li>
+                        </ul>
+                        <div class="btn-wrap">
+                            <a href="{% url 'accounts:register' %}" class="btn-buy">Join Us</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mt-4 mt-md-0">
+                    <div class="box featured" data-aos="zoom-in" data-aos-delay="100">
+                        <h3>Basic</h3>
+                        <h4><sup>$</sup>9000<span> / lifetime</span></h4>
+                        <ul>
+                            <li>Read our traveling guides</li>
+                            <li>ask questions to the expert</li>
+                            <li>Customized guide</li>
+                            <li>Travel with us</li>
+                            <li class="na">Reletionship continue after journey</li>
+                        </ul>
+                        <div class="btn-wrap">
+                            <a href="{% url 'accounts:register' %}" class="btn-buy">Join Us</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mt-4 mt-lg-0">
+                    <div class="box" data-aos="zoom-in" data-aos-delay="200">
+                        <h3>Business</h3>
+                        <h4><sup>$</sup>11000<span> / lifetime</span></h4>
+                        <ul>
+                            <li>Read our traveling guides</li>
+                            <li>ask questions to the expert</li>
+                            <li>Customized guide</li>
+                            <li>Travel with us</li>
+                            <li>Reletionship continue after journey</li>
+                            <li class="na">can change country after</li>
+                        </ul>
+                        <div class="btn-wrap">
+                            <a href="{% url 'accounts:register' %}" class="btn-buy">Join Us</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mt-4 mt-lg-0">
+                    <div class="box" data-aos="zoom-in" data-aos-delay="300">
+                        <span class="advanced">Express</span>
+                        <h3>Ultimate</h3>
+                        <h4><sup>$</sup>12000<span> / lifetime</span></h4>
+                        <ul>
+                            <li>Read our traveling guides</li>
+                            <li>ask questions to the expert</li>
+                            <li>Customized guide</li>
+                            <li>Travel with us</li>
+                            <li>Reletionship continue after journey</li>
+                            <li>can change country after</li>
+                        </ul>
+                        <div class="btn-wrap">
+                            <a href="{% url 'accounts:register' %}" class="btn-buy">Join Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Pricing Section -->
+    <!-- ======= F.A.Q Section ======= -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <div class="section-title" data-aos="zoom-out">
+                <h2>F.A.Q</h2>
+                <p>Frequently Asked Questions</p>
+            </div>
+            <ul class="faq-list">
+                <li>
+                    <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">How do i get a job in the USA <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+                    <div id="faq1" class="collapse" data-bs-parent=".faq-list">
+                        <p>
+                            To get a job in the USA is not easy, but it can be done if by an expert like us, we are trusted buy many employers, we will hold your hand 
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <div data-bs-toggle="collapse" href="#faq2" class="collapsed question">My spouse is living abroad, I have been denied a visa, how do I do it? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+                    <div id="faq2" class="collapse" data-bs-parent=".faq-list">
+                        <p>
+                            There are several reasons why you could be denied a visa even when your spouse is there, we can handle any question have separately 
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <div data-bs-toggle="collapse" href="#faq3" class="collapsed question">How do I get where to stay if i am new in a country <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+                    <div id="faq3" class="collapse" data-bs-parent=".faq-list">
+                        <p>
+                            People who have such questions express the need to meet the right expert like us, irrespective which country you want to visit, we will have you settled 
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <div data-bs-toggle="collapse" href="#faq4" class="collapsed question">I am going alone first but I want my family join me later, will it be easy? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+                    <div id="faq4" class="collapse" data-bs-parent=".faq-list">
+                        <p>
+                            With us anything concerning travelling is easy
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <div data-bs-toggle="collapse" href="#faq5" class="collapsed question">I dont have money on my account will I suucceed? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+                    <div id="faq5" class="collapse" data-bs-parent=".faq-list">
+                        <p>
+                            We dont care whether you have zero, all we care about is our fee and then watch us perfom miracles 
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <div data-bs-toggle="collapse" href="#faq6" class="collapsed question">I want an asylum, do you also help on that? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+                    <div id="faq6" class="collapse" data-bs-parent=".faq-list">
+                        <p>
+                            Hell yeah, just choose a country 
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <!-- End F.A.Q Section -->
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title" data-aos="zoom-out">
+                <h2>Contact</h2>
+                <p>Contact Us</p>
+            </div>
+            <div class="row mt-5">
+                <div class="col-lg-4" data-aos="fade-right">
+                    <div class="info">
+                        <div class="address">
+                            <i class="bi bi-geo-alt"></i>
+                            <h4>Location:</h4>
+                            <p>Kampala central</p>
+                        </div>
+                        <div class="email">
+                            <i class="bi bi-envelope"></i>
+                            <h4>Email:</h4>
+                            <a href="mailto:cajetanglobalvisa@gmail.com">
+                                <p >cajetan@cajetan.global</p>
+                            </a>
+                        </div>
+                        <div class="phone">
+                            <a href="tel:+256200903172"><i class="bi bi-telephone-fill"></i></a>
+                            <h4>Call:</h4>
+                            <!-- <p>+1 5589 55488 55s</p>  -->
+                            <a href="tel:+256200903172"><span>+256 200 903 172</span></a>
+                        </div>
+                        <div class="email">
+                            <a href="https://wa.me/+256200903172"></a><i class="bi bi-whatsapp"></i></a>
+                            <h4>WhatsApp:</h4>
+                            <a href="https://wa.me/+256200903172"><span>+256 200 903 172</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 mt-5 mt-lg-0" data-aos="fade-left">
+                    <form action="{% url 'blog:contact' %}" method="post" role="form" class="php-email-form">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                            </div>
+                            <div class="col-md-6 form-group mt-3 mt-md-0">
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group mt-3">
+                            <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                        </div>
+                        <div class="my-3">
+                            <div class="loading">Loading</div>
+                            <div class="error-message"></div>
+                            <div class="sent-message">Your message has been sent. Thank you!</div>
+                        </div>
+                        <div class="text-center"><button type="submit">Send Message</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Contact Section -->
+</main>
+<!-- End #main -->
+{% endblock %}

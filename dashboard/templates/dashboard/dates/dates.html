@@ -12,11 +12,14 @@
             {{ message }}
         </div>
         {% endfor %}
+
+        <a href="{% url 'dashboard:event_create'  %}" class="btn btn-primary col-auto text-right float-right ml-auto" class="col-auto text-right float-right ml-auto"><i class="fas fa-plus"></i></a>
+
         <div class="row align-items-center" style="font-family: helvetica; color: #337ab7; font-size: 50px; text-align: center; width: 100%;text-shadow: 6px 6px 6px #c9c6c6; display: block;font-weight: bolder;">
-            <div class="col-auto text-right float-right ml-auto">
+
                 {% comment %} <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Download</a> {% endcomment %}
-                <a href="{% url 'dashboard:event_create'  %}" class="btn btn-primary"><i class="fas fa-plus"></i></a> 
-            </div>
+     
+
             <div class="col">
                 <h3 class="page-title">Events</h3>
                 <ul class="breadcrumb">
@@ -58,13 +61,28 @@
                                         </h2>
                                     </td>
                                     <td>{{ event.event_name }}</td>
-                                    <td>{{ event.event_date }}</td>
+                                    {% if event.is_due %}
+                                    <td class="text-right">
+                                        <span class="badge badge-danger">{{ event.event_date}}</span>
+                                    </td>
+                                    <td> So soon </td>
+                                    {% elif event.is_passed %}
+                                    <td class="text-right">
+                                        <span class="badge badge-danger">{{ event.event_date}}</span>
+                                    </td>
+                                    <td> Passed </td>
+                                    {% else %}
+                                    <td class="text-right">
+                                        <span class="badge badge-success">{{ event.event_date}}</span>
+                                    </td>
+                                    <td>You can breath 😎</td>
+                                    {% endif %}
                                     <td class="text-right">
                                         <div class="actions">
-                                            <a href="{% url 'dashboard:profile_update' profile.pk %}" class="btn btn-sm bg-success-light mr-2">
+                                            <a href="{% url 'dashboard:event_update' event.pk %}" class="btn btn-sm bg-success-light mr-2">
                                             <i class="fas fa-pen"></i>
                                             </a>
-                                            <a href="{% url 'dashboard:profile_delete' profile.pk %}" class="btn btn-sm bg-danger-light">
+                                            <a href="{% url 'dashboard:event_delete' event.pk %}" class="btn btn-sm bg-danger-light">
                                             <i class="fas fa-trash"></i>
                                             </a>
                                         </div>

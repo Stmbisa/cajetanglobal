@@ -15,7 +15,10 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from .models import Transactions
 from .forms import *
+from django.contrib.auth.decorators import login_required
 
+
+@login_required
 def eventsdates(request):
     events = ProfileEvents.objects.all()
     paginator = Paginator(events, 5)
@@ -33,6 +36,8 @@ def eventsdates(request):
 
 
 # all list of transactions by this profile will be rendered by this view 
+
+@login_required
 def EventDateDetail(request, pk):
     event = ProfileEvents.objects.get(pk=pk)
     profile = Profile.objects.get(pk = pk)
@@ -55,10 +60,10 @@ def EventDateDetail(request, pk):
 
 
 class EventDateCreate(CreateView):
-    template_name='dashboard/dates/eventdate_create.html'
+    template_name='dashboard/dates/date_create.html'
     model= ProfileEvents
     # fields = '__all__'
-    success_url = reverse_lazy('dashboard:eventsdates')
+    success_url = reverse_lazy('dashboard:events')
     form_class=ProfileEventsCreateForm
 
 

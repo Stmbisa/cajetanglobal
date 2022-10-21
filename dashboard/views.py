@@ -1,11 +1,10 @@
 from multiprocessing import context
-import profile
 from django.shortcuts import render, redirect, get_object_or_404
-from users.models import Profile
-from users.forms import ProfileCreateForm, AccountsRevenueForm, AccountsExpenseForm, ProfileSearchform
+from users.forms import ProfileCreateForm, AccountsExpenseForm, ProfileSearchform
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import UserPassesTestMixin
-from users.models import User, Profile, AccountsRevenue, AccountsExpense
+from users.models import *
+from dashboard.models import *
 from datetime import datetime, timedelta
 from email import message
 from django.contrib import messages
@@ -15,8 +14,10 @@ from django.views.generic.edit import  DeleteView, CreateView, UpdateView, Creat
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 def dashboard(request):
     # startdate = datetime.today()
     # end_date = startdate + timedelta(days=30)
@@ -30,7 +31,7 @@ def dashboard(request):
     total_profile_revenues = 0
     total_revenues = 0
     total_expenses = 0
-    all_revenue = AccountsRevenue.objects.all()
+    all_revenue = Cashmemo.objects.all()
     for revenue in all_revenue:
         total_revenues+= revenue.amount
     
@@ -71,6 +72,8 @@ def dashboard(request):
     
     return render(request, 'dashboard/dashboard.html', context)
 
+
+@login_required
 def userprofileupdate(request):
     # user = User.objects.get(id = request.user.id)
     # if request.method == 'POST':
@@ -117,7 +120,7 @@ def userprofileupdate(request):
     return render(request, 'dashboard/userupdate.html' )
 
 
-
+@login_required
 def profiles(request):
     # user = User.objects.get(id = request.user.id)
     profiles = Profile.objects.all()

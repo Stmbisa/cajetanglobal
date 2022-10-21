@@ -230,29 +230,6 @@ class Announcement(models.Model):
 
 
 
-class AccountsRevenue(models.Model):
-    revenue_of = models.CharField(max_length=250, default='Someone paid',null=False)
-    cashmemo_by = models.CharField(max_length=250, default='i.e: Transport of a good',null=False)
-    amount = models.IntegerField( default='0') 
-    day_on_which = models.DateField(null=True, blank=True)
-    evidence_document = models.ImageField(upload_to = 'uploads/', blank=True, default='')
-    signature = models.ImageField(upload_to = 'uploads/', blank=True, default='')
-    
-
-    def __str__(self):
-        return str(self.revenue_of)
-
-    def get_absolute_url(self):
-        return reverse('dashboard:revenue', kwargs= {'pk':self.pk} )
-
-    def get_document(self):
-        if self.evidence_document and hasattr(self.evidence_document, 'url'):
-            return self.evidence_document.url
-        else:
-            return "/static/assets/img/user.png"
-
-
-
 class AccountsExpense(models.Model):
     expense_of = models.CharField(max_length=250, default='i.e: Transport of a good',null=False)
     # expense_by = models.ForeignKey(Profile, on_delete=models.CASCADE,null=True, blank=True, help_text='select this if its attached on a profile' )

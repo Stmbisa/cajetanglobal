@@ -1,29 +1,29 @@
 from django.urls import URLPattern, path
+from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.conf.urls.static import static
 from . views import profiles, Profile_detail, Profile_update, Profile_delete, dashboard, Profile_create, userprofileupdate
        
 
-from .accountsviews import AccountsRevenueUpdate, AccountsRevenue_delete, AccountsRevenues, AccountsRevenueDetail, AccountsExpenses\
-     , AccountsExpenseDetail, AccountsExpenseCreate, AccountsExpenseUpdate, AccountsExpenseDelete,revenue_add, AccountsRevenueCreate
+from .expensesviews import *
             
-from .transactionsviews import transactions, TransactionDetail, TransactionUpdate,\
-            TransactionDelete, TransactionCreate
-             #add_profile
+from .transactionsviews import *
 
 from .identityviews import *
 
 from .datesviews import *
+from .cashmemoviews import *
+from .documentsviews import *
 
 
 app_name = "dashboard"
 urlpatterns = [
     path ('', dashboard, name='dash_home'),
     path ('profiles/', profiles, name='profiles'),
-    path ('profiles/<str:pk>', Profile_detail.as_view(), name='profile'),
-    path ('profiles/<str:pk>/update/', Profile_update.as_view(), name='profile_update'),
-    path ('profiles/<str:pk>/delete/', Profile_delete.as_view(), name='profile_delete'),
-    path ('profiles/create/', Profile_create.as_view(), name='profile_create'),
+    path ('profiles/<str:pk>', login_required(Profile_detail.as_view()), name='profile'),
+    path ('profiles/<str:pk>/update/', login_required(Profile_update.as_view()), name='profile_update'),
+    path ('profiles/<str:pk>/delete/', login_required(Profile_delete.as_view()), name='profile_delete'),
+    path ('profiles/create/', login_required(Profile_create.as_view()), name='profile_create'),
     path ('profile', userprofileupdate, name='user_update'),
 
     #transactions 
@@ -32,35 +32,42 @@ urlpatterns = [
     #transactions 
     path ('transactions/', transactions, name='transactions'),
     path ('transactions/<str:pk>', TransactionDetail, name='transaction'),
-    path ('transactions/<str:pk>/update/', TransactionUpdate.as_view(), name='transaction_update'),
-    path ('transactions/<str:pk>/delete/', TransactionDelete.as_view(), name='transaction_delete'),
-    path ('transactions/create/', TransactionCreate.as_view(), name='transaction_create'),
+    path ('transactions/<str:pk>/update/', login_required(TransactionUpdate.as_view()), name='transaction_update'),
+    path ('transactions/<str:pk>/delete/', login_required(TransactionDelete.as_view()), name='transaction_delete'),
+    path ('transactions/create/', login_required(TransactionCreate.as_view()), name='transaction_create'),
 
     #dates 
     path ('eventsdates/', eventsdates, name='events'),
     path ('eventsdates/<str:pk>', EventDateDetail, name='event'),
-    path ('eventsdates/<str:pk>/update/', EventDateUpdate.as_view(), name='event_update'),
-    path ('eventsdates/<str:pk>/delete/', EventDateDelete.as_view(), name='event_delete'),
-    path ('eventsdates/create/', EventDateCreate.as_view(), name='event_create'),
+    path ('eventsdates/<str:pk>/update/', login_required(EventDateUpdate.as_view()), name='event_update'),
+    path ('eventsdates/<str:pk>/delete/', login_required(EventDateDelete.as_view()), name='event_delete'),
+    path ('eventsdates/create/', login_required(EventDateCreate.as_view()), name='event_create'),
 
     
 
     # all accounts
     # path ('accounts/', Profiles.as_view(), name='accounts'),
-    # accounts revenues 
+    # accounts cashmemo 
    
-    path ('accounts/revenues', AccountsRevenues.as_view(), name='revenues'),
-    path ('accounts/revenues/<str:pk>/', AccountsRevenueDetail, name='revenue'),
-    path ('accounts/revenues/<str:pk>/update/', AccountsRevenueUpdate.as_view(), name='revenue_update'),
-    path ('accounts/revenues/<str:pk>/delete/', AccountsRevenue_delete.as_view(), name='revenue_delete'),
-    path ('accounts/revenues/create/', AccountsRevenueCreate.as_view(), name='revenue_create'),
-    path ('accounts/revenues/add/', revenue_add, name='revenue_add'),
+    path ('cashmemos', cashmemos, name='cashmemos'),
+    path ('cashmemos/<str:pk>/', CashmemoDetail, name='cashmemo'),
+    path ('cashmemos/<str:pk>/update/', login_required(CashmemoUpdate.as_view()), name='cashmemo_update'),
+    path ('cashmemos/<str:pk>/delete/', login_required(CashmemoDelete.as_view()), name='cashmemo_delete'),
+    path ('cashmemos/create/add/', login_required(CashmemoCreate.as_view()), name='cashmemo_create'),
+
 
     # accounts expenses 
-    path ('accounts/expenses', AccountsExpenses.as_view(), name='expenses'),
-    path ('accounts/expenses/<str:pk>', AccountsExpenseDetail, name='expense'),
-    path ('accounts/expenses/<str:pk>/update/', AccountsExpenseUpdate.as_view(), name='expense_update'),
-    path ('accounts/expenses/<str:pk>/delete/', AccountsExpenseDelete.as_view(), name='expense_delete'),
-    path ('accounts/expenses/create/', AccountsExpenseCreate.as_view(), name='expense_create'),
+    path ('expenses', login_required(AccountsExpenses.as_view()), name='expenses'),
+    path ('expenses/<str:pk>', AccountsExpenseDetail, name='expense'),
+    path ('expenses/<str:pk>/update/', login_required(AccountsExpenseUpdate.as_view()), name='expense_update'),
+    path ('expenses/<str:pk>/delete/', login_required(AccountsExpenseDelete.as_view()), name='expense_delete'),
+    path ('expenses/create/', login_required(AccountsExpenseCreate.as_view()), name='expense_create'),
+
+    #documents
+    path ('documents/', documents, name='documents'),
+    path ('documents/<str:pk>', DocumentDetail, name='document'),
+    path ('documents/<str:pk>/update/', login_required(DocumentUpdate.as_view()), name='document_update'),
+    path ('documents/<str:pk>/delete/', login_required(DocumentDelete.as_view()), name='document_delete'),
+    path ('documents/create/', login_required(DocumentCreate.as_view()), name='document_create'),
     
 ]#+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

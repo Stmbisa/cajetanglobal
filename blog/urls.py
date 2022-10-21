@@ -11,7 +11,7 @@ urlpatterns = [
     path ('contact/', contact, name='contact'),
     path ('warning/', warning, name='warning'),
     path ('blogs/', BlogList.as_view(), name='blog_home'),
-    path ('blogs/<slug:slug>/', BlogDetail.as_view(), name='blog_detail'),
+    path ('blogs/<slug:pk>/', BlogDetail.as_view(), name='blog_detail'),
     
     
 

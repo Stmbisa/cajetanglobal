@@ -1,0 +1,55 @@
+{% extends 'dashboard/base2.html' %}
+{% block content %}
+<div id="content-wrapper" style="padding-top: 35px"
+{% if user.is_authenticated %}
+{% if user.is_staff %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 mb-3">
+            <div class="col-12 mb-3">
+                <div id="content-wrapper">
+                    <div class="container-fluid">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <p>You are about to delete an element,<a href="{% url 'dashboard:cashmemos' %}" >return instead?</a></a></p>
+                            </li>
+                        </ol>
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <i class="fas fa-table text-warning"></i>
+                                Deleting profile ...... 
+                            </div>
+                            <div class="card-body">
+                                {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                                    {{ message }}
+                                </div>
+                                {% endfor %}
+                                <div class="row">
+                                    <div class="col-12">
+                                        <form method="post">
+                                            {% csrf_token %}
+                                            <div class="alert alert-warning" role="alert">
+                                                Are you sure to delete detail of {{ cashmemo.cashmemo_of }} ?
+                                            </div>
+                                            <input type="submit" class="btn btn-danger" value="Yes, delete it" />
+                                            <a class="btn btn-success" href="{% url 'dashboard:cashmemos' %}">Return back</a>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<p>It seems you are not logged in <a href="{% url 'account:login' %}" >login now</a></p>
+{% endif %}
+{% else %
+<p>It seems you dont have the permission to view this page </p>
+{% endif %}
+</div>
+{% endblock %}

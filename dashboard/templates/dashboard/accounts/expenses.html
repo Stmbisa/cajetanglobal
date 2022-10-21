@@ -13,7 +13,7 @@
                     {{ message }}
                 </div>
                 {% endfor %}
-                  <div class="row align-items-center">
+                  <div class="row align-items-center" style="font-family: helvetica; color: #337ab7; font-size: 50px; text-align: center; width: 100%;text-shadow: 6px 6px 6px #c9c6c6; display: block;font-weight: bolder;">
                      <div class="col">
                         <h3 class="page-title">expenses</h3>
                         <ul class="breadcrumb">
@@ -32,7 +32,7 @@
                      <div class="card card-table">
                         <div class="card-body">
                            <div class="table-responsive">
-                              <table class="table table-hover table-center mb-0 datatable">
+                              <table class="table table-hover table-center mb-0 datatable" style="border-bottom-right-radius: 20px; padding-left: 5px; padding-right: 5px; padding-bottom: 20px;box-shadow: 12px 12px 20px 6px #2e6da4;">
                                  <thead>
                                     <tr>
                                        <th>ID</th>
@@ -51,7 +51,7 @@
                                        <td>{{ expense.id }}</td>
                                        <td>
                                           <h2 class="table-avatar">
-                                             <a href="{{ expense.get_absolute_url }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ expense.get_document }}" alt="img"></a>
+                                             <a href="{{ expense.get_absolute_url }}" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{ revenue.get_document }}" alt="User Image"></a>
                                              <a href="{{ expense.get_absolute_url }}">{{ expense.expense_of }}</a>
                                           </h2>
                                        </td>
@@ -112,3 +112,9 @@
 </div>
                         
 {% endblock %}
+
+
+
+
+
+expense

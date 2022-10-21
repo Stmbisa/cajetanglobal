@@ -19,7 +19,7 @@ def home_view(request, *args, **kwargs):
         'features':features,
         'categories':categories,
     }
-    return render (request, "blog/index.html", context) 
+    return render (request, "blog/index1.html", context) 
 
 
 def warning(request):
@@ -207,17 +207,23 @@ def blog_view(request):
     return render (request, "blog_view.html", context) 
 
 
-def blog_detail_view(request, id=None):
-    # blog_list = Blog.objects.all()
-    blog_obj = None
-    if blog_obj is not None:
-        # blog_obj=Blog.objects.get(id=id)
-        blog_obj=get_object_or_404(Blog, id=id)
-    context= {
-        'object': blog_obj, 
-        # 'blog_list': blog_list
-    }
+def blog_detail_view(request, pk):
+    blog = Blog.objects.filter(pk = pk)
+    context = {'blog': blog}
     return render (request, "detail.html", context=context)
+
+
+# def blog_detail_view(request, id=None):
+#     # blog_list = Blog.objects.all()
+#     blog_obj = None
+#     if blog_obj is not None:
+#         # blog_obj=Blog.objects.get(id=id)
+#         blog_obj=get_object_or_404(Blog, id=id)
+#     context= {
+#         'object': blog_obj, 
+#         # 'blog_list': blog_list
+#     }
+#     return render (request, "detail.html", context=context)
 # def year_archive_view(request, year):
 #     a_list = Blog.objects.filter(pub_date__year=year)
 #     context ={'year':year, 'blog_list': a_list}
@@ -254,4 +260,11 @@ def contact(request):
         return HttpResponse('We will get in touch, thank you for contacting us ')
     return render (request, "blog/contact.html",)
 
+
+def privacypolicy(request):
+	return render(request, 'privacypolicy.html')
+
+
+def retainersagreement(request):
+	return render(request, 'retainersagreement.html')
 

@@ -24,10 +24,10 @@
                      <div class="row">
                         <div class="col-12">
                            <h5 class="form-title">
-                              <span>Profile Update </span>
+                              <span>Event Create </span>
                            </h5>
                         </div>
-                        <form method="post", action="{% url 'dashboard:profile_create' %}">
+                        <form method="post", action="{% url 'dashboard:event_create' %}">
                            {% csrf_token %}
                            
                               {{ form|crispy }}

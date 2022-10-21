@@ -13,10 +13,11 @@
         {{ message }}
     </div>
     {% endfor %}
+    
     <div class="row align-items-center" style="font-family: helvetica; color: #337ab7; font-size: 50px; text-align: center; width: 100%;text-shadow: 6px 6px 6px #c9c6c6; display: block;font-weight: bolder;">
         <div class="col-auto text-right float-right ml-auto">
             {% comment %} <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Download</a> {% endcomment %}
-            <a href="{% url 'dashboard:profile_create'  %}" class="btn btn-primary"><i class="fas fa-plus"></i></a> 
+            {% comment %} <a href="{% url 'dashboard:profile_create'  %}" class="btn btn-primary"><i class="fas fa-plus"></i></a>  {% endcomment %}
         </div>
         <div class="col">
             <h3 class="page-title">Profiles</h3>
@@ -27,6 +28,7 @@
         </div>
         <br>
     </div>
+    <a href="{% url 'dashboard:profile_create'  %}" class="btn btn-primary col-auto text-right float-right ml-auto" class="col-auto text-right float-right ml-auto"><i class="fas fa-plus"></i></a>
     <form method='POST' action=''>{% csrf_token %}
         {{form}}
         <input type="submit" value='Search'/>
