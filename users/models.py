@@ -73,6 +73,9 @@ class User(AbstractUser):
         else:
             return "/static/assets/img/user.png"
 
+    def get_absolute_url(self):
+        return reverse('dashboard:user', kwargs= {'pk':self.pk} )
+
 class Payment(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     has_paid = models.BooleanField(default=False)

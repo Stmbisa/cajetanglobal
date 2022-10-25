@@ -216,6 +216,8 @@ def user_profile_update(request):
             messages.warning(request, 'Your profile not updated')
             redirect('dashboard:user_profile_update')
     return render(request, 'users/admin/user_profile_edit.html')
+
+    
 @login_required
 def create_profile(request):
     if request.method == 'POST':

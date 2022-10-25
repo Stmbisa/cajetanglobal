@@ -14,6 +14,7 @@ from .identityviews import *
 from .datesviews import *
 from .cashmemoviews import *
 from .documentsviews import *
+from .userviews import *
 
 
 app_name = "dashboard"
@@ -26,8 +27,15 @@ urlpatterns = [
     path ('profiles/create/', login_required(Profile_create.as_view()), name='profile_create'),
     path ('profile', userprofileupdate, name='user_update'),
 
-    #transactions 
+    #identities 
     path ('identities/', identities, name='identities'),
+
+    # users
+    path ('users/', users, name='users'),
+    path ('users/<str:pk>', UserDetail, name='transaction'),
+    path ('users/<str:pk>/update/', login_required(UserUpdate.as_view()), name='user_update'),
+    path ('users/<str:pk>/delete/', login_required(UserDelete.as_view()), name='user_delete'),
+    path ('users/create/', login_required(UserCreate.as_view()), name='user_create'),
     
     #transactions 
     path ('transactions/', transactions, name='transactions'),

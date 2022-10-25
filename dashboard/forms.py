@@ -41,6 +41,8 @@ class DocumentSubmitForm(forms.ModelForm):
     class Meta:
         model = Documents
         fields = '__all__'
+        widgets = {
+            'date_submitted': DateInput(attrs={'type':'date'}),}
 
 class DocumentSearchForm(forms.ModelForm):
     class Meta:
