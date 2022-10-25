@@ -19,7 +19,7 @@ def home_view(request, *args, **kwargs):
         'features':features,
         'categories':categories,
     }
-    return render (request, "blog/index.html", context) 
+    return render (request, "blog/index1.html", context) 
 
 
 def warning(request):
