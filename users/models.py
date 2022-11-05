@@ -19,8 +19,9 @@ def path_and_rename(instance, filename):
 
 
 class User(AbstractUser):
-    is_verified= models.BooleanField(default=False) 
+    is_verified= models.BooleanField(default=False)
     is_active= models.BooleanField(default=True)
+    has_profile = models.BooleanField(default=False)
     has_taken_biometry_before= models.BooleanField(default=False, help_text='Tick if you have ever taken the biometry')
     avatar = models.ImageField(upload_to = 'uploads/', default='')
     first_name = models.CharField(max_length=255, default='')

@@ -110,6 +110,7 @@ def userprofileupdate(request):
         if password != None and password !='':
             user.set_password(password)
         profile.save()
+        user.has_profile==True
         messages.success(request, 'Profile successfully updated')
         redirect('memberships:membership')
 

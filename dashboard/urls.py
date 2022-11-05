@@ -32,7 +32,7 @@ urlpatterns = [
 
     # users
     path ('users/', users, name='users'),
-    path ('users/<str:pk>', UserDetail, name='transaction'),
+    path ('users/<str:pk>', UserDetail, name='user'),
     path ('users/<str:pk>/update/', login_required(UserUpdate.as_view()), name='user_update'),
     path ('users/<str:pk>/delete/', login_required(UserDelete.as_view()), name='user_delete'),
     path ('users/create/', login_required(UserCreate.as_view()), name='user_create'),

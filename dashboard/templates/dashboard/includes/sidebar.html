@@ -8,6 +8,14 @@
                 <span>Main Menu</span>
              </li>
              <li class="submenu">
+               <a href="{% url 'dashboard:users' %}"><i class="bi bi-people-fill"" style="color: pink;"></i> <span> Registered Users </span> <span class="menu-arrow"></span></a>
+               <ul>
+                  <li><a href="{% url 'dashboard:users' %}">Manage all registered users </a></li>
+                  <li><a href="{% url 'dashboard:user_create' %}">add users </a></li>
+               </ul>
+            </li>
+
+             <li class="submenu">
                <a href="{% url 'dashboard:dash_home' %}"><i class="bi-file-spreadsheet-fill" style="color: #d6ff22"></i> <span> Dashboard</span> <span class="menu-arrow"></span></a>
                <ul>
                   <li><a href="{% url 'dashboard:profiles' %}">Main </a></li>

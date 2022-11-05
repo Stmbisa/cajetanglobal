@@ -28,9 +28,15 @@
   <link type="text/css" href="{% static 'asset/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
   <link type="text/css" href="{% static 'asset/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
   <!-- counter -->
-  <link type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link type="text/css" href="{% static 'asset/vendor/counter/bootstrap.min.css' %}" rel="stylesheet" id="bootstrap-css">
   <script src="{% static 'asset/vendor/counter/bootstrap.min.js' %}"></script>
   <script src="{% static 'asset/vendor/counter/jquery.min.js' %}"></script>
+  <!-- 
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   -->
 
   <!-- Template Main CSS File -->
   <link href="{% static 'asset/css/style.css' %}" rel="stylesheet">
@@ -54,7 +60,7 @@
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li><a class="nav-link scrollto" href="#services">Services</a></li>
           <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
-          <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li>
+          <li><a class="nav-link scrollto" href="#partners">Partners</a></li>
           <li class="dropdown"><a href="#"><span>visas</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">Working Visas</a></li>
@@ -166,7 +172,7 @@
       <li><a href=" {% url 'blog:index_home' %}"><i class="bi bi-chevron-right"></i> Home</a></li>
       <li><a href="{% url 'blog:blog_home' %}"><i class="bi bi-chevron-right"></i> Blog</a></li>
       <li><a href="{% url 'blog:categories' %}"><i class="bi bi-chevron-right"></i> Categories</a></li>
-      <li><a href="{ url 'memberships:membership'}"><i class="bi bi-chevron-right"></i> membership</a></li>
+      <li><a href="{% url 'memberships:membership' %}"><i class="bi bi-chevron-right"></i> membership</a></li>
       <li><a href="{% url 'blog:about' %}"><i class="bi bi-chevron-right"></i> About us</a></li>
       {% if user.is_authenticated %}
       {% if user.is_staff %}
@@ -219,7 +225,7 @@
         <!-- You can delete the links only if you purchased the pro version. -->
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/selecao-bootstrap-template/ -->
-        System programmed by <a href="a href="https://twitter.com/jcmbisa">JC MBISA</a>
+        System programmed by <a href="https://twitter.com/jcmbisa">JC MBISA</a>
       </div>
     </div>
   </footer><!-- End Footer -->

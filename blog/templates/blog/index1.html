@@ -16,24 +16,8 @@
             </div>
         </div>
         {% endfor %}
-        {% else %}
-        <!-- Slide 2 -->
-        <div class="carousel-item">
-            <div class="carousel-container">
-                <h2 class="animate__animated animate__fadeInDown">Welcome to cajetan Global Visas </h2>
-                <p class="animate__animated animate__fadeInUp">We guarantee that all your travelling needs wil be met, feel home and feel free to tell us your thoughts and Your dream journey</p>
-                <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
-            </div>
-        </div>
         {% endif %}
-        <!-- Slide 3 -->
-        <!-- <div class="carousel-item">
-            <div class="carousel-container">
-              <h2 class="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
-              <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
-              <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
-            </div>
-            </div> -->
+        
         <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
         <span class="carousel-control-prev-icon bx bx-chevron-left" aria-hidden="true"></span>
         </a>
@@ -109,7 +93,7 @@
             </div>
             <div class="col">
                 <div class="counter">
-                    <i class="bi bi-cpu-fill"></i>
+                    <i class="bi bi-check-circle-fill" style="color: #68ff75;"></i>
                     <h2 class="timer count-title count-number" data-to="69700" data-speed="1500"></h2>
                     <p class="count-text ">Happy Clients</p>
                 </div>
@@ -123,7 +107,7 @@
             </div>
             <div class="col">
                 <div class="counter">
-                  <i class="bi bi-cpu-fill"></i>
+                  <i class="bi bi-cpu-fill" style="color: #687fff;"></i>
                     <h2 class="timer count-title count-number" data-to="11020" data-speed="1500"></h2>
                     <p class="count-text ">Processing now</p>
                 </div>
@@ -292,14 +276,14 @@
                     <div class="icon-box" data-aos="zoom-in-left" data-aos-delay="100">
                         <div class="icon"><i class="bi bi-person-workspace" style="color: #e9bf06;"></i></div>
                         <h4 class="title"><a href="">Working Abroad</a></h4>
-                        <p class="description">If you are planning to work in the USA, CANADA, SCHENZEN, ISRAEL, We will help you </p>
+                        <p class="description">If you are planning to work in the USA, CANADA, SCHENGEN, ISRAEL, We will help you </p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 mt-5 mt-lg-0 ">
                     <div class="icon-box" data-aos="zoom-in-left" data-aos-delay="200">
                         <div class="icon"><i class="bi bi-airplane-engines-fill" style="color: #3fcdc7;"></i></div>
                         <h4 class="title"><a href="">Resetlement</a></h4>
-                        <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                        <p class="description">Its very much possible that you want to change your geographical location, well we will help you ressetle in the country of your choice</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 mt-5">
@@ -424,7 +408,7 @@
                     <div class="portfolio-info">
                         <h4>Business VISA CHINA</h4>
                         <p>BUSINESS VISA</p>
-                        <a href="{% static 'asset/img/portfolio/china.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
+                        <a href="{% static 'asset/img/portfolio/china.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
                         <a href="" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
                     </div>
                 </div>
@@ -468,7 +452,7 @@
                     <div class="portfolio-img"><img src="{% static 'asset/img/portfolio/working1.jpg' %}" class="img-fluid" alt=""></div>
                     <div class="portfolio-info">
                         <h4>Working Visas</h4>
-                        <p>USA, CANADA, SCHENZEN</p>
+                        <p>USA, CANADA, SCHENGEN</p>
                         <a href="{% static 'asset/img/portfolio/working1.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="WV 2"><i class="bx bx-plus"></i></a>
                         <a href="#" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
                     </div>
@@ -599,7 +583,7 @@
                                 I know pray guitar and sing in places I never thought of, my talent can now grow and make me prosper 
                                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                             </p>
-                            <img src="{% static 'asset/img/testimonials/testimonials-5.jpeg" class="testimonial-img" alt="">
+                            <img src="{% static 'asset/img/testimonials/testimonials-5.jpeg' %}" class="testimonial-img" alt="">
                             <h3>Apach Larson</h3>
                             <h4>Nigeria</h4>
                         </div>
@@ -611,75 +595,38 @@
         </div>
     </section>
     <!-- End Testimonials Section -->
-    <!-- ======= Pricing Section ======= -->
-    <section id="pricing" class="pricing">
+    <!-- ======= partners Section ======= -->
+    <section id="partners" class="partners">
         <div class="container">
-            <div class="section-title" data-aos="zoom-out">
-                <h2>Pricing</h2>
-                <p>Our Competing Prices</p>
+            <div class="section-title text-center" data-aos="zoom-out">
+                <h2>Partners</h2>
+                <p>Our Partners</p>
             </div>
             <div class="row">
-                <div class="col-lg-3 col-md-6">
+                <!-- <div class="col-lg-3 col-md-6">  -->
+                <div class="col-lg-6 col-md-6">
                     <div class="box" data-aos="zoom-in">
-                        <h3>Free</h3>
-                        <h4><sup>$</sup>0<span> / lifetime</span></h4>
+                        <h3>Low-hanging fruit</h3>
+                        <h4> Employement and jobs in North America </span></h4>
                         <ul>
-                            <li>Read our traveling guides</li>
-                            <li>ask questions to the expert</li>
-                            <li class="na">Customized guide</li>
-                            <li class="na">Travel with us</li>
+                            <li>Settlement</li>
+                            <li>jobs</li>
                         </ul>
+                        <img src="{% static 'asset/img/partners/partners-1.png' %}" class="testimonial-img" alt="">
                         <div class="btn-wrap">
                             <a href="{% url 'accounts:register' %}" class="btn-buy">Join Us</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 mt-4 mt-md-0">
-                    <div class="box featured" data-aos="zoom-in" data-aos-delay="100">
-                        <h3>Basic</h3>
-                        <h4><sup>$</sup>9000<span> / lifetime</span></h4>
+                <div class="col-lg-6 col-md-6">
+                    <div class="box" data-aos="zoom-in">
+                        <h3>DHL</h3>
+                        <h4> Documents and paper transfer </span></h4>
                         <ul>
-                            <li>Read our traveling guides</li>
-                            <li>ask questions to the expert</li>
-                            <li>Customized guide</li>
-                            <li>Travel with us</li>
-                            <li class="na">Reletionship continue after journey</li>
+                            <li>Moving our documents your documents</li>
+                            <li>Tranfering of files</li>
                         </ul>
-                        <div class="btn-wrap">
-                            <a href="{% url 'accounts:register' %}" class="btn-buy">Join Us</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mt-4 mt-lg-0">
-                    <div class="box" data-aos="zoom-in" data-aos-delay="200">
-                        <h3>Business</h3>
-                        <h4><sup>$</sup>11000<span> / lifetime</span></h4>
-                        <ul>
-                            <li>Read our traveling guides</li>
-                            <li>ask questions to the expert</li>
-                            <li>Customized guide</li>
-                            <li>Travel with us</li>
-                            <li>Reletionship continue after journey</li>
-                            <li class="na">can change country after</li>
-                        </ul>
-                        <div class="btn-wrap">
-                            <a href="{% url 'accounts:register' %}" class="btn-buy">Join Us</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mt-4 mt-lg-0">
-                    <div class="box" data-aos="zoom-in" data-aos-delay="300">
-                        <span class="advanced">Express</span>
-                        <h3>Ultimate</h3>
-                        <h4><sup>$</sup>12000<span> / lifetime</span></h4>
-                        <ul>
-                            <li>Read our traveling guides</li>
-                            <li>ask questions to the expert</li>
-                            <li>Customized guide</li>
-                            <li>Travel with us</li>
-                            <li>Reletionship continue after journey</li>
-                            <li>can change country after</li>
-                        </ul>
+                        <img src="{% static 'asset/img/partners/partners-2.jpg' %}" class="testimonial-img" alt="">
                         <div class="btn-wrap">
                             <a href="{% url 'accounts:register' %}" class="btn-buy">Join Us</a>
                         </div>
@@ -688,7 +635,7 @@
             </div>
         </div>
     </section>
-    <!-- End Pricing Section -->
+    <!-- End partners Section -->
     <!-- ======= F.A.Q Section ======= -->
     <section id="faq" class="faq">
         <div class="container">

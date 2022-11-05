@@ -2,48 +2,40 @@
 {% block content %}
 <div id="content-wrapper" style="padding-top: 35px"
 {% include 'blog/includes/alerts.html' %}
-
 {% if user.is_authenticated %}
 {% if user.is_staff %}
 <div class="col-12">
-              <div class="card recent-sales overflow-auto">
-              <div class="col-auto text-right float-right ml-auto">
-               <a href="{% url 'dashboard:transaction_create'  %}" class="btn btn-primary"><i class="fas fa-plus"></i></a> 
-               </div>
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
-                <div class="card-body">
-                  <h5 class="card-title">All transactions <span>| Today</span></h5>
-
-
-                  <table class="table table-borderless datatable">
-                   
-                    <thead>
-                      <tr>
+    <div class="card recent-sales overflow-auto">
+        <div class="col-auto text-right float-right ml-auto">
+            <a href="{% url 'dashboard:transaction_create'  %}" class="btn btn-primary"><i class="fas fa-plus"></i></a> 
+        </div>
+        <div class="filter">
+            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                <li class="dropdown-header text-start">
+                    <h6>Filter</h6>
+                </li>
+                <li><a class="dropdown-item" href="#">Today</a></li>
+                <li><a class="dropdown-item" href="#">This Month</a></li>
+                <li><a class="dropdown-item" href="#">This Year</a></li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">All transactions <span>| Today</span></h5>
+            <table class="table table-borderless datatable">
+                <thead>
+                    <tr>
                         <th scope="col">#</th>
                         <th scope="col">profile</th>
                         <th scope="col">service</th>
                         <th scope="col">Amount</th>
                         <th scope="col">Status</th>
-                      </tr>
-                    </thead>
-                    {% if transactions %}
-                    {% for transaction in transactions %}
-                   
-                    <tbody>
-                      <tr>
+                    </tr>
+                </thead>
+                {% if transactions %}
+                {% for transaction in transactions %}
+                <tbody>
+                    <tr>
                         <th scope="row"><a href="{{ transaction.get_absolute_url }}">{{forloop.counter}}</a></th>
                         <td>{{ transaction.profile }}</td>
                         <td><a href="{{ transaction.get_absolute_url }}" class="text-primary">{{ transaction.reason }}</a></td>
@@ -67,34 +59,33 @@
                                 </a>
                             </div>
                         </td>
-                      </tr>
-                    </tbody>
-                    {% endfor %}
-                    {% endif %}
-                  </table>
-
-                </div>
-
-              </div>
-            </div>
-
-            <div class="pagination">
-                              <span class="step-links">
-                                  {% if page_obj.has_previous %}
-                                      <a href="?page=1">&laquo; first</a>
-                                      <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-                                  {% endif %}
-                          
-                                  <span class="current">
-                                      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                                  </span>
-                          
-                                  {% if page_obj.has_next %}
-                                      <a href="?page={{ page_obj.next_page_number }}">next</a>
-                                      <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-                                  {% endif %}
-                              </span>
-                          </div>
-            {% endif %}
-            {% endif %}
-            {% endblock content %}
+                    </tr>
+                </tbody>
+                {% endfor %}
+                {% endif %}
+            </table>
+        </div>
+    </div>
+</div>
+<div class="pagination">
+    <span class="step-links">
+    {% if page_obj.has_previous %}
+    <a href="?page=1">&laquo; first</a>
+    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+    {% endif %}
+    <span class="current">
+    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+    </span>
+    {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}">next</a>
+    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+    {% endif %}
+    </span>
+</div>
+{% else %}
+<p>It seems you are not logged in <a href="{% url 'account:login' %}" >login now</a></p>
+{% endif %}
+{% else %}
+<p>It seems you dont have permission to view this page </p>
+{% endif %}
+{% endblock content %}

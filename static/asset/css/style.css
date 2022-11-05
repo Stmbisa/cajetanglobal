@@ -1128,9 +1128,9 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Pricing
+# AccountsExpenseDelete
 --------------------------------------------------------------*/
-.pricing .box {
+.partners .box {
   padding: 20px;
   background: #fff;
   text-align: center;
@@ -1140,7 +1140,7 @@ section {
   overflow: hidden;
 }
 
-.pricing h3 {
+.partners h3 {
   font-weight: 400;
   margin: -20px -20px 25px -20px;
   padding: 30px 15px;
@@ -1150,7 +1150,7 @@ section {
   background: #f8f8f8;
 }
 
-.pricing h4 {
+.partners h4 {
   font-size: 36px;
   color: #ef6603;
   font-weight: 600;
@@ -1158,19 +1158,19 @@ section {
   margin-bottom: 20px;
 }
 
-.pricing h4 sup {
+.partners h4 sup {
   font-size: 20px;
   top: -15px;
   left: -3px;
 }
 
-.pricing h4 span {
+.partners h4 span {
   color: #bababa;
   font-size: 16px;
   font-weight: 300;
 }
 
-.pricing ul {
+.partners ul {
   padding: 0;
   list-style: none;
   color: #444444;
@@ -1179,29 +1179,29 @@ section {
   font-size: 14px;
 }
 
-.pricing ul li {
+.partners ul li {
   padding-bottom: 16px;
 }
 
-.pricing ul i {
+.partners ul i {
   color: #ef6603;
   font-size: 18px;
   padding-right: 4px;
 }
 
-.pricing ul .na {
+.partners ul .na {
   color: #ccc;
   text-decoration: line-through;
 }
 
-.pricing .btn-wrap {
+.partners .btn-wrap {
   margin: 20px -20px -20px -20px;
   padding: 20px 15px;
   background: #f8f8f8;
   text-align: center;
 }
 
-.pricing .btn-buy {
+.partners .btn-buy {
   background: #ef6603;
   display: inline-block;
   padding: 8px 35px 10px 35px;
@@ -1215,20 +1215,20 @@ section {
   transition: 0.3s;
 }
 
-.pricing .btn-buy:hover {
+.partners .btn-buy:hover {
   background: #fc8129;
 }
 
-.pricing .featured {
+.partners .featured {
   border: 2px solid #ef6603;
 }
 
-.pricing .featured h3 {
+.partners .featured h3 {
   color: #fff;
   background: #ef6603;
 }
 
-.pricing .advanced {
+.partners .advanced {
   width: 200px;
   position: absolute;
   top: 18px;
