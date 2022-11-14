@@ -37,6 +37,7 @@
                         <th scope="col">document name</th>
                         <th scope="col">date submitted</th>
                         <th scope="col">Status</th>
+                        <th scope="col">actions</th>
                       </tr>
                     </thead>
                     {% if documents %}
@@ -44,9 +45,8 @@
                    
                     <tbody>
                       <tr>
-                        <th scope="row"><a href="{{ document.get_absolute_url }}">{{forloop.counter}}</a></th>
+                        <td scope="row"><a href="{{ document.get_absolute_url }}">{{forloop.counter}}</a></td>
                         <td>{{ document.document_owner }}</td>
-                        <td><a href="{{ document.get_absolute_url }}" class="text-primary">{{ document.reason }}</a></td>
                         <td>${{ document.document_name }}</td>
                         <td>${{ document.date_submitted }}</td>
                         {% if document.document %}

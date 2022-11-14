@@ -85,6 +85,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'blog.context_processors.add_variable_to_context',
+                # 'blog.context_processors.menu_links',
             ],
         },
     },
@@ -197,3 +198,17 @@ SECURE_SSL_REDIRECT = True
 # HSTS settings
 SECURE_HSTS_SECONDS = 31536000 # 1 year
 SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS={
+    messages.ERROR: 'danger',
+}
+
+import mimetypes
+mimetypes.add_type("text/css", ".css", True)
+
+WHITENOISE_MIMETYPES = {
+    '.xsl': 'application/xml'
+}

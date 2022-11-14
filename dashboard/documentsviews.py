@@ -15,25 +15,20 @@ from .models import *
 from .forms import *
 from django.contrib.auth.decorators import login_required
 
+
 @login_required
 def documents(request):
     documents = Documents.objects.all()
     paginator = Paginator(documents, 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    
-    for documents in documents:
-        context = {
-            'page_obj':page_obj,
-            'documents':documents,
-            }
+    context = {
+        'page_obj':page_obj,
+        'documents':documents,
+        }
 
-        return render(request, 'dashboard/documents/documents.html',context)
-# all_total_amount_paid_out_so_far+=int(out_transaction.amount_paid_or_paying)
+    return render(request, 'dashboard/documents/documents.html',context)
 
-    else:
-        messages.warning(request, 'Something isnt right')
-        return render(request, 'dashboard/documents/documents.html')
     
     
 

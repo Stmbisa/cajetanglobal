@@ -6,7 +6,7 @@
 <section id="hero" class="d-flex flex-column justify-content-end align-items-center" style= "top: -100;">
     <div id="heroCarousel" data-bs-interval="5000" class="container carousel carousel-fade" data-bs-ride="carousel" >
         <!-- Slide  -->
-        {% if blog_list %}
+        {% comment %} {% if blog_list %} {% endcomment %}
         {% for blog in blog_list %}
         <div class="carousel-item active">
             <div class="carousel-container">
@@ -16,7 +16,7 @@
             </div>
         </div>
         {% endfor %}
-        {% endif %}
+        {% comment %} {% endif %} {% endcomment %}
         
         <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
         <span class="carousel-control-prev-icon bx bx-chevron-left" aria-hidden="true"></span>
