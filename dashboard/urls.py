@@ -2,7 +2,7 @@ from django.urls import URLPattern, path
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.conf.urls.static import static
-from . views import profiles, Profile_detail, Profile_update, Profile_delete, dashboard, Profile_create, userprofileupdate
+from . views import *
        
 
 from .expensesviews import *
@@ -15,23 +15,27 @@ from .datesviews import *
 from .cashmemoviews import *
 from .documentsviews import *
 from .userviews import *
+from .adminverifyuserviews import *
+from .fileviews import *
 
 
 app_name = "dashboard"
 urlpatterns = [
     path ('', dashboard, name='dash_home'),
     path ('profiles/', profiles, name='profiles'),
-    path ('profiles/<str:pk>', login_required(Profile_detail.as_view()), name='profile'),
+    path ('profiles/search/', search_profile, name="search_profiles"),
+    path ('profiles/<str:pk>', login_required(Profile_detail), name='profile'),
     path ('profiles/<str:pk>/update/', login_required(Profile_update.as_view()), name='profile_update'),
     path ('profiles/<str:pk>/delete/', login_required(Profile_delete.as_view()), name='profile_delete'),
     path ('profiles/create/', login_required(Profile_create.as_view()), name='profile_create'),
-    path ('profile', userprofileupdate, name='user_update'),
+
 
     #identities 
     path ('identities/', identities, name='identities'),
 
     # users
     path ('users/', users, name='users'),
+    path ('users/search/', search_users, name="search_users"),
     path ('users/<str:pk>', UserDetail, name='user'),
     path ('users/<str:pk>/update/', login_required(UserUpdate.as_view()), name='user_update'),
     path ('users/<str:pk>/delete/', login_required(UserDelete.as_view()), name='user_delete'),
@@ -39,6 +43,7 @@ urlpatterns = [
     
     #transactions 
     path ('transactions/', transactions, name='transactions'),
+    path ('transactions/search/', search, name="search_transactions"),
     path ('transactions/<str:pk>', TransactionDetail, name='transaction'),
     path ('transactions/<str:pk>/update/', login_required(TransactionUpdate.as_view()), name='transaction_update'),
     path ('transactions/<str:pk>/delete/', login_required(TransactionDelete.as_view()), name='transaction_delete'),
@@ -46,6 +51,7 @@ urlpatterns = [
 
     #dates 
     path ('eventsdates/', eventsdates, name='events'),
+    path ('eventdates/search/', search, name="search_events"),
     path ('eventsdates/<str:pk>', EventDateDetail, name='event'),
     path ('eventsdates/<str:pk>/update/', login_required(EventDateUpdate.as_view()), name='event_update'),
     path ('eventsdates/<str:pk>/delete/', login_required(EventDateDelete.as_view()), name='event_delete'),
@@ -73,9 +79,23 @@ urlpatterns = [
 
     #documents
     path ('documents/', documents, name='documents'),
+    path ('profiles/search/', search_documents, name="search_documents"),
     path ('documents/<str:pk>', DocumentDetail, name='document'),
     path ('documents/<str:pk>/update/', login_required(DocumentUpdate.as_view()), name='document_update'),
     path ('documents/<str:pk>/delete/', login_required(DocumentDelete.as_view()), name='document_delete'),
     path ('documents/create/', login_required(DocumentCreate.as_view()), name='document_create'),
+
+    #documents
+    path ('adminverify/', adminverifyusers, name='adminverifyusers'),
+    path ('adminverify/<str:pk>', adminverifyUserDetail, name='adminverifyuserdetail'),
+    path ('adminverify/search/', adminverifysearch, name="search_adminverify"),
+    path ('adminverify/<str:pk>/update/', login_required(AdminverifyUserUpdate.as_view()), name='Adminverifyuserupdate'),
+
+
+    #files 
+    path ('files/', files, name='files'),
+    path ('files/<str:pk>', file_detail, name='file_detail'),
+    path ('files/search/', file_search, name="search_file"),
+
     
 ]#+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

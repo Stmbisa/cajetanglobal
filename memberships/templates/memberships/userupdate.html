@@ -1,0 +1,41 @@
+{% extends 'blog/base3.html' %}
+{% load static %}
+{% block content %}
+<div class="main-wrapper login-body align-items-center justify-content-center" style="vertical-align:center;background-color: rgb(21, 21, 32);color: aliceblue;" >
+<div class="container-fluid">
+   <div class="row" >
+      <div class="col-12 mb-3 mt-5">
+         <div class="col-12 mb-3">
+            <div id="content-wrapper " class="align-items-center justify-content-center" style="padding-top: 45px">
+               <div class="row">
+                  <div class="col-sm-12">
+                     <div class="card" >
+                        <div class="card-body">
+                        {% if messages%}
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                          {{ message }}
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                        <div class="row" >
+                           <div class="col-sm-12">
+                              <div class="card" style="background-color: rgb(21, 21, 32);color: aliceblue;">
+                                 <div class="card-body" >
+                                    <form method="post" action="{% url 'memberships:user_update' %}" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="col-12">
+                                             <h5 class="form-title text-center"><span>Welcome {{ user.first_name }} please verify and update the information below</span></h5>
+                                             <h5 class="form-title"><span>Profile Information</span></h5>
+                                          </div>
+                                          <div class="col-12 text-center">
+                                             <button type="submit" class="btn btn-primary">Submit</button>
+                                          </div>
+                                       </div>
+                                    </form>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+
+{% endblock content %}

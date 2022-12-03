@@ -6,6 +6,20 @@
 {% if user.is_authenticated %}
 {% if user.is_staff %}
 <div class="col-12">
+<div class="col-12">
+ <div class="col-lg  col-md-6 col-sm-12 col">
+		<form action="{% url 'dashboard:search_documents' %}" class="search" method="get">
+			<div class="input-group w-100">
+			    <input type="text" class="form-control" style="width:60%;" placeholder="Search by any name, phone, country of destination" name="keyword">
+
+			    <div class="input-group-append">
+			      <button class="btn btn-primary" type="submit">
+			        <i class="fa fa-search"></i>
+			      </button>
+			    </div>
+		    </div>
+		</form> <!-- search-wrap .end// -->
+	</div>
               <div class="card recent-sales overflow-auto">
               <div class="col-auto text-right float-right ml-auto">
                <a href="{% url 'dashboard:document_create'  %}" class="btn btn-primary"><i class="fas fa-plus"></i></a> 
@@ -67,6 +81,10 @@
                       </tr>
                     </tbody>
                     {% endfor %}
+                    {% else %}
+                            <div>
+		                        <h2>It looks like match for your query, please try again </h2>
+	                        </div>
                     {% endif %}
                   </table>
 

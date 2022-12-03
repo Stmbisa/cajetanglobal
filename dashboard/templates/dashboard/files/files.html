@@ -1,0 +1,134 @@
+{% extends 'dashboard/base2.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+<!-- {{ profile_list }} -->
+<div id="content-wrapper" style="padding-top: 35px"
+{% if user.is_authenticated %}
+{% if user.is_staff %}
+{% if 'search' in request.path %}
+	<h2 class="title-page">Search in the profiles</h2>
+{% else %}
+	<h2 class="title-page">-</h2>
+{% endif %}
+<div class="content container-fluid">
+<div class="page-header">
+<div class="card-body">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    
+    <div class="row align-items-center" style="font-family: helvetica; color: #337ab7; font-size: 50px; text-align: center; width: 100%;text-shadow: 6px 6px 6px #c9c6c6; display: block;font-weight: bolder;">
+        <div class="col-auto text-right float-right ml-auto">
+            {% comment %} <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Download</a> {% endcomment %}
+            
+        </div>
+        <div class="col">
+            <h3 class="page-title">Profiles</h3>
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="">Dashboard</a></li>
+                <li class="breadcrumb-item active">Profiles</li>
+            </ul>
+        </div>
+        <br>
+    </div>
+
+    <div class="col-lg  col-md-6 col-sm-12 col">
+		<form action="{% url 'dashboard:search_file' %}" class="search" method="get">
+			<div class="input-group w-100">
+			    <input type="text" class="form-control" style="width:60%;" placeholder="Search by any name, phone, country of destination" name="keyword">
+
+			    <div class="input-group-append">
+			      <button class="btn btn-primary" type="submit">
+			        <i class="fa fa-search"></i>
+			      </button>
+			    </div>
+		    </div>
+		</form> <!-- search-wrap .end// -->
+	</div>
+    <a href="{% url 'dashboard:profile_create'  %}" class="btn btn-primary"><i class="fas fa-plus"></i></a> 
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-table">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div class="display_table" >
+                        <table class="table table-hover table-center mb-0 datatable">
+                            <thead style="background-color: #d8dee4; color: rgb(5, 1, 1);">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>The owner </th>
+                                    <th>Passport Picture</th>
+                                    <th>Passport Document</th>
+                                    <th>Covid certificate</th>
+                                    <th>Yellow fever</th>
+                                </tr>
+                            </thead>
+                            {% if files %}
+                            {% for file in files %}
+                            <tbody>
+                                <tr>
+                                    <td>{{ file.id }}</td>
+                                    <td>{{file.full_name}}</td>
+                                    <td>{% if file.avatar %} <span class="badge bg-success">uploaded</span>
+                                    {% else  %}
+                                    <span class="badge bg-danger">Not available</span></td>
+                                    {% endif %}
+                                    </td>
+                                    <td>{% if file.passport_document %} <span class="badge bg-success">uploaded</span>
+                                    {% else  %}
+                                    <span class="badge bg-danger">Not available</span></td>
+                                    {% endif %}
+                                    </td>
+
+                                    <td>{% if file.covid_certificate %} <span class="badge bg-success">uploaded</span>
+                                    {% else  %}
+                                    <span class="badge bg-danger">Not available</span></td>
+                                    {% endif %}
+                                    </td>
+                                    <td>{% if file.yellow_fever %} <span class="badge bg-success">uploaded</span>
+                                    {% else  %}
+                                    <span class="badge bg-danger">Not available</span></td>
+                                    {% endif %}
+                                    </td>
+                                </tr>
+                            </tbody>
+                            {% endfor %}
+                            {% else %}
+                            <div>
+		                        <h2>It looks like match for your query, please try again </h2>
+	                        </div>
+                            {% endif %}
+                        </table>
+                    </div>
+                    <div>
+                        <div class="pagination">
+                            <span class="step-links">
+                            {% if page_obj.has_previous %}
+                            <a href="?page=1">&laquo; first</a>
+                            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                            {% endif %}
+                            <span class="current">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                            </span>
+                            {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}">next</a>
+                            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                            {% endif %}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<p>It seems you are not logged in <a href="{% url 'account:login' %}" >login now</a></p>
+{% endif %}
+{% else %}
+<p>It seems you dont have the permission to view this page </p>
+{% endif %}
+{% endblock %}

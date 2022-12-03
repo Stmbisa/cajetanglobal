@@ -76,10 +76,29 @@ class ProfileCreateForm(forms.ModelForm):
             Submit('submit', 'Sign in')
         )
 
-class ProfileSearchform(forms.ModelForm):
+class ProfileUserUpdateform(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['first_name', 'last_name', 'phonenumber']
+        fields = ['passport_document','first_name', 'last_name','gender','email', 'phonenumber', 'birth_date', 'next_of_kin',\
+                  'next_of_kin_phone', 'country_of_orgin', 'country_of_destination', 'nationality']
+        widgets = {
+            'birth_date': DateInput(attrs={'type':'date'}),        
+        }
+
+class UserUpdateform(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['has_done_biometry_before','has_obtained_visa_before',]
+
+class AdminUserUpdateform(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['has_done_biometry_before','has_obtained_visa_before','is_verified','has_paid','has_done_biometry','has_obtained_visa','rejected']
+
+class UserUpdateformFiles(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['avatar','passport_document','covid_certificate','yellow_fever']
 
 
 

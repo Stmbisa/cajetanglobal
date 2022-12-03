@@ -1,0 +1,141 @@
+{% extends 'dashboard/base2.html' %}
+{% block content %}
+<div id="content-wrapper" style="padding-top: 35px"
+{% include 'blog/includes/alerts.html' %}
+{% if user.is_authenticated %}
+{% if user.is_staff %}
+<div class="col-12">
+    <div class="col-lg  col-md-6 col-sm-12 col">
+        <form action="{% url 'dashboard:adminverifyusers' %}" class="search" method="get">
+            <div class="input-group w-100">
+                <input type="text" class="form-control" style="width:60%;" placeholder="Search by any name, phone, country of destination" name="keyword">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">
+                    <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <!-- search-wrap .end// -->
+    </div>
+    <div class="card recent-sales overflow-auto">
+        <div class="card-body">
+            <h5 class="card-title">All transactions <span>| Today</span></h5>
+            <table class="table table-borderless datatable">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">names</th>
+                        <th scope="col">User done biometry before</th>
+                        <th scope="col">User obtained visa before</th>
+                        <th scope="col">user is verified</th>
+                        <th scope="col">completed biometry </th>
+                        <th scope="col">User obtained visa </th>
+                        <th scope="col">User rejected </th>
+                        <th scope="col">User paid </th>
+                        {% comment %} 
+                        <th scope="col">Action</th>
+                        {% endcomment %}
+                    </tr>
+                </thead>
+                {% if users %}
+                {% for user in users %}
+                <tbody>
+                    <tr>
+                        <th scope="row"><a href="{{ user.get_absolute_url }}">{{forloop.counter}}</a></th>
+                        <td><a href="{{ user.get_absolute_url }}" class=""> {{ user.full_name }}</a></td>
+                        {% if user.has_done_biometry_before %}
+                        <td><span class="badge bg-success">Yes</span></td>
+                        {% else %}
+                        <td><span class="badge bg-warning">No</span></td>
+                        {% endif %}
+                        {% if user.has_obtained_visa_before %}
+                        <td><span class="badge bg-success">Yes</span></td>
+                        {% else %}
+                        <td><span class="badge bg-warning">No</span></td>
+                        {% endif %}
+                        {% if user.is_verified  %}
+                        <td><span class="badge bg-success">Yes</span></td>
+                        {% else %}
+                        <td><span class="badge bg-warning">No</span></td>
+                        {% endif %}
+                        {% if user.has_done_biometry  %}
+                        <td><span class="badge bg-danger">Yes</span></td>
+                        {% else %}
+                        <td><span class="badge bg-warning">No</span></td>
+                        {% endif %}
+                        {% if user.has_obtained_visa  %}
+                        <td><span class="badge bg-danger">Yes</span></td>
+                        {% else %}
+                        <td><span class="badge bg-warning">No</span></td>
+                        {% endif %}
+                        {% if user.rejected  %}
+                        <td><span class="badge bg-danger">{{ user.rejected }}</span></td>
+                        {% else %}
+                        <td><span class="badge bg-warning">No</span></td>
+                        {% endif %}
+                        {% if user.has_paid %}
+                        <td><span class="badge bg-danger">Yes</span></td>
+                        {% else %}
+                        <td><span class="badge bg-warning">No</span></td>
+                        {% endif %}
+                        <!-- class="text-primary" -->
+                        {% comment %} 
+                        <td class="text-right">
+                            <div class="actions">
+                                <a href="{% url 'dashboard:Adminverifyuserupdate' user.pk %}" class="btn btn-sm bg-success-light mr-2">
+                                <i class="fas fa-pen"></i>
+                                </a>
+                            </div>
+                        </td>
+                        {% endcomment %}
+                    </tr>
+                </tbody>
+                {% endfor %}
+                {% else %}
+                <div>
+                    <h2>It looks like match for your query, please try again </h2>
+                </div>
+                {% endif %}
+            </table>
+        </div>
+    </div>
+</div>
+<div class="pagination">
+    <span class="step-links">
+    {% if page_obj.has_previous %}
+    <a href="?page=1">&laquo; first</a>
+    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+    {% endif %}
+    <span class="current">
+    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+    </span>
+    {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}">next</a>
+    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+    {% endif %}
+    </span>
+</div>
+{% else %}
+<p>It seems you are not logged in <a href="{% url 'account:login' %}" >login now</a></p>
+{% endif %}
+{% else %}
+<p>It seems you dont have permission to view this page </p>
+{% endif %}
+{% endblock content %}
+{% comment %} 
+<tr>
+    <td>Totals</td>
+    <td>--</td>
+    <td>--</td>
+    <td>--</td>
+    <td>--</td>
+    <td>--</td>
+    <td>--</td>
+    <td>{{ all_total_amount_to_pay }}</td>
+    <td>--</td>
+    <td>{{all_total_amount_paid_so_far}}</td>
+    <td>{{all_total_balance}}</td>
+    <td></td>
+</tr>
+{% endcomment %}

@@ -12,9 +12,10 @@ TRANSACTION_STATUS = [
         ]
 
 class Transactions(models.Model):
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE,null=True, blank=True )
+    profile = models.ForeignKey(User, on_delete=models.CASCADE,null=True, blank=True )
     Transaction_date = models.DateField( null=True, blank=True)
     amount_paid_or_paying = models.CharField(max_length=250, default='',null=False)
+    amount_to_pay = models.DecimalField(max_length=255, null=True, blank=True, default=0, decimal_places=3, max_digits=15)
     status = models.CharField(max_length=10, choices=TRANSACTION_STATUS,default='', null=True, blank=True)
     reason = models.CharField(max_length=250, default='',null=False)
 
@@ -24,6 +25,10 @@ class Transactions(models.Model):
 
     def get_absolute_url(self):
         return reverse('dashboard:transaction', kwargs= {'pk':self.pk} )
+
+    def get_balance (self):
+        if self.profile.amount_to_pay and self.amount_paid_or_paying:
+            return self.amount_to_pay-int(self.amount_paid_or_paying)
 
 
 
@@ -35,7 +40,7 @@ class Transactions(models.Model):
 
 
 class ProfileEvents(models.Model):
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE,null=True, blank=True )
+    profile = models.ForeignKey(User, on_delete=models.CASCADE,null=True, blank=True )
     event_name= models.CharField(max_length=100, default='', null=True, blank=True) 
     event_date = models.DateField( null=True, blank=True)
 
@@ -86,7 +91,7 @@ class Cashmemo(models.Model):
 
 
 class Documents(models.Model):
-    document_owner = models.ForeignKey(Profile, on_delete=models.CASCADE,null=False, blank=False )
+    document_owner = models.ForeignKey(User, on_delete=models.CASCADE,null=False, blank=False )
     document_name = models.CharField(max_length=250, default='i.e: passport',null=True)
     date_submitted = models.DateField(null=True, blank=True)
     document = models.FileField(upload_to = 'uploads/', blank=True, default='')

@@ -12,6 +12,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from .models import Transactions
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q 
 
 
 @login_required
@@ -24,14 +25,13 @@ def transactions(request):
     page_obj = paginator.get_page(page_number)
     all_total_amount_paid_so_far=0 
     all_total_amount_paid_out_so_far=0 
-    balance = 0
+   
     
     for transaction in transactions:
         all_total_amount_paid_so_far+=int(transaction.amount_paid_or_paying)
         context = {
             'page_obj':page_obj,
             'transactions':transactions,
-            'balance':balance,
             'all_total_amount_paid_so_far':all_total_amount_paid_so_far,
             }
 
@@ -43,7 +43,6 @@ def transactions(request):
         context = {
             'page_obj':page_obj,
             'in_transactions':in_transactions,
-            'balance':balance,
             'all_total_amount_paid_so_far':all_total_amount_paid_so_far,
             }
 
@@ -54,7 +53,6 @@ def transactions(request):
         context = {
             'page_obj':page_obj,
             'out_transactions':out_transactions,
-            'balance':balance,
             'all_total_amount_paid_so_far':all_total_amount_paid_so_far,
             }
 
@@ -88,25 +86,33 @@ class TransactionCreate(CreateView):
     form_class=TransactionCreateForm
 
 
-class TransactionUpdate(SuccessMessageMixin,UserPassesTestMixin, UpdateView):
+# def TransactionUpdate(request, pk):
+ 
+#     obj = get_object_or_404(Transactions, pk = pk)
+ 
+#     form = TransactionCreateForm(request.POST or None, instance = obj)
+
+#     if form.is_valid():
+#         form.save()
+#         return redirect ('dashboard:transactions', pk=pk)
+    
+#     context ={
+#         "form" : form,
+#         "obj" : obj
+#     }
+ 
+#     return render(request, "dashboard/transactions/transaction_update.html", context)
+
+class TransactionUpdate(SuccessMessageMixin, UpdateView):
     template_name='dashboard/transactions/transaction_update.html'
     model= Transactions
-    # fields = '__all__'
+    context_object_name = 'transaction'
+    success_message = "transaction Was Deleted Successfully"
     success_url = reverse_lazy('dashboard:transactions')
-    success_message = "transaction Was updated Successfully"
-    # form_class=TransactionCreateForm
+    fields = 'first_name'
 
-    def test_func(self):
-        transaction= self.get_object()
 
-        if self.request.user.is_staff:
-            return True
-        return False
 
-    def dispatch(self, request, *args, **kwargs):
-        transaction = self.get_object()
-        self.fields = '__all__'
-        return super().dispatch(request, *args, **kwargs)
 
 
 
@@ -116,3 +122,15 @@ class TransactionDelete(SuccessMessageMixin, DeleteView):
     context_object_name = 'transaction'
     success_message = "transaction Was Deleted Successfully"
     success_url = reverse_lazy('dashboard:transactions')
+
+
+def search_documents(request):
+    profiles = None
+    if 'keyword' in request.GET:
+        keyword = request.GET['keyword']
+        if keyword:
+            profiles = Transactions.objects.order_by('id').filter(Q(profile__first_name__icontains=keyword)| Q(profile__last_name__icontains= keyword)| Q(Transaction_date__icontains= keyword)|Q(profile__country_of_destination__icontains= keyword)|Q(profile__phone__icontains= keyword)) # fielter treats , as a and 
+        context = {
+            'profiles':profiles, 
+        }
+    return render(request, 'dashboard/transactions/transactions.html',context)

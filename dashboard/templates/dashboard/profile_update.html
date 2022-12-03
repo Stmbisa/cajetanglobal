@@ -21,7 +21,7 @@
                          <span>Profile Update </span>
                       </h5>
                    </div>
-             <form method="post", action="{% url 'dashboard:profile_update' profile.pk %}">
+             <form method="post", action="{% url 'dashboard:profile_update' profile.pk %}"> 
                {% csrf_token %}
                 
                    {{ form|crispy }}

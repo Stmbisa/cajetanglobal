@@ -46,11 +46,11 @@ def cashmemos(request):
 def CashmemoDetail(request, pk):
     cashmemos = Cashmemo.objects.filter(pk = pk)
     context = {'Cashmemos': cashmemos}
-    return render(request, 'dashboard/cashmemos/transaction_detail.html', context) 
+    return render(request, 'dashboard/cashmemos/cashmemo_detail.html', context) 
 
 
 class CashmemoCreate(CreateView):
-    template_name='dashboard/cashmemos/Cashmemo_create.html'
+    template_name='dashboard/cashmemos/cashmemo_create.html'
     model= Cashmemo
     # fields = '__all__'
     success_url = reverse_lazy('dashboard:cashmemos')

@@ -22,7 +22,8 @@
       <section id="about" class="about">
       <div class="container">
         <div class="row">
-          {% for user in users %}
+          {% if users %}
+            {% for user in users %}
           {% comment %} <div class="col-lg-4" data-aos="fade-right">
             <img src="{{ transaction.get_image }}" class="img-fluid" alt="pic">
           </div> {% endcomment %}
@@ -40,6 +41,7 @@
             </div>
           </div>
           {% endfor %}
+          {% endif %}
         </div>
       </div>
     </section>

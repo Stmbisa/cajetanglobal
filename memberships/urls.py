@@ -1,10 +1,10 @@
 from django.urls import URLPattern, path
-from .views import register, membership_view, loginView, logOut
+from .views import *
 
 app_name = "memberships"
 urlpatterns = [
     path('', membership_view, name='membership'),
-    path('register', register, name='register'),
-    path('login', loginView, name='login'),
-    path('logout', logOut, name='logout'),
+    path ('profile_detail', profile, name='user_profile'),
+    path ('profile/update', userprofileupdate, name='user_update'),
+    path ('profile/files', userfileupload, name='user_files_upload'),
 ]

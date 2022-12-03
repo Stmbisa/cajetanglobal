@@ -12,6 +12,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from users.models import User
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q 
 
 
 @login_required
@@ -45,14 +46,14 @@ class UserUpdate(SuccessMessageMixin,UserPassesTestMixin, UpdateView):
     template_name='dashboard/users/user_update.html'
     model= User
     # fields = '__all__'
-    success_url = reverse_lazy('dashboard:transactions')
+    success_url = reverse_lazy('dashboard:users')
     success_message = "User Was updated Successfully"
     # form_class=TransactionCreateForm
 
     def test_func(self):
         transaction= self.get_object()
 
-        if self.request.user.is_staff:
+        if self.request.user.is_staff or self.request.user:
             return True
         return False
 
@@ -69,3 +70,18 @@ class UserDelete(SuccessMessageMixin, DeleteView):
     context_object_name = 'user'
     success_message = "User Was Deleted Successfully"
     success_url = reverse_lazy('dashboard:users')
+
+
+def search_users(request):
+    if 'keyword' in request.GET:
+        keyword = request.GET['keyword']
+        if keyword:
+            profiles = User.objects.order_by('id').filter(Q(first_name__icontains=keyword)| Q(last_name__icontains= keyword) |Q(country_of_destination__icontains= keyword)|Q(phone__icontains= keyword)) # fielter treats , as a and 
+        context = {
+            'profiles':profiles, 
+        }
+    return render(request, 'dashboard/users/users.html',context)
+
+
+#  all_profiles = Profile.objects.all().count()
+#     all_paid_profiles = Profile.objects.filter(has_paid =True).count()

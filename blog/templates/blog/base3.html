@@ -1,0 +1,245 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Cajetan Global visas - Index</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <base href="{% static '/' %}">
+
+  <!-- Favicons -->
+  <link href="{% static 'asset/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'asset/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link type="text/css" href="{% static 'asset/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+  <link type="text/css" href="{% static 'asset/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link type="text/css" href="{% static 'asset/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link type="text/css" href="{% static 'asset/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link type="text/css" href="{% static 'asset/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link type="text/css" href="{% static 'asset/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link type="text/css" href="{% static 'asset/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link type="text/css" href="{% static 'asset/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+  <!-- counter -->
+  <link type="text/css" href="{% static 'asset/vendor/counter/bootstrap.min.css' %}" rel="stylesheet" id="bootstrap-css">
+  <script src="{% static 'asset/vendor/counter/bootstrap.min.js' %}"></script>
+  <script src="{% static 'asset/vendor/counter/jquery.min.js' %}"></script>
+  <!-- 
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   -->
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'asset/css/style.css' %}" rel="stylesheet">
+  </head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center  header-transparent ">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <div class="logo">
+        <h1><a href="{% url 'blog:index_home' %}">Cajetan Global visas</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="{% static 'asset/img/logo.png' %}" alt="" class="img-fluid"></a>-->
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="{% url 'blog:blog_home' %}">Home</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'blog:about' %}">About</a></li>
+          <li class="dropdown"><a href="#"><span>visas</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="#">Working Visas</a></li>
+              <li class="dropdown"><a href="#"><span>available countries</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                   <li><a href="">USA</a></li>
+                   <li><a href="#">Canada</a></li>
+                   <li><a href="#">Australia</a></li>
+                   <li><a href="#">Shenzen </a></li>
+                   <li><a href="#">Israel</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Studying Visas</a></li>
+              <li><a href="#">Business Visas</a></li>
+              <li><a href="#">Settlement</a></li>
+              <li><a href="#">many others</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+          <a class="nav-link scrollto" href="{% url 'blog:contact' %}">Contact</a>
+          </li>
+          {% if not user.is_authenticated %}
+          <li><a href="{% url 'accounts:login' %}">login</a></li>
+          <li><a href="{% url 'accounts:register' %}">register</a></li>
+          {% else %}
+          <li><a href="{% url 'dashboard:dash_home' %}">Dashboard</a></li>
+          <li><a href="{% url 'accounts:logout' %}">logout</a></li>
+          <li class="nav-item dropdown pe-3">
+            <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                <!-- <img class="avatar-img rounded-circle img-responsive thumbnail" src="{{ user.image.url|default_if_none:'#' }}" alt="Profile"> -->
+                <!-- <img class="avatar-img rounded-circle img-responsive thumbnail" src="{{ user.get_image|default_if_none:'#' }}" alt="Profile">   -->
+                <!-- <img src="{{ user.get_image|default_if_none:'#' }}" alt="Profile" class="rounded-circle">  -->
+                <span class="d-none d-md-block dropdown-toggle ps-2">Cajetan Global Visas</span>
+            </a>
+            <!-- End Profile Iamge Icon -->
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                <li class="dropdown-header">
+                  <h6>{{ user.first_name }} {{ user.last_name }}</h6>
+                  {% if user is not None and user.is_active %}
+                  {% if user.is_admin or user.is_superuser %}
+                  <span>Administrator</span>
+                  {% endif %}
+                </li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li>
+                  <a class="dropdown-item d-flex align-items-center" href="{% url 'blog:warning' %}">
+                  <i class="bi bi-gear"></i>
+                  <span>Make payment </span>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item d-flex align-items-center" href="{% url 'blog:warning' %}">
+                  <i class="bi bi-person"></i>
+                  <span>My Profile</span>
+                  </a>
+                </li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li>
+                  <a class="dropdown-item d-flex align-items-center" href="{% url 'blog:warning' %}">
+                  <i class="bi bi-gear"></i>
+                  <span>Account Settings</span>
+                  </a>
+                </li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li>
+                  <a class="dropdown-item d-flex align-items-center" href="{% url 'blog:contact' %}">
+                  <i class="bi bi-question-circle"></i>
+                  <span>Need Help?</span>
+                  </a>
+                </li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li>
+                  <a class="dropdown-item d-flex align-items-center" href="{% url 'accounts:logout' %}">
+                  <i class="bi bi-box-arrow-right"></i>
+                  <span>Sign Out</span>
+                  </a>
+                </li>
+                {% endif %}
+                {% endif %}
+        </ul>
+      </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+  {% block content %}
+  {% endblock content %}
+  <footer id="footer">
+    <div class="footer-content">
+      <div class="container">
+      <div class="row g-5">
+      <div class="col-lg-4">
+      <h3 class="footer-heading">About Cajetan Global </h3>
+      Cajetan Global is always here to provide you various visa services which are based on your nationalities. You can have one of the following visa options when searching for one through our website. The process mentioned below will also guide you through the entire visa processing that takes place before you travel to a foreign country.</p>
+      <p><a href="{% url 'blog:about' %}" class="footer-link-more">Learn More</a></p>
+      </div>
+      <div class="col-6 col-lg-2">
+      <h3 class="footer-heading">Navigation</h3>
+      <ul class="footer-links list-unstyled">
+      <li><a href=" {% url 'blog:index_home' %}"><i class="bi bi-chevron-right"></i> Home</a></li>
+      <li><a href="{% url 'blog:blog_home' %}"><i class="bi bi-chevron-right"></i> Blog</a></li>
+      <li><a href="{% url 'blog:categories' %}"><i class="bi bi-chevron-right"></i> Categories</a></li>
+      <li><a href="{% url 'memberships:membership' %}"><i class="bi bi-chevron-right"></i> membership</a></li>
+      <li><a href="{% url 'blog:about' %}"><i class="bi bi-chevron-right"></i> About us</a></li>
+      {% if user.is_authenticated %}
+      {% if user.is_staff %}
+      <li><a href="{% url 'dashboard:dash_home' %}"><i class="bi bi-chevron-right"></i> Dashboard</a></li>
+      {% endif  %}
+      <li><a href="{% url 'blog:warning' %}"><i class="bi bi-chevron-right"></i> profile</a></li>
+      {% endif %}
+      </ul>
+      </div>
+      <div class="col-6 col-lg-2">
+      <h3 class="footer-heading">Categories</h3>
+      {% for category in categories %}
+      <ul class="footer-links list-unstyled">
+      <li><a href=category.html"><i class="bi bi-chevron-right"></i> {{ category.category_name }}</a></li>
+      {% endfor %}
+      </ul>
+      </div>
+      <div class="col-lg-4">
+      <h3 class="footer-heading">Recent Posts</h3>
+      {% for blog in blogs %}
+      <ul class="footer-links footer-blog-entry list-unstyled">
+      <li>
+      <a href="single-post.html" class="d-flex align-items-center">
+      <img  alt="" class="img-fluid me-3">{{ blog.topic }} <img/>
+      <!-- src="{% static 'asset/img/post-sq-1.jpg' %}" -->
+      <div>
+      <div class="post-meta d-block"><span class="date"><a href="blog_detail">{{ blog.title }} . {{ post.date_posted|date:'F d, Y' }}</a></span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
+      <span> {{ blog.date_posted|date:'F d, Y' }}</span>
+      <span>{{ blog.topic}}</span>
+      </div>
+      </a>
+      </li>
+      </ul>
+      {% endfor %}
+      </div>
+      </div>
+      </div>
+      </div>
+    <div class="container">
+      <h3>Cajetan Global Visas</h3>
+      <p>Please follow us to stay updated on some of our global events</p>
+      <div class="social-links">
+        <a href="https://www.facebook.com/Cajetan-Global-Visa-100856879259515/" class="facebook"><i class="bi bi-facebook"></i></a>
+      </div>
+      <div class="copyright">
+        &copy; © Copyright <strong><span>MBISA</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/selecao-bootstrap-template/ -->
+        System programmed by <a href="https://twitter.com/jcmbisa">JC MBISA</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'asset/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'asset/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'asset/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'asset/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'asset/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'asset/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'asset/js/main.js' %}"></script>
+
+</body>
+
+</html>

@@ -23,7 +23,7 @@ class User(AbstractUser):
     is_active= models.BooleanField(default=True)
     has_profile = models.BooleanField(default=False)
     has_taken_biometry_before= models.BooleanField(default=False, help_text='Tick if you have ever taken the biometry')
-    avatar = models.ImageField(upload_to = 'uploads/', default='')
+    avatar = models.ImageField(upload_to = 'uploads/', default='', blank=True)
     first_name = models.CharField(max_length=255, default='')
     last_name = models.CharField(max_length=255, default='')
 
@@ -39,7 +39,9 @@ class User(AbstractUser):
     forget_password=models.CharField(max_length=100, null=True, blank=True)
     last_login = models.DateField(auto_now=True, null=True, blank=True)
     last_logout = models.DateField(auto_now=True, null=True, blank=True)
+    birth_date = models.DateField(blank=True, null=True,help_text='')
     country_of_orgin = models.CharField(max_length=100, null=False, blank=False, default='')
+    
   
 
     COUNTRY_CHOICES = [
@@ -54,6 +56,28 @@ class User(AbstractUser):
     nationality = models.CharField(max_length=100, null=False, blank=False, default='')
     next_of_kin = models.CharField(max_length=255, default='', help_text='whom would we call if you are not available')
     next_of_kin_phone_number = models.CharField(max_length=14, default='')
+    has_paid = models.BooleanField(default=False)
+    has_done_biometry_before = models.BooleanField(default=False)
+    has_done_biometry = models.BooleanField(default=False)
+    has_obtained_visa_before=models.BooleanField(default=False)
+    has_obtained_visa=models.BooleanField(default=False)
+    brought_by =  models.CharField(max_length=255, default='', null=True, blank=True)
+    Departure_date = models.DateField(blank=True, null=True)
+    rejected_CHOICES = [
+        ('0', '0'),
+        ('once', '1'),
+        ('twice', '2'),
+        ('thrice', '3'),
+        ('fourth', '4'),
+        ('fith', '5'),
+        ]
+    rejected = models.CharField(max_length=15, choices=rejected_CHOICES, default='',null=True)
+
+    # about the documents 
+    passport_document = models.FileField(upload_to = 'uploads/', blank=True, default='')
+    covid_certificate = models.FileField(upload_to = 'uploads/', blank=True, default='')
+    yellow_fever = models.FileField(upload_to = 'uploads/', blank=True, default='')
+
     
     
     objects: UserManager()
@@ -61,7 +85,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS = ['first_name', 'last_name','phone']
 
     def __str__(self):
-        return self.username or ''
+        return self.first_name or ''
         # return self.first_name+ ' ' + str(self.last_name)
     @property
     def full_name(self):
@@ -73,6 +97,24 @@ class User(AbstractUser):
             return self.avatar.url
         else:
             return "/static/assets/img/user.png"
+    
+    def get_passport(self):
+        if self.passport_document and hasattr(self.passport_document, 'url'):
+            return self.passport_document.url
+        else:
+            return "/static/assets/img/document.svg"
+    
+    def get_certificate(self):
+        if self.covid_certificate and hasattr(self.covid_certificate, 'url'):
+            return self.covid_certificate.url
+        else:
+            return "/static/assets/img/document.svg"
+
+    def get_yellow_fever(self):
+        if self.yellow_fever and hasattr(self.yellow_fever, 'url'):
+            return self.yellow_fever.url
+        else:
+            return "/static/assets/img/document.svg"
 
     def get_absolute_url(self):
         return reverse('dashboard:user', kwargs= {'pk':self.pk} )
@@ -149,7 +191,7 @@ class Profile(models.Model):
         ('fith', '5'),
         ]
     rejected = models.CharField(max_length=15, choices=rejected_CHOICES, default='',null=True)
-    Departure_date = models.DateField(blank=True, default='', null=True)
+    Departure_date = models.DateField(blank=True, null=True)
     export_to_CSV=models.BooleanField(default=False)
 
     def get_image(self):

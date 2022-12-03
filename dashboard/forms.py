@@ -32,10 +32,7 @@ class CashmemoCreateForm(forms.ModelForm):
         model = Cashmemo
         fields = '__all__'
 
-class CashmemoSearch(forms.ModelForm):
-    class Meta:
-        model = Cashmemo
-        fields = [ 'cashmemo_by',]
+
 
 class DocumentSubmitForm(forms.ModelForm):
     class Meta:
@@ -43,8 +40,3 @@ class DocumentSubmitForm(forms.ModelForm):
         fields = '__all__'
         widgets = {
             'date_submitted': DateInput(attrs={'type':'date'}),}
-
-class DocumentSearchForm(forms.ModelForm):
-    class Meta:
-        model = Documents
-        fields = [ 'document_owner','document_name']

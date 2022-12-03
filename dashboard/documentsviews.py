@@ -13,6 +13,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from .models import *
 from .forms import *
+from django.db.models import Q 
 from django.contrib.auth.decorators import login_required
 
 
@@ -50,26 +51,13 @@ class DocumentCreate(CreateView):
     success_url = reverse_lazy('dashboard:documents')
     form_class=DocumentSubmitForm
 
-
-class DocumentUpdate(SuccessMessageMixin,UserPassesTestMixin, UpdateView):
+class DocumentUpdate(SuccessMessageMixin, UpdateView):
     template_name='dashboard/documents/document_update.html'
     model= Documents
+    context_object_name = 'document'
+    success_message = "document Was Deleted Successfully"
     success_url = reverse_lazy('dashboard:documents')
-    success_message = "document Was updated Successfully"
-    form_class=DocumentSubmitForm
     fields = '__all__'
-
-    # def test_func(self):
-    #     document= self.get_object()
-
-    #     if self.request.user.is_staff:
-    #         return True
-    #     return False
-
-    # def dispatch(self, request, *args, **kwargs):
-    #     document = self.get_object()
-    #     self.fields = '__all__'
-    #     return super().dispatch(request, *args, **kwargs)
 
 
 
@@ -79,3 +67,15 @@ class DocumentDelete(SuccessMessageMixin, DeleteView):
     context_object_name = 'document'
     success_message = "document Was Deleted Successfully"
     success_url = reverse_lazy('dashboard:documents')
+
+
+def search(request):
+    profiles = None
+    if 'keyword' in request.GET:
+        keyword = request.GET['keyword']
+        if keyword:
+            profiles = Transactions.objects.order_by('id').filter(Q(profile__first_name__icontains=keyword)| Q(profile__last_name__icontains= keyword)| Q(Transaction_date__icontains= keyword)|Q(profile__country_of_destination__icontains= keyword)|Q(profile__phone__icontains= keyword)) # fielter treats , as a and 
+        context = {
+            'profiles':profiles, 
+        }
+    return render(request, 'dashboard/documents/documents.html',context)

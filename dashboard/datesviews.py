@@ -66,14 +66,13 @@ class EventDateCreate(CreateView):
     success_url = reverse_lazy('dashboard:events')
     form_class=ProfileEventsCreateForm
 
-
-class EventDateUpdate(SuccessMessageMixin,UserPassesTestMixin, UpdateView):
+class EventDateUpdate(SuccessMessageMixin, UpdateView):
     template_name='dashboard/dates/eventdate_update.html'
     model= ProfileEvents
-    # fields = '__all__'
+    context_object_name = 'eventdate'
+    success_message = "eventdate Was Deleted Successfully"
     success_url = reverse_lazy('dashboard:eventsdates')
-    success_message = "eventdate Was updated Successfully"
-    # form_class=ProfileEventsCreateForm
+    fields = '__all__'
 
 
 class EventDateDelete(SuccessMessageMixin, DeleteView):

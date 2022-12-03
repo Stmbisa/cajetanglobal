@@ -1,25 +1,36 @@
 {% extends 'dashboard/base2.html' %}
 {% block content %}
+
 <div id="content-wrapper" style="padding-top: 35px"
 {% include 'blog/includes/alerts.html' %}
 {% if user.is_authenticated %}
 {% if user.is_staff %}
 <div class="col-12">
+    {% if 'search' in request.path %}
+	<h2 class="title-page">Search in the Users</h2>
+    {% else %}
+	<h2 class="title-page">-</h2>
+    {% endif %}
     <div class="card recent-sales overflow-auto">
         <div class="col-auto text-right float-right ml-auto">
             <a href="{% url 'dashboard:user_create'  %}" class="btn btn-primary"><i class="fas fa-plus"></i></a> 
         </div>
         <div class="filter">
             <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                    <h6>Filter</h6>
-                </li>
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-            </ul>
         </div>
+        <div class="col-lg  col-md-6 col-sm-12 col">
+		<form action="{% url 'dashboard:search_users' %}" class="search">
+			<div class="input-group w-100">
+			    <input type="text" class="form-control" style="width:60%;" placeholder="Search by any name, phone, country of destination" name="keyword">
+
+			    <div class="input-group-append">
+			      <button class="btn btn-primary" type="submit">
+			        <i class="fa fa-search"></i>
+			      </button>
+			    </div>
+		    </div>
+		</form> <!-- search-wrap .end// -->
+	</div>
         <div class="card-body">
             <h5 class="card-title">All users</h5>
             <table class="table table-borderless datatable">
@@ -40,7 +51,7 @@
                     <tr>
                         <th scope="row"><a href="{{ user.get_absolute_url }}">{{forloop.counter}}</a></th>
                         <td><a href="{{ user.get_absolute_url }}" class="text-primary"></a>{{ user.full_name }}</a></td>
-                        <td><a href="{{ user.get_absolute_url }}" class="text-primary">{{ user.phone }}</a></td>
+                        <td><a href="tel:{{ user.full_name }}" id="number" class="" value="{{ user.phone }}" >{{ user.phone }}</a><button><i onclick="myFunction()" class="bi bi-clipboard"></i></button></td>
                         <td>{{ user.username }}</td>
                         <td>{{ user.country_of_destination }}</td>
                         <td>{{ user.last_login }}</td>
@@ -84,3 +95,52 @@
 <p>It seems you dont have the permission to view this page </p>
 {% endif %}
 {% endblock content %}
+
+
+<script>
+    function myFunction() {
+  // Get the text field
+  var copyText = document.getElementById("number");
+
+  // Select the text field
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); // For mobile devices
+
+   // Copy the text inside the text field
+  navigator.clipboard.writeText(copyText.value);
+
+  // Alert the copied text
+  alert("Copied the text: " + copyText.value);
+}
+</script>
+
+
+{% comment %} {% if profile.has_paid %}
+<td class="text-right">
+    <span class="badge badge-success">Paid</span>
+</td>
+{% else %}
+<td class="text-right">
+    <span class="badge badge-danger">Unpaid</span>
+</td>
+{% endif %} {% endcomment %}
+
+{% comment %} <th>Currency Choice</th> {% endcomment %}
+
+{% comment %} <th>status</th> {% endcomment %}
+
+
+
+{% comment %} <td>{{ profile.amount_to_pay }}</td>
+<td>{{ profile.currency_of_choice }}</td>
+<td>{{ profile.amount_paid_so_far }}</td> {% endcomment %}
+
+
+
+
+{% comment %} 
+{% if self.amount_paid_so_far or self.amount_to_pay %}
+    <td>{{ profile.get_balance }}</td>
+    {% else %}
+    <td>{{ balance }}</td>
+    {% endif %} {% endcomment %}

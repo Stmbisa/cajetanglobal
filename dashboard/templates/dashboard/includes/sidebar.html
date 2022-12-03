@@ -11,9 +11,9 @@
              <li class="submenu">
                <a href="{% url 'dashboard:dash_home' %}"><i class="bi-file-spreadsheet-fill" style="color: #d6ff22"></i> <span> Dashboard</span> <span class="menu-arrow"></span></a>
                <ul>
+                  <li><a href="{% url 'dashboard:profiles' %}">Main </a></li>
                   <li><a href="{% url 'dashboard:users' %}">Manage all registered users </a></li>
                   <li><a href="{% url 'dashboard:user_create' %}">add users </a></li>
-                  <li><a href="{% url 'dashboard:profiles' %}">Main </a></li>
                   <li><a href="{% url 'dashboard:profiles' %}">Manage all User profiles </a></li>
                   <li><a href="{% url 'dashboard:profile_create' %}">add profiles</a></li>
                   {% comment %} <li><a href="">see paid profiles</a></li>
@@ -24,18 +24,13 @@
                <a href="{% url 'dashboard:profiles' %}"><i class="bi-file-person" style="color: blue;"></i> <span> Profile identities</span> <span class="menu-arrow"></span></a>
                <ul>
                   <li><a href="{% url 'dashboard:identities' %}">Manage all profile identities </a></li>
-                  {% comment %} <li><a href="{% url 'dashboard:profile_update' profile.pk %}">add information </a></li> {% endcomment %}
-                  {% comment %} <li><a href="">see paid profiles</a></li>
-                  <li><a href="">see non-paid profiles</a></li> {% url 'blog:warning' %}{% endcomment %}
                </ul>
             </li>
             <li class="submenu">
-               <a href="{% url 'dashboard:transactions' %}"><i class="bi-arrow-left-right" style="color: #3fcdc7;"></i><span> Profile transactions</span> <span class="menu-arrow"></span></a>
+               <a href="{% url 'dashboard:transactions' %}"><i class="bi-arrow-left-right" style="color: #3fcdc7;"></i><span> Profile payments</span> <span class="menu-arrow"></span></a>
                <ul>
-                  <li><a href="{% url 'dashboard:transactions' %}">Manage all profile transactions </a></li>
-                  <li><a href="{% url 'dashboard:transaction_create' %}">add transations </a></li>
-                  {% comment %} <li><a href="">see paid profiles</a></li>
-                  <li><a href="">see non-paid profiles</a></li> {% url 'blog:warning' %}{% endcomment %}
+                  <li><a href="{% url 'dashboard:transactions' %}">Manage all profile payments </a></li>
+                  <li><a href="{% url 'dashboard:transaction_create' %}">add payments </a></li>
                </ul>
             </li>
             <li class="submenu">
@@ -43,8 +38,25 @@
                <ul>
                   <li><a href="{% url 'dashboard:documents' %}">Manage all profile documents </a></li>
                   <li><a href="{% url 'dashboard:document_create' %}">add documents </a></li>
-                  {% comment %} <li><a href="">see paid profiles</a></li>
-                  <li><a href="">see non-paid profiles</a></li> {% url 'blog:warning' %}{% endcomment %}
+               </ul>
+            </li>
+            <li class="submenu">
+               <a href="{% url 'dashboard:adminverifyusers' %}"><i class="bi bi-check-circle-fill"  style="color: yellow"></i><span> Admin side verifications</span> <span class="menu-arrow"></span></a>
+               <ul>
+                  <li><a href="{% url 'dashboard:adminverifyusers' %}">Manage verifications</a></li>
+               </ul>
+            </li>
+            <li class="submenu ">
+               <a href="#"><i class="bi-calendar-date-fill"style="color: #ff689b;"></i> <span> profile dates and Appointements </span> <span class="menu-arrow"></span></a>
+               <ul>
+                 <a href="{% url 'dashboard:events' %}"><i class="fas fa-holly-berry"></i> <span>Manage dates </span></a>
+                 <a href="{% url 'dashboard:event_create' %}"><i class="fas fa-holly-berry"></i> <span>add dates </span></a>
+               </ul>
+            </li>
+            <li class="submenu ">
+               <a href="{% url 'dashboard:files' %}"><i class="bi bi-files" style="color: #40E0D0;" ></i> <span> Files Submitted </span> <span class="menu-arrow"></span></a>
+               <ul>
+                 <a href="{% url 'dashboard:files' %}"><i class="bi bi-files"></i> <span>See files </span></a>
                </ul>
             </li>
              <li class="submenu">
@@ -61,13 +73,6 @@
                    <li><a href="{% url 'dashboard:expense_create' %}"> Expenses Add</a></li>
                 </ul>
              </li>
-            <li class="submenu ">
-               <a href="#"><i class="bi-calendar-date-fill"style="color: #ff689b;"></i> <span> profile dates and Appointements </span> <span class="menu-arrow"></span></a>
-               <ul>
-                 <a href="{% url 'dashboard:events' %}"><i class="fas fa-holly-berry"></i> <span>Manage dates </span></a>
-                 <a href="{% url 'dashboard:event_create' %}"><i class="fas fa-holly-berry"></i> <span>add dates </span></a>
-               </ul>
-            </li>
             <li><a href="{% url 'accounts:logout' %}"><i class="fa fa-sign-out-alt"></i> <span>Log out </span></a></li>   
        </div>
     </div>
