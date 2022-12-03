@@ -283,8 +283,8 @@ table.table td h2 span {
 }
 
 th {
-  background-color: #337ab7;
-  color: rgb(238, 15, 15);
+  background-color: #d8dee4;
+  color: rgb(5, 1, 1);
 }
 
 .display_table{
@@ -401,19 +401,19 @@ button.bg-success:hover {
 }
 .bg-info,
 .badge-info {
-	background-color: #009efb !important;
+	background-color: #c9cfd3 !important;
 }
 .pro-bg-info, .badge-info {
-	background-color: #56dccc !important;
+	background-color: #7c9e9a !important;
 }
 .pro-bg-light, .badge-light{
-	background-color: #18aefa !important;
+	background-color: #87a3b1 !important;
 }
 a.bg-info:focus, 
 a.bg-info:hover, 
 button.bg-info:focus, 
 button.bg-info:hover {
-    background-color: #028ee1 !important;
+    background-color: #808c92 !important;
 }
 .bg-warning,
 .badge-warning {
