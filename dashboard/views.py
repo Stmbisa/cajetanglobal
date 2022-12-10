@@ -95,7 +95,7 @@ class Profile_create(CreateView):
     model= User
     # fields = '__all__'
     success_url = reverse_lazy('dashboard:profiles')
-    form_class=ProfileCreateForm
+    form_class=RegisterUserCreationForm
 
 class Profile_update(SuccessMessageMixin, UpdateView):
     template_name='dashboard/profile_update.html'
