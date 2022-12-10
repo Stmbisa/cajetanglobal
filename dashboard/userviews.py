@@ -73,12 +73,13 @@ class UserDelete(SuccessMessageMixin, DeleteView):
 
 
 def search_users(request):
+    users = None
     if 'keyword' in request.GET:
         keyword = request.GET['keyword']
         if keyword:
-            profiles = User.objects.order_by('id').filter(Q(first_name__icontains=keyword)| Q(last_name__icontains= keyword) |Q(country_of_destination__icontains= keyword)|Q(phone__icontains= keyword)) # fielter treats , as a and 
+            users = User.objects.order_by('id').filter(Q(first_name__icontains=keyword)| Q(last_name__icontains= keyword) |Q(country_of_destination__icontains= keyword)|Q(phone__icontains= keyword)) # fielter treats , as a and 
         context = {
-            'profiles':profiles, 
+            'users':users, 
         }
     return render(request, 'dashboard/users/users.html',context)
 

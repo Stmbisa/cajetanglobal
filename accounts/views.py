@@ -85,7 +85,7 @@ def register(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'You successfully created an account')
-            return redirect('memberships:user_update')
+            return redirect('memberships:membership')
             # first_name =form.cleaned_data['first_name']
             # last_name =form.cleaned_data['last_name']
             # phone =form.cleaned_data['phone']
@@ -116,7 +116,7 @@ def login(request):
     if user is not None:
         auth.login(request, user)
         messages.success(request, 'You are welcome')
-        return redirect('memberships:user_update')
+        return redirect('memberships:membership')
 
     else:
         messages.error(request, 'Invalid login credentials')

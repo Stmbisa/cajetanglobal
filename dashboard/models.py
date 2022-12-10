@@ -27,8 +27,8 @@ class Transactions(models.Model):
         return reverse('dashboard:transaction', kwargs= {'pk':self.pk} )
 
     def get_balance (self):
-        if self.profile.amount_to_pay and self.amount_paid_or_paying:
-            return self.amount_to_pay-int(self.amount_paid_or_paying)
+        if self.amount_to_pay and self.amount_paid_or_paying:
+            return int(self.amount_to_pay)-int(self.amount_paid_or_paying)
 
 
 

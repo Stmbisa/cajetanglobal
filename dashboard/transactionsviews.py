@@ -29,10 +29,12 @@ def transactions(request):
     
     for transaction in transactions:
         all_total_amount_paid_so_far+=int(transaction.amount_paid_or_paying)
+        balance = int(transaction.amount_to_pay) - int(transaction.amount_paid_or_paying)
         context = {
             'page_obj':page_obj,
             'transactions':transactions,
             'all_total_amount_paid_so_far':all_total_amount_paid_so_far,
+            'balance':balance,
             }
 
         return render(request, 'dashboard/transactions/transactions.html',context)
@@ -74,7 +76,11 @@ def transactions(request):
 @login_required
 def TransactionDetail(request, pk):
     transactions = Transactions.objects.filter(pk = pk)
-    context = {'transactions': transactions}
+    # balance = int(transactions.amount_to_pay)-int(transactions.amount_paid_or_paying)
+    context = {
+        'transactions': transactions,
+        # 'balance': balance
+        }
     return render(request, 'dashboard/transactions/transaction_detail.html', context) 
 
 
@@ -107,9 +113,9 @@ class TransactionUpdate(SuccessMessageMixin, UpdateView):
     template_name='dashboard/transactions/transaction_update.html'
     model= Transactions
     context_object_name = 'transaction'
-    success_message = "transaction Was Deleted Successfully"
+    success_message = "transaction Was updated Successfully"
     success_url = reverse_lazy('dashboard:transactions')
-    fields = 'first_name'
+    fields = ('profile', 'Transaction_date', 'amount_paid_or_paying', 'amount_to_pay', 'status', 'reason')
 
 
 
@@ -124,13 +130,13 @@ class TransactionDelete(SuccessMessageMixin, DeleteView):
     success_url = reverse_lazy('dashboard:transactions')
 
 
-def search_documents(request):
-    profiles = None
+def search_transactions(request):
+    transactions = None
     if 'keyword' in request.GET:
         keyword = request.GET['keyword']
         if keyword:
-            profiles = Transactions.objects.order_by('id').filter(Q(profile__first_name__icontains=keyword)| Q(profile__last_name__icontains= keyword)| Q(Transaction_date__icontains= keyword)|Q(profile__country_of_destination__icontains= keyword)|Q(profile__phone__icontains= keyword)) # fielter treats , as a and 
+            transactions = Transactions.objects.order_by('id').filter(Q(profile__first_name__icontains=keyword)| Q(profile__last_name__icontains= keyword)| Q(Transaction_date__icontains= keyword)|Q(profile__country_of_destination__icontains= keyword)|Q(profile__phone__icontains= keyword)|Q(reason__icontains= keyword)) # fielter treats , as a and 
         context = {
-            'profiles':profiles, 
+            'transactions':transactions, 
         }
     return render(request, 'dashboard/transactions/transactions.html',context)

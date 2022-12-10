@@ -1,11 +1,8 @@
 from django.shortcuts import render
-from django.contrib.auth.forms import (AuthenticationForm, UserCreationForm, 
-                                       PasswordChangeForm)
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import login, authenticate,logout
-from users.forms import RegisterUserCreationForm
-from users.models import User, Profile
+from users.models import User
 from users.forms import *
 from django.contrib.auth.decorators import login_required
 
@@ -71,11 +68,9 @@ def profile(request):
 
 @login_required
 def userprofileupdate(request):
-    user = User.objects.get(id = request.user.id)
     if request.method == "POST":
         form = UserUpdateform(request.POST, instance=request.user)
         if form.is_valid():
-            Profile.objects.filter(id = request.user.id).create
             form.save()
             messages.success(request, 'You successfully created a profile')
             return redirect('memberships:user_files_upload')
@@ -95,9 +90,8 @@ def userfileupload(request):
     if request.method == "POST":
         form = UserUpdateformFiles(request.POST, instance=request.user)
         if form.is_valid():
-            Profile.objects.filter(id = request.user.id).create
             form.save()
-            messages.success(request, 'You successfully created a profile')
+            messages.success(request, 'You successfully updated a profile')
             return redirect('memberships:profile')
     else:
         form= UserUpdateformFiles(instance=request.user)

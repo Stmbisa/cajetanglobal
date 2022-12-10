@@ -6,7 +6,7 @@
 {% if user.is_staff %}
 <div class="col-12">
     <div class="col-lg  col-md-6 col-sm-12 col">
-        <form action="{% url 'dashboard:adminverifyusers' %}" class="search" method="get">
+        <form action="{% url 'dashboard:search_adminverify' %}" class="search" method="get">
             <div class="input-group w-100">
                 <input type="text" class="form-control" style="width:60%;" placeholder="Search by any name, phone, country of destination" name="keyword">
                 <div class="input-group-append">
@@ -20,7 +20,7 @@
     </div>
     <div class="card recent-sales overflow-auto">
         <div class="card-body">
-            <h5 class="card-title">All transactions <span>| Today</span></h5>
+            <h5 class="card-title">All verifications <span>| all</span></h5>
             <table class="table table-borderless datatable">
                 <thead>
                     <tr>

@@ -16,6 +16,7 @@ from django.core.paginator import Paginator
 from .models import Transactions
 from .forms import *
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q 
 
 
 @login_required
@@ -81,3 +82,15 @@ class EventDateDelete(SuccessMessageMixin, DeleteView):
     context_object_name = 'eventdate'
     success_message = "eventdate Was Deleted Successfully"
     success_url = reverse_lazy('dashboard:eventsdates')
+
+
+def search_events(request):
+    events = None
+    if 'keyword' in request.GET:
+        keyword = request.GET['keyword']
+        if keyword:
+            events = ProfileEvents.objects.order_by('id').filter(Q(profile__first_name__icontains=keyword)| Q(profile__last_name__icontains= keyword)| Q(event_date__icontains= keyword)|Q(profile__country_of_destination__icontains= keyword)|Q(profile__phone__icontains= keyword)|Q(event_name__icontains= keyword)) # fielter treats , as a and 
+        context = {
+            'events':events, 
+        }
+    return render(request, 'dashboard/dates/dates.html',context)

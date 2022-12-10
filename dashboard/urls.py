@@ -43,7 +43,7 @@ urlpatterns = [
     
     #transactions 
     path ('transactions/', transactions, name='transactions'),
-    path ('transactions/search/', search, name="search_transactions"),
+    path ('transactions/search/', search_transactions, name="search_transactions"),
     path ('transactions/<str:pk>', TransactionDetail, name='transaction'),
     path ('transactions/<str:pk>/update/', login_required(TransactionUpdate.as_view()), name='transaction_update'),
     path ('transactions/<str:pk>/delete/', login_required(TransactionDelete.as_view()), name='transaction_delete'),
@@ -51,7 +51,7 @@ urlpatterns = [
 
     #dates 
     path ('eventsdates/', eventsdates, name='events'),
-    path ('eventdates/search/', search, name="search_events"),
+    path ('eventdates/search/', search_events, name="search_events"),
     path ('eventsdates/<str:pk>', EventDateDetail, name='event'),
     path ('eventsdates/<str:pk>/update/', login_required(EventDateUpdate.as_view()), name='event_update'),
     path ('eventsdates/<str:pk>/delete/', login_required(EventDateDelete.as_view()), name='event_delete'),
@@ -79,7 +79,7 @@ urlpatterns = [
 
     #documents
     path ('documents/', documents, name='documents'),
-    path ('profiles/search/', search_documents, name="search_documents"),
+    path ('documents/search/', search_documents, name="search_documents"),
     path ('documents/<str:pk>', DocumentDetail, name='document'),
     path ('documents/<str:pk>/update/', login_required(DocumentUpdate.as_view()), name='document_update'),
     path ('documents/<str:pk>/delete/', login_required(DocumentDelete.as_view()), name='document_delete'),

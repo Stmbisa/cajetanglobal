@@ -4,11 +4,16 @@
 {% include 'blog/includes/alerts.html' %}
 {% if user.is_authenticated %}
 {% if user.is_staff %}
+{% if 'search' in request.path %}
+	<h2 class="title-page">Search in the transactions</h2>
+{% else %}
+	<h2 class="title-page">-</h2>
+{% endif %}
 <div class="col-12">
  <div class="col-lg  col-md-6 col-sm-12 col">
 		<form action="{% url 'dashboard:search_transactions' %}" class="search" method="get">
 			<div class="input-group w-100">
-			    <input type="text" class="form-control" style="width:60%;" placeholder="Search by any name, phone, country of destination" name="keyword">
+			    <input type="text" class="form-control" style="width:60%;" placeholder="Search by service (ie:transport) any name, phone, country of destination" name="keyword">
 
 			    <div class="input-group-append">
 			      <button class="btn btn-primary" type="submit">
@@ -42,8 +47,8 @@
                 <tbody>
                     <tr>
                         <th scope="row"><a href="{{ transaction.get_absolute_url }}">{{forloop.counter}}</a></th>
-                        <td>{{ transaction.profile }}</td>
-                        <td><a href="{{ transaction.get_absolute_url }}" class="">{{ transaction.reason }}</a></td>
+                        <td><a href="{{ transaction.get_absolute_url }}">{{ transaction.profile }}</a></td>
+                        <td>{{ transaction.reason }}</td>
                         <td>${{ transaction.amount_paid_or_paying }}</td>
                         {% ifequal transaction.status 'in' %}
                         <td><span class="badge bg-success">IN</span></td>
@@ -51,12 +56,13 @@
                         {% ifequal transaction.status 'pending' %}
                         <td><span class="badge bg-warning">Pending</span></td>
                         {% endifequal %}
-                        {% ifequal transaction.status 'OUT' %}
+                        {% ifequal transaction.status 'out' %}
                         <td><span class="badge bg-danger">OUT</span></td>
                         {% endifequal %}
-                        <td><a href="" >{{ transaction.profile.amount_to_pay }}</a></td> 
+                        <td><a href="" >{{ transaction.amount_to_pay }}</a></td> 
                         <!-- class="text-primary" -->
-                        <td><a href="" >{{ transaction.profile.get_balance }}</a></td> 
+                        {% comment %} <td><a href="" >{{ balance }}</a></td>  {% endcomment %}
+                        <td><a href="" >{{ transaction.get_balance }}</a></td> 
                         <td class="text-right">
                             <div class="actions">
                                 <a href="{% url 'dashboard:transaction_update' transaction.pk %}" class="btn btn-sm bg-success-light mr-2">

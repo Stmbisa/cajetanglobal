@@ -5,6 +5,11 @@
 
 {% if user.is_authenticated %}
 {% if user.is_staff %}
+{% if 'search' in request.path %}
+	<h2 class="title-page">Search in the documents</h2>
+{% else %}
+	<h2 class="title-page">-</h2>
+{% endif %}
 <div class="col-12">
 <div class="col-12">
  <div class="col-lg  col-md-6 col-sm-12 col">

@@ -69,13 +69,14 @@ class DocumentDelete(SuccessMessageMixin, DeleteView):
     success_url = reverse_lazy('dashboard:documents')
 
 
-def search(request):
-    profiles = None
+
+def search_documents(request):
+    documents = None
     if 'keyword' in request.GET:
         keyword = request.GET['keyword']
         if keyword:
-            profiles = Transactions.objects.order_by('id').filter(Q(profile__first_name__icontains=keyword)| Q(profile__last_name__icontains= keyword)| Q(Transaction_date__icontains= keyword)|Q(profile__country_of_destination__icontains= keyword)|Q(profile__phone__icontains= keyword)) # fielter treats , as a and 
+            documents = Documents.objects.order_by('id').filter(Q(document_owner__first_name__icontains=keyword)| Q(document_owner__last_name__icontains= keyword)| Q(date_submitted__icontains= keyword)|Q(document_owner__country_of_destination__icontains= keyword)|Q(document_name__icontains= keyword)) # fielter treats , as a and 
         context = {
-            'profiles':profiles, 
+            'documents':documents, 
         }
-    return render(request, 'dashboard/documents/documents.html',context)
+    return render(request, 'dashboard/documents/documents.html',context)    
