@@ -29,7 +29,7 @@ class Transactions(models.Model):
     def get_balance (self):
         if self.amount_to_pay and self.amount_paid_or_paying:
             balance=int(self.amount_to_pay)
-            balance=-int(self.amount_paid_or_paying)
+            balance -= int(self.amount_paid_or_paying)
             return balance
 
 
