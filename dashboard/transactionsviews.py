@@ -29,7 +29,8 @@ def transactions(request):
     
     for transaction in transactions:
         all_total_amount_paid_so_far+=int(transaction.amount_paid_or_paying)
-        balance = int(transaction.amount_to_pay) - int(transaction.amount_paid_or_paying)
+        balance=int(transaction.amount_to_pay)
+        balance =- int(transaction.amount_paid_or_paying)
         context = {
             'page_obj':page_obj,
             'transactions':transactions,

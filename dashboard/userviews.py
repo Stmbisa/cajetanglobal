@@ -30,6 +30,10 @@ def users(request):
 @login_required
 def UserDetail(request, pk):
     users = User.objects.filter(pk = pk)
+    # all_transactions = User.transactions_set.all().order_by('Transaction_date')
+    # all_documents = User.documents_set.all().order_by('date_submitted')
+    # all_events = User.profileEvents_set.all().order_by('event_date')
+    
     context = {'users': users}
     return render(request, 'dashboard/users/user_detail.html', context) 
 
