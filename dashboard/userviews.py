@@ -18,9 +18,20 @@ from django.db.models import Q
 @login_required
 def users(request):
     users = User.objects.all()
+    # all_transactions = User.transactions_set.all().order_by('Transaction_date')
+    # all_documents = User.documents_set.all().order_by('date_submitted')
+    # all_events = User.profileEvents_set.all().order_by('event_date')
+    paginator = Paginator(users, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
     context = {
-        'users':users,
+        'users': users,
+        'paginator':paginator,
+        'page_obj':page_obj
+
         }
+
 
     return render(request, 'dashboard/users/users.html',context)
     
@@ -30,11 +41,11 @@ def users(request):
 @login_required
 def UserDetail(request, pk):
     users = User.objects.filter(pk = pk)
-    # all_transactions = User.transactions_set.all().order_by('Transaction_date')
-    # all_documents = User.documents_set.all().order_by('date_submitted')
-    # all_events = User.profileEvents_set.all().order_by('event_date')
-    
-    context = {'users': users}
+    context = {
+        'users': users,
+
+        }
+   
     return render(request, 'dashboard/users/user_detail.html', context) 
 
 
