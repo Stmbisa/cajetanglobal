@@ -15,7 +15,7 @@ class Transactions(models.Model):
     profile = models.ForeignKey(User, on_delete=models.CASCADE,null=True, blank=True )
     Transaction_date = models.DateField( null=True, blank=True)
     amount_paid_or_paying = models.CharField(max_length=250, default='',null=False)
-    amount_to_pay = models.DecimalField(max_length=255, null=True, blank=True, default=0, decimal_places=3, max_digits=15)
+    amount_to_pay = models.DecimalField(max_length=255, null=True, blank=True, default=0, decimal_places=0, max_digits=15)
     status = models.CharField(max_length=10, choices=TRANSACTION_STATUS,default='', null=True, blank=True)
     reason = models.CharField(max_length=250, default='',null=False)
 
